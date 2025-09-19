@@ -1,0 +1,48 @@
+
+services:
+  web_lms:
+    build: .
+    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+
+    environment:    # <--- ADD THIS
+      POSTGRES_DB: my_lms_db
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: my_lms_db
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d my_lms_db"]
+      interval: 5s
+      retries: 5
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      - web_lms
+    restart: always
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

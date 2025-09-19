@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% block content %}
+    <!--==============================
+    Breadcumb
+    ============================== -->
+    <div class="breadcumb-wrapper " data-bg-src="assets/img/breadcumb/breadcumb-bg.png">
+        <div class="container z-index-common">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title">{% trans 'Our Courses'%}</h1>
+                <div class="breadcumb-menu-wrap">
+                    <ul class="breadcumb-menu">
+                        <li><a href="index.html">{% trans 'Home'%}</a></li>
+                        <li>{% trans 'Our Courses'%}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!--==============================
+    Course Area
+    ==============================-->
+    <section class="course-layout1 space-top space-extra-bottom" data-bg-src="{% static 'assets/img/bg/course-bg1.png'%}">
+        <div class="container">
+            <div class="title-area3 text-center wow fadeInUp" data-wow-delay="0.3s">
+                <span class="sec-subtitle style1">{% trans 'Browse Top Courses'%}</span>
+                <h2 class="sec-title">{% trans 'Most Popular Courses'%}</h2>
+            </div>
+            <div class="row">
+                {% for course in courses %}
+                <div class="col-sm-6 col-xl-4">
+                    <div class="course-style2">
+                        <div class="course-img">
+                            <a href="{% url 'course-details' course.id %}"><img class="w-100" src="{{course.course_image.url}}" alt="Course Img"></a>
+                            <span class="course-price">${{course.price}}</span>
+                        </div>
+                        <div class="course-content">
+                            <h3 class="h5 course-name"><a href="{% url 'course-details' course.id %}" class="text-inherit">{{course.title}}</a></h3>
+                            <div class="course-meta">
+                                <span><i class="fal fa-user-circle"></i>{{course.student_count}} Students</span>
+                                <span><i class="fas fa-history"></i>{{course.duration}}</span><br>
+                                <span><i class="far fa-calendar"></i>{{course.created_at|date:"d F, Y"}}</span>
+                            </div>
+                            <div class="course-footer">
+                                <div class="course-teacher"><a href="{% url 'team-details' course.tutor.id %}" class="text-inherit"><img src="{{course.tutor.profile_image.url}}" alt="Course">{{course.tutor.name}}</a></div>
+                                
+                                <div class="course-review">
+                                    {% for i in course.tutor.rating|times %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    <span class="review-avarage">{{course.tutor.rating}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-sm-6 col-xl-4">
+                    <span>{% trans 'No Courses Found'%}</span>
+
+                </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+    </section>
+    
+{%endblock%}

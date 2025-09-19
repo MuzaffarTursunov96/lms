@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% block content %}
+    <!--==============================
+    Breadcumb
+    ============================== -->
+    <div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/breadcumb/breadcumb-bg.png'%}">
+        <div class="container z-index-common">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title">{% trans 'Our Tutors'%}</h1>
+                <div class="breadcumb-menu-wrap">
+                    <ul class="breadcumb-menu">
+                        <li><a href="{% url 'index' %}">{% trans 'Home'%}</a></li>
+                        <li>{% trans 'Our Tutors'%}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    About Area
+    ==============================-->
+    <section class="space-top space-extra-bottom">
+        <div class="container">
+            <div class="row flex-row-reverse gx-80">
+                <div class="col-lg-6">
+                    <div class="picture-box6">
+                        <div class="img-1 mega-hover"><img src="{% static 'assets/img/about/tutor.png'%}" alt="online-class"></div>
+                        <div class="vs-circle"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <span class="sec-subtitle">{% trans 'OUR TUTORS ARE PASSIONATE'%}</span>
+                    <h2 class="sec-title mb-2 mb-xl-4">{% trans 'Start your education career with us'%}</h2>
+                    <p class="fs-md me-xxl-5 col-xl-11">{% trans 'Ducamb welcomed every pain avoided but in certa mstances owing to the claims of igation that off bu will frequently occuthe obligations of business it will ently ofcurs that pleasures.'%}</p>
+                    <div class="list-style1 vs-list  mb-4">
+                        <ul>
+                            <li>{% trans 'Hand-picked authors'%}</li>
+                            <li>{% trans 'Easy to follow curriculum'%}</li>
+                            <li>{% trans 'Free courses'%}</li>
+                            <li>{% trans 'Money-back guarantee'%}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--==============================
+      Team Area
+  ==============================-->
+    <section class="space-bottom">
+        <div class="container">
+            <div class="title-area text-center">
+                <div class="sec-icon">
+                    <div class="vs-circle"></div>
+                </div>
+                <span class="sec-subtitle">{% trans 'IDEAL TUTOR FOR EVERYONE'%}</span>
+                <h2 class="sec-title h1">{% trans 'Qualified Online Tutors'%}</h2>
+            </div>
+            <div class="row justify-content-center">
+                {% for tutor in tutors %}
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="team-style2 has-border">
+                        <div class="team-content">
+                            <h4 class="team-name h5"><a href="{% url 'team-details' tutor.id %}">{{tutor.name}}</a></h4>
+                            <p class="team-degi">{{tutor.subject}}</p>
+                            <span class="team-courses">{{tutor.lessons_completed}}+ {% trans 'Lessons Completed'%}</span>
+                            <div class="team-img">
+                                <img src="{{tutor.profile_image.url}}" alt="member">
+                            </div>
+                            <span class="team-rate"><span class="team-price">${{tutor.hourly_rate}} </span>/ {% trans 'per hour'%}</span>
+                            <p class="team-experi">{{tutor.experience_years}}+ {% trans 'years experience'%}</p>
+                            <div class="team-review">
+                                {% for i in tutor.rating|times %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <span>{% trans 'Tutors not found.'%}</span>
+                {%endfor%}
+            </div>
+            <div class="text-center pt-lg-4">
+                <p class="font-body fs-md fw-medium mb-2">{% trans 'Call us now and transform your career today'%}</p>
+                <a class="call-number1 h5" href="+99 899 142 21 10">+99 899 142 21 10</a>
+            </div>
+        </div>
+    </section><!--==============================
+      Testimonial Area
+  ==============================-->
+    <section class="overflow-hidden bgc-f6 space-top space-extra-bottom">
+        <div class="shape-mockup jump d-none d-xxl-block" data-left="-14%">
+            <div class="vs-border-circle"></div>
+        </div>
+        <div class="shape-mockup jump-img d-none d-xxl-block" data-right="-15%" data-top="170px">
+            <div class="vs-circle color2"></div>
+        </div>
+        <div class="shape-mockup jump-img d-none d-xxl-block" data-left="8%" data-bottom="10%">
+            <div class="shape-dotted style2"></div>
+        </div>
+        <div class="container">
+            <div class="title-area text-center wow fadeInUp" data-wow-delay="0.3s">
+                <div class="sec-icon">
+                    <div class="vs-circle"></div>
+                </div>
+                <span class="sec-subtitle">{% trans 'WHAT PEOPLE SAY'%}</span>
+                <h2 class="sec-title h1">{% trans 'Our Students Words'%}</h2>
+            </div>
+            <div class="row vs-carousel" data-dots="true" data-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1">
+                <div class="col-sm-6 col-xl-4">
+                    <div class="testi-style1">
+                        <div class="testi-content">
+                            <p class="testi-text">“ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus pulvinar ”</p>
+                        </div>
+                        <div class="testi-client">
+                            <img src="{% static 'assets/img/testimonial/testimonial-2-1.png'%}" alt="author">
+                            <h3 class="testi-name h5">Jessica Moniqa</h3>
+                            <span class="testi-degi">B.Tech-Civil , 2017-2024</span>
+                            <div class="testi-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                    <div class="testi-style1">
+                        <div class="testi-content">
+                            <p class="testi-text">“ I had the opportunity to meet with the dynamic & distinguishe faculties, who are highly qualified & friendly patients. With their assist & guidance I… ”</p>
+                        </div>
+                        <div class="testi-client">
+                            <img src="{% static 'assets/img/testimonial/testimonial-2-2.png'%}" alt="author">
+                            <h3 class="testi-name h5">Willimes Parkar</h3>
+                            <span class="testi-degi">CSE Computer , 2017-2024</span>
+                            <div class="testi-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                    <div class="testi-style1">
+                        <div class="testi-content">
+                            <p class="testi-text">“ So how did the classical Latin become so incoherent? According to McClintock, a 15th century typesetter likely scrambled part of Cicero's ”</p>
+                        </div>
+                        <div class="testi-client">
+                            <img src="{% static 'assets/img/testimonial/testimonial-2-3.png'%}" alt="author">
+                            <h3 class="testi-name h5">Silverster Scott</h3>
+                            <span class="testi-degi">DBBL Pvt Ltd, 2011-2015</span>
+                            <div class="testi-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                    <div class="testi-style1">
+                        <div class="testi-content">
+                            <p class="testi-text">“ One brave soul did take a stab at translating the almost-not-quite-Latin. According to The Guardian, Jaspreet Singh Boparai undertook the challenge ”</p>
+                        </div>
+                        <div class="testi-client">
+                            <img src="{% static 'assets/img/testimonial/testimonial-2-4.png'%}" alt="author">
+                            <h3 class="testi-name h5">Marry Rose</h3>
+                            <span class="testi-degi">Moto Build LTD, 2015-2018</span>
+                            <div class="testi-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{%endblock%}

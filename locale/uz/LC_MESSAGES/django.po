@@ -1,0 +1,852 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-18 19:32+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: uz\n"
+"Language-Team: uz <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: .\account\models.py:46
+msgid "Admin"
+msgstr "Administrator"
+
+#: .\account\models.py:47
+msgid "Editor"
+msgstr "Muharrir"
+
+#: .\account\models.py:48
+msgid "Viewer"
+msgstr "Ko‘ruvchi"
+
+#: .\templates\about.html:12 .\templates\about.html:16 .\templates\base.html:97
+#: .\templates\includes\header.html:50
+msgid "About Us"
+msgstr "Biz haqimizda"
+
+#: .\templates\about.html:15 .\templates\base.html:93
+#: .\templates\blog-details.html:15 .\templates\contact.html:14
+#: .\templates\course\courses.html:15 .\templates\course\search_course.html:15
+#: .\templates\event-details.html:15 .\templates\find-program.html:14
+#: .\templates\includes\header.html:48 .\templates\program-details.html:14
+#: .\templates\team-details.html:15 .\templates\team.html:15
+msgid "Home"
+msgstr "Bosh sahifa"
+
+#: .\templates\about.html:33 .\templates\about.html:42
+msgid "book library and store"
+msgstr "kitob kutubxonasi va do‘kon"
+
+#: .\templates\about.html:34 .\templates\about.html:43 .\templates\about.html:52
+#: .\templates\about.html:61
+msgid ""
+"Certain welcomed eveytry pain avoided but inger cer mstnces owing ation will "
+"online freetly."
+msgstr ""
+"Baʼzi noqulayliklardan qochiladi, ammo ayrim holatlar tufayli ular onlayn yuz"
+" beradi."
+
+#: .\templates\about.html:51
+msgid "learn courses online"
+msgstr "kurslarni onlayn o‘rganing"
+
+#: .\templates\about.html:60
+msgid "access 3000+ courses"
+msgstr "3000+ kurslarga kirish"
+
+# | msgid "GLOBAL EDUCATION"
+#: .\templates\about.html:81 .\templates\team-details.html:86
+msgid "WELCOME TO GLOBAL EDUCATION"
+msgstr "GLOBAL TA’LIM"
+
+#: .\templates\about.html:91
+msgid "Call Anytime"
+msgstr "Istalgan vaqtda qo‘ng‘iroq qiling"
+
+#: .\templates\about.html:97
+msgid "Trusted by Students"
+msgstr "Talabalar ishonchi"
+
+#: .\templates\about.html:98
+msgid "Expert Instructor"
+msgstr "Tajribali o‘qituvchi"
+
+#: .\templates\about.html:102 .\templates\index.html:172 .\templates\index.html:192
+#: .\templates\index.html:402
+msgid "Get More Info"
+msgstr "Ko‘proq ma’lumot olish"
+
+#: .\templates\about.html:121 .\templates\index.html:359
+msgid "IDEAL TUTOR EVERYONE"
+msgstr "HAR BIR KISHI UCHUN IDEAL REPETITOR"
+
+#: .\templates\about.html:122 .\templates\index.html:360 .\templates\team.html:59
+msgid "Qualified Online Tutors"
+msgstr "Malakali onlayn repetitorlar"
+
+#: .\templates\about.html:131 .\templates\index.html:74 .\templates\index.html:86
+#: .\templates\index.html:98 .\templates\index.html:110 .\templates\index.html:122
+#: .\templates\index.html:134 .\templates\index.html:369
+msgid "course"
+msgstr "kurs"
+
+#: .\templates\about.html:135 .\templates\index.html:377
+msgid "students"
+msgstr "talabalar"
+
+#: .\templates\about.html:136 .\templates\team-details.html:43
+#: .\templates\team.html:73
+msgid "years experience"
+msgstr "yillik tajriba"
+
+# | msgid "Hire teachers"
+#: .\templates\about.html:174
+msgid "Find Our Teachers"
+msgstr "O‘qituvchilarni yollash"
+
+#: .\templates\about.html:196
+msgid "ASKED QUESTIONS"
+msgstr "Berilgan savollar"
+
+#: .\templates\about.html:197
+msgid "Academic Faq's"
+msgstr "Akademik savol-javoblar"
+
+#: .\templates\about.html:264 .\templates\find-program.html:216
+msgid "Apply Today"
+msgstr "Bugun ariza topshiring"
+
+# | msgid "Admission Session"
+#: .\templates\about.html:271 .\templates\find-program.html:223
+msgid "Admission Process"
+msgstr "Qabul sessiyasi"
+
+#: .\templates\account\login.html:16
+msgid "LOG IN"
+msgstr "Kirish"
+
+#: .\templates\account\login.html:19
+msgid "Username or email address"
+msgstr "Foydalanuvchi nomi yoki email manzili"
+
+#: .\templates\account\login.html:22 .\templates\account\register.html:25
+msgid "Password"
+msgstr "Parol"
+
+#: .\templates\account\login.html:27
+msgid "Remember me"
+msgstr "Meni eslab qol"
+
+#: .\templates\account\login.html:30
+msgid "REGISTER"
+msgstr "Ro‘yxatdan o‘tish"
+
+#: .\templates\account\login.html:33
+msgid "Login"
+msgstr "Kirish"
+
+#: .\templates\account\register.html:16
+msgid "SIGN UP"
+msgstr "Ro‘yxatdan o‘tish"
+
+# | msgid "Your Name"
+#: .\templates\account\register.html:19
+msgid "First Name"
+msgstr "Ismingiz"
+
+# | msgid "Email Address"
+#: .\templates\account\register.html:22
+msgid "Email address"
+msgstr "Elektron pochta manzili"
+
+#: .\templates\account\register.html:30
+msgid "SIGN IN"
+msgstr "Kirish"
+
+# | msgid "Login & Register"
+#: .\templates\account\register.html:33
+msgid "Register"
+msgstr "Kirish va ro‘yxatdan o‘tish"
+
+#: .\templates\base.html:9 .\templates\base.html:11
+msgid "ROA Group - online education platform"
+msgstr "ROA Group - onlayn taʼlim platformasi"
+
+#: .\templates\base.html:76
+msgid "Cancel Preloader"
+msgstr "Oldindan yuklashni bekor qilish"
+
+#: .\templates\base.html:100 .\templates\includes\header.html:52
+msgid "Courses"
+msgstr "Kurslar"
+
+#: .\templates\base.html:117 .\templates\includes\header.html:67
+msgid "Contact Us"
+msgstr "Bog‘lanish"
+
+#: .\templates\base.html:129
+msgid "What are you looking for"
+msgstr "Nimani qidiryapsiz"
+
+#: .\templates\become-tutor.html:22
+msgid "BECOME AN ONLINE TUTOR"
+msgstr "Onlayn repetitor bo‘ling"
+
+#: .\templates\become-tutor.html:23
+msgid "Give lessons whenever and wherever you want. We take care of the rest."
+msgstr "Istalgan joy va vaqtda dars bering. Qolganini biz amalga oshiramiz."
+
+#: .\templates\become-tutor.html:24
+msgid "Register Now"
+msgstr "Hozir ro‘yxatdan o‘ting"
+
+#: .\templates\become-tutor.html:38
+msgid "MORE THAN JUST A TUTORING"
+msgstr "Faqatgina repetitorlik emas"
+
+#: .\templates\become-tutor.html:39
+msgid "Why become an online tutor"
+msgstr "Nega onlayn repetitor bo‘lish kerak"
+
+#: .\templates\become-tutor.html:46
+msgid "You Need to Teach Online."
+msgstr "Siz onlayn dars berishingiz kerak."
+
+#: .\templates\become-tutor.html:47 .\templates\team.html:37
+msgid ""
+"Ducamb welcomed every pain avoided but in certa mstances owing to the claims "
+"of igation that off bu will frequently occuthe obligations of business it "
+"will ently ofcurs that pleasures."
+msgstr ""
+"Ducamb welcomed every pain avoided but in certa mstances owing to the claims "
+"of igation that off bu will frequently occuthe obligations of business it "
+"will ently ofcurs that pleasures."
+
+# | msgid "IDEAL TUTOR EVERYONE"
+#: .\templates\become-tutor.html:79 .\templates\team.html:58
+msgid "IDEAL TUTOR FOR EVERYONE"
+msgstr "HAR BIR KISHI UCHUN IDEAL REPETITOR"
+
+#: .\templates\become-tutor.html:80
+msgid "The benefits of giving classes online"
+msgstr "Onlayn dars berishning afzalliklari"
+
+#: .\templates\become-tutor.html:129 .\templates\team.html:87
+msgid "Call us now and transform your career today"
+msgstr "Hozir qo‘ng‘iroq qiling va karyerangizni o‘zgartiring"
+
+#: .\templates\become-tutor.html:142
+msgid "FIND THE BEST TEACHER FOR YOU"
+msgstr "Siz uchun eng yaxshi o‘qituvchini toping"
+
+#: .\templates\become-tutor.html:143
+msgid "How it works"
+msgstr "Qanday ishlaydi"
+
+#: .\templates\become-tutor.html:198
+msgid "PLEASURES HAVE TO REPUDIATED"
+msgstr "Lazzatlardan voz kechish kerak"
+
+#: .\templates\become-tutor.html:199
+msgid "Top Companies"
+msgstr "Eng yaxshi kompaniyalar"
+
+#: .\templates\blog-details.html:12 .\templates\blog-details.html:16
+msgid "Blog Details"
+msgstr "Blog tafsilotlari"
+
+#: .\templates\contact.html:11 .\templates\contact.html:15
+msgid "Contac Us"
+msgstr "Biz bilan bog‘lanish"
+
+#: .\templates\contact.html:28
+msgid "Get in Touch"
+msgstr "Bog‘lanish"
+
+#: .\templates\contact.html:29 .\templates\contact.html:51
+msgid "become a partner school, or discover more about our work."
+msgstr "hamkor maktabga aylaning yoki ishimiz haqida ko‘proq bilib oling."
+
+#: .\templates\contact.html:30
+msgid "Regional Office"
+msgstr "Mintaqaviy ofis"
+
+#: .\templates\contact.html:33
+msgid "Office hours are 9am – 5pm"
+msgstr "Ish vaqti ertalab 9:00 dan kechki 5:00 gacha"
+
+#: .\templates\contact.html:33
+msgid "Monday-Thursday and 9am – 4.30pm on Friday."
+msgstr "Dushanba-Payshanba kunlari va Juma kuni ertalab 9:00 dan kechki 4:30 gacha."
+
+#: .\templates\contact.html:37
+msgid "1309 Beacon Street, Suite 300, Brookline, MA, 02446"
+msgstr "1309 Beacon Street, Suite 300, Brookline, MA, 02446"
+
+#: .\templates\contact.html:50
+msgid "any questions?"
+msgstr "Savollaringiz bormi?"
+
+#: .\templates\contact.html:53
+msgid "Your Name"
+msgstr "Ismingiz"
+
+#: .\templates\contact.html:56
+msgid "Email Address"
+msgstr "Elektron pochta manzili"
+
+#: .\templates\contact.html:59
+msgid "Phone No"
+msgstr "Telefon raqami"
+
+#: .\templates\contact.html:63
+msgid "Select Subject"
+msgstr "Mavzuni tanlang"
+
+#: .\templates\contact.html:66
+msgid "Private Tutor"
+msgstr "Xususiy repetitor"
+
+#: .\templates\contact.html:67
+msgid "Admission Session"
+msgstr "Qabul sessiyasi"
+
+#: .\templates\contact.html:71
+msgid "Write your message"
+msgstr "Xabaringizni yozing"
+
+#: .\templates\contact.html:73
+msgid "send message"
+msgstr "Xabar yuborish"
+
+#: .\templates\contact.html:74
+msgid "For message will display here"
+msgstr "Xabar bu yerda ko‘rsatiladi"
+
+# | msgid "Our Courses Two"
+#: .\templates\course\courses.html:12 .\templates\course\courses.html:16
+#: .\templates\course\search_course.html:12
+#: .\templates\course\search_course.html:16
+msgid "Our Courses"
+msgstr "Bizning ikkinchi kurslarimiz"
+
+#: .\templates\course\courses.html:28 .\templates\index.html:218
+msgid "Browse Top Courses"
+msgstr "Eng yaxshi kurslarni ko‘rib chiqing"
+
+#: .\templates\course\courses.html:29 .\templates\index.html:219
+msgid "Most Popular Courses"
+msgstr "Eng mashhur kurslar"
+
+# | msgid "No articles found."
+#: .\templates\course\courses.html:61
+msgid "No Courses Found"
+msgstr "Maqolalar topilmadi."
+
+#: .\templates\course\lecture.html:110
+msgid "Course Sections"
+msgstr "Kurs bo‘limlari"
+
+#: .\templates\course\lecture.html:143
+msgid "Quiz"
+msgstr "Test"
+
+#: .\templates\course\lecture.html:152
+msgid "Unknown item type"
+msgstr "Nomaʼlum element turi"
+
+#: .\templates\course\lecture.html:157
+msgid "Content not found for item order"
+msgstr "Element tartibi uchun kontent topilmadi"
+
+#: .\templates\course\lecture.html:161
+msgid "No items in this section."
+msgstr "Bu bo‘limda elementlar yo‘q"
+
+# | msgid "students"
+#: .\templates\course\my-courses.html:22 .\templates\course\search_course.html:37
+#: .\templates\team-details.html:100
+msgid "Students"
+msgstr "talabalar"
+
+#: .\templates\course\my-courses.html:30
+msgid "Go to the Course"
+msgstr "Kursga o‘tish"
+
+#: .\templates\course\my-courses.html:51 .\templates\course\search_course.html:63
+msgid "No articles found."
+msgstr "Maqolalar topilmadi."
+
+#: .\templates\course\my-courses.html:58 .\templates\course\my-courses.html:60
+#: .\templates\course\quiz2.html:85 .\templates\course\search_course.html:70
+#: .\templates\course\search_course.html:72
+msgid "Previous"
+msgstr "Oldingi"
+
+#: .\templates\course\my-courses.html:93 .\templates\course\my-courses.html:95
+#: .\templates\course\quiz2.html:87 .\templates\course\search_course.html:105
+#: .\templates\course\search_course.html:107
+msgid "Next"
+msgstr "Keyingi"
+
+#: .\templates\course\quiz.html:56 .\templates\course\quiz2.html:59
+#: .\templates\course\quiz2.html:268
+msgid "Все вопросы"
+msgstr "Barcha savollar"
+
+#: .\templates\course\quiz.html:58 .\templates\course\quiz2.html:277
+msgid "Вопрос"
+msgstr "Savol"
+
+#: .\templates\course\quiz.html:225 .\templates\course\quiz2.html:129
+msgid "Loading quiz data..."
+msgstr "Test maʼlumotlari yuklanmoqda..."
+
+#: .\templates\course\quiz.html:254 .\templates\course\quiz2.html:155
+msgid "Quiz completed! You have answered all the questions."
+msgstr "Test tugadi! Siz barcha savollarga javob berdingiz."
+
+#: .\templates\course\quiz.html:264 .\templates\course\quiz2.html:165
+msgid "Failed to load quiz. Please try again later."
+msgstr "Testni yuklashda xatolik. Keyinroq urinib ko‘ring."
+
+#: .\templates\course\quiz.html:272 .\templates\course\quiz2.html:172
+msgid "Quiz is complete or no more questions available."
+msgstr "Test yakunlandi yoki boshqa savollar qolmagan."
+
+# | msgid "any questions?"
+#: .\templates\course\quiz.html:292 .\templates\course\quiz.html:362
+#: .\templates\course\quiz2.html:198
+msgid "Question"
+msgstr "Savollaringiz bormi?"
+
+#: .\templates\course\quiz.html:295
+msgid "Single-Choice (Radio)"
+msgstr "Bir javobli (radio)"
+
+#: .\templates\course\quiz.html:340 .\templates\course\quiz2.html:251
+msgid "Failed to save answer. Please check your connection."
+msgstr "Javobni saqlab bo‘lmadi. Iltimos, internet aloqasini tekshiring."
+
+# | msgid "any questions?"
+#: .\templates\course\quiz.html:353
+msgid "All questions"
+msgstr "Savollaringiz bormi?"
+
+#: .\templates\course\quiz2.html:61
+msgid "Loading"
+msgstr "Yuklanmoqda"
+
+# | msgid "any questions?"
+#: .\templates\course\quiz2.html:79
+msgid "Loading questions..."
+msgstr "Savollaringiz bormi?"
+
+#: .\templates\course\quiz2.html:86
+msgid "Submit"
+msgstr "Yuborish"
+
+# | msgid "Course Sections"
+#: .\templates\course\search_course.html:38
+msgid "Sections"
+msgstr "Kurs bo‘limlari"
+
+#: .\templates\course\search_course.html:44
+msgid "Off"
+msgstr "O‘chirilgan"
+
+#: .\templates\course\search_course.html:46 .\templates\index.html:228
+msgid "Preview Course"
+msgstr "Kursni ko‘rib chiqish"
+
+#: .\templates\event-details.html:12 .\templates\event-details.html:16
+msgid "Event Details"
+msgstr "Tadbir tafsilotlari"
+
+# | msgid "Find Program"
+#: .\templates\find-program.html:11 .\templates\find-program.html:15
+msgid "Find Programs"
+msgstr "Dastur topish"
+
+#: .\templates\find-program.html:35
+msgid "Search Your Program"
+msgstr "Dasturingizni qidiring"
+
+#: .\templates\find-program.html:39
+msgid "Undergraduate Programs"
+msgstr "Bakalavriat dasturlari"
+
+# | msgid "Find Program"
+#: .\templates\find-program.html:43
+msgid "Graduate Programs"
+msgstr "Dastur topish"
+
+#: .\templates\find-program.html:58
+msgid "8,000 online courses"
+msgstr "8 000 ta onlayn kurs"
+
+#: .\templates\find-program.html:59
+msgid "Explore a variety of fresh topics"
+msgstr "Turli yangi mavzularni o‘rganing"
+
+#: .\templates\find-program.html:67
+msgid "Expert Instruction"
+msgstr "Mutaxassisdan taʼlim"
+
+#: .\templates\find-program.html:68
+msgid "Find the right instructor for you"
+msgstr "Siz uchun to‘g‘ri o‘qituvchini toping"
+
+#: .\templates\find-program.html:85
+msgid "PROGRAMS (INCLUDING MAJORS AND MINORS)"
+msgstr "Dasturlar (asosiy va qo‘shimcha yo‘nalishlar)"
+
+#: .\templates\find-program.html:86
+msgid "TYPE OF DEGREE"
+msgstr "Daraja turi"
+
+#: .\templates\find-program.html:127
+msgid "AWARD WINNING QUALIFIED TUTORS"
+msgstr "Mukofotli malakali repetitorlar"
+
+# | msgid "Private Tutor"
+#: .\templates\find-program.html:129
+msgid "Find a Tutor"
+msgstr "Xususiy repetitor"
+
+#: .\templates\find-program.html:149
+msgid "FREQUENTLY ASKED QUESTIONS"
+msgstr "Tez-tez beriladigan savollar"
+
+#: .\templates\includes\footer.html:17
+msgid ""
+"Lorem ipsum dolor sit amet, consectet rem ips dolor sit amet. sum dolor sit "
+"amet, consectet e dolor sit amet, comod."
+msgstr ""
+"Lorem ipsum dolor sit amet, consectet rem ips dolor sit amet. sum dolor sit "
+"amet, consectet e dolor sit amet, comod."
+
+#: .\templates\includes\footer.html:25
+msgid "Study Links"
+msgstr "O‘qish havolalari"
+
+#: .\templates\includes\footer.html:28 .\templates\includes\header.html:55
+msgid "All Courses"
+msgstr "Barcha kurslar"
+
+#: .\templates\includes\footer.html:29
+msgid "Summer Sessions"
+msgstr "Yozgi sessiyalar"
+
+#: .\templates\includes\footer.html:30
+msgid "Best Courses"
+msgstr "Eng yaxshi kurslar"
+
+#: .\templates\includes\footer.html:31
+msgid "Hire teachers"
+msgstr "O‘qituvchilarni yollash"
+
+#: .\templates\includes\footer.html:32
+msgid "Program FAQs"
+msgstr "Dastur bo‘yicha tez-tez beriladigan savollar"
+
+#: .\templates\includes\footer.html:39
+msgid "Quick Links"
+msgstr "Tezkor havolalar"
+
+#: .\templates\includes\footer.html:42
+msgid "Community"
+msgstr "Jamiyat"
+
+#: .\templates\includes\footer.html:43
+msgid "Support"
+msgstr "Yordam"
+
+#: .\templates\includes\footer.html:44
+msgid "Video Guides"
+msgstr "Video qo‘llanmalar"
+
+#: .\templates\includes\footer.html:45
+msgid "Documentation"
+msgstr "Hujjatlar"
+
+#: .\templates\includes\footer.html:46
+msgid "Security"
+msgstr "Xavfsizlik"
+
+#: .\templates\includes\footer.html:53
+msgid "Recent Courses"
+msgstr "So‘nggi kurslar"
+
+#: .\templates\includes\header.html:11
+msgid "Phone"
+msgstr "Telefon"
+
+#: .\templates\includes\header.html:12
+msgid "Email"
+msgstr "Elektron pochta"
+
+#: .\templates\includes\header.html:20
+msgid "Log out"
+msgstr "Chiqish"
+
+#: .\templates\includes\header.html:24
+msgid "Login & Register"
+msgstr "Kirish va ro‘yxatdan o‘tish"
+
+# | msgid "Courses"
+#: .\templates\includes\header.html:54
+msgid "My Courses"
+msgstr "Kurslar"
+
+#: .\templates\includes\header.html:59
+msgid "Tutor"
+msgstr "Repetitor"
+
+# | msgid "Tutor"
+#: .\templates\includes\header.html:61 .\templates\team.html:12
+#: .\templates\team.html:16
+msgid "Our Tutors"
+msgstr "Repetitor"
+
+#: .\templates\includes\header.html:62
+msgid "Become Tutor"
+msgstr "Repetitor bo‘lish"
+
+#: .\templates\includes\header.html:78 .\templates\includes\header.html:85
+msgid "Uzbek"
+msgstr "O‘zbek tili"
+
+#: .\templates\includes\header.html:79 .\templates\includes\header.html:86
+msgid "Русский"
+msgstr "Rus tili"
+
+# | msgid "Basic English"
+#: .\templates\includes\header.html:80 .\templates\includes\header.html:87
+msgid "English"
+msgstr "Boshlang‘ich ingliz tili"
+
+#: .\templates\includes\header.html:101
+msgid "Find Program"
+msgstr "Dastur topish"
+
+#: .\templates\index.html:18
+msgid "Find your course..."
+msgstr "Kursingizni toping..."
+
+#: .\templates\index.html:19
+msgid "Find Course"
+msgstr "Kursni topish"
+
+#: .\templates\index.html:60
+msgid "our Top Categories"
+msgstr "Eng yaxshi toifalarimiz"
+
+#: .\templates\index.html:61
+msgid "Browse Learn Skills You Need"
+msgstr "Sizga kerak bo‘lgan ko‘nikmalarni o‘rganing"
+
+#: .\templates\index.html:72 .\templates\index.html:132
+msgid "web Developer"
+msgstr "Veb dasturchi"
+
+#: .\templates\index.html:84
+msgid "Basic English"
+msgstr "Boshlang‘ich ingliz tili"
+
+#: .\templates\index.html:96
+msgid "Java Script"
+msgstr "Java Script"
+
+#: .\templates\index.html:108
+msgid "tach & coding"
+msgstr "texnologiya va dasturlash"
+
+#: .\templates\index.html:120
+msgid "IT Service"
+msgstr "IT xizmati"
+
+#: .\templates\index.html:161
+msgid "GLOBAL EDUCATION"
+msgstr "GLOBAL TA’LIM"
+
+#: .\templates\index.html:188
+msgid "Browse Top Courses​"
+msgstr "Eng yaxshi kurslarni ko‘rib chiqing"
+
+#: .\templates\index.html:262
+msgid "PRICING PLANS"
+msgstr "NARXLAR REJASI"
+
+#: .\templates\index.html:263
+msgid "Lesson Packages"
+msgstr "Dars to‘plamlari"
+
+#: .\templates\index.html:269 .\templates\index.html:295 .\templates\index.html:321
+msgid "Standard"
+msgstr "Standart"
+
+#: .\templates\index.html:270 .\templates\index.html:296
+msgid "month"
+msgstr "oy"
+
+#: .\templates\index.html:271 .\templates\index.html:297 .\templates\index.html:323
+msgid "Secondary Education"
+msgstr "O‘rta ta’lim"
+
+#: .\templates\index.html:278 .\templates\index.html:304 .\templates\index.html:330
+msgid "lessons / month"
+msgstr "darslar / oy"
+
+#: .\templates\index.html:279 .\templates\index.html:305 .\templates\index.html:331
+msgid "One-to-one training"
+msgstr "Yakka tartibdagi mashg‘ulot"
+
+#: .\templates\index.html:280 .\templates\index.html:306 .\templates\index.html:332
+msgid "minutes"
+msgstr "daqiqalar"
+
+#: .\templates\index.html:281 .\templates\index.html:307 .\templates\index.html:333
+msgid "Lesson price"
+msgstr "Dars narxi"
+
+#: .\templates\index.html:285 .\templates\index.html:311 .\templates\index.html:337
+msgid "Save"
+msgstr "Saqlash"
+
+#: .\templates\index.html:286 .\templates\index.html:312 .\templates\index.html:338
+msgid "Discount"
+msgstr "Chegirma"
+
+#: .\templates\index.html:288 .\templates\index.html:314 .\templates\index.html:340
+msgid "Purchase Now"
+msgstr "Hoziroq sotib olish"
+
+#: .\templates\index.html:322
+msgid "year"
+msgstr "yil"
+
+#: .\templates\index.html:421
+msgid "BLOG AND UPDATES"
+msgstr "BLOG VA YANGILANISHLAR"
+
+#: .\templates\index.html:422
+msgid "News & Articles"
+msgstr "Yangiliklar va maqolalar"
+
+#: .\templates\index.html:443
+msgid "Read More"
+msgstr "Batafsil o‘qish"
+
+# | msgid "Program FAQs"
+#: .\templates\program-details.html:11 .\templates\program-details.html:15
+msgid "Program Details"
+msgstr "Dastur bo‘yicha tez-tez beriladigan savollar"
+
+#: .\templates\program-details.html:27
+msgid "CERTIFICATE"
+msgstr "Sertifikat"
+
+#: .\templates\program-details.html:36
+#, python-format
+msgid "Guaranteed 40%% tuition scholarships"
+msgstr "40%% gacha o‘qish uchun grant kafolatlanadi"
+
+#: .\templates\program-details.html:40
+msgid "Overview"
+msgstr "Umumiy maʼlumot"
+
+# | msgid "Best Courses"
+#: .\templates\program-details.html:47
+msgid "Core Courses"
+msgstr "Eng yaxshi kurslar"
+
+# | msgid "All Courses"
+#: .\templates\program-details.html:53
+msgid "Additional Courses"
+msgstr "Barcha kurslar"
+
+# | msgid "Program FAQs"
+#: .\templates\program-details.html:67
+msgid "Program Features"
+msgstr "Dastur bo‘yicha tez-tez beriladigan savollar"
+
+#: .\templates\program-details.html:84
+msgid "Requirements"
+msgstr "Talablar"
+
+#: .\templates\program-details.html:86
+msgid "Internships"
+msgstr "Amaliyotlar"
+
+#: .\templates\team-details.html:12 .\templates\team-details.html:16
+msgid "Tutor Details"
+msgstr "Repetitor tafsilotlari"
+
+# | msgid "Lesson price"
+#: .\templates\team-details.html:41 .\templates\team.html:68
+msgid "Lessons Completed"
+msgstr "Dars narxi"
+
+#: .\templates\team-details.html:42 .\templates\team.html:72
+msgid "per hour"
+msgstr "soatiga"
+
+#: .\templates\team-details.html:57
+msgid "Qualifications"
+msgstr "Malakalar"
+
+# | msgid "Private Tutor"
+#: .\templates\team-details.html:69
+msgid "History Tutor"
+msgstr "Xususiy repetitor"
+
+# | msgid "All Courses"
+#: .\templates\team-details.html:87
+msgid "Explore Courses"
+msgstr "Barcha kurslar"
+
+#: .\templates\team.html:35
+msgid "OUR TUTORS ARE PASSIONATE"
+msgstr "Bizning repetitorlarimiz ishtiyoqli"
+
+#: .\templates\team.html:36
+msgid "Start your education career with us"
+msgstr "Biz bilan taʼlim karyerangizni boshlang"
+
+#: .\templates\team.html:40
+msgid "Hand-picked authors"
+msgstr "Tanlab olingan mualliflar"
+
+#: .\templates\team.html:41
+msgid "Easy to follow curriculum"
+msgstr "Oson o‘zlashtiriladigan dastur"
+
+# | msgid "Recent Courses"
+#: .\templates\team.html:42
+msgid "Free courses"
+msgstr "So‘nggi kurslar"
+
+#: .\templates\team.html:43
+msgid "Money-back guarantee"
+msgstr "Pulni qaytarish kafolati"
+
+#: .\templates\team.html:83
+msgid "Tutors not found."
+msgstr "Repetitorlar topilmadi."
+
+#: .\templates\team.html:109
+msgid "WHAT PEOPLE SAY"
+msgstr "Odamlar nima deydi"
+
+#: .\templates\team.html:110
+msgid "Our Students Words"
+msgstr "Talabalarimizning fikrlari"
+

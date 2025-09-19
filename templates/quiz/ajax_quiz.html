@@ -1,0 +1,70 @@
+<h2>{{ quiz.title }}</h2>
+<div id="quiz-container"></div>
+
+<button id="submit-btn">Submit Quiz</button>
+
+<div id="result"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const quizId = "{{ quiz.id }}";
+
+    fetch(`/api/quiz/${quizId}/questions/`)
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('quiz-container');
+        data.questions.forEach(q => {
+            const qDiv = document.createElement('div');
+            qDiv.innerHTML = `<strong>${q.text}</strong><br>`;
+            q.choices.forEach(choice => {
+                qDiv.innerHTML += `
+                    <label>
+                        <input type="radio" name="${q.id}" value="${choice.id}">
+                        ${choice.text}
+                    </label><br>`;
+            });
+            container.appendChild(qDiv);
+            container.appendChild(document.createElement('hr'));
+        });
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        const answers = {};
+        document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+            answers[input.name] = input.value;
+        });
+
+        fetch(`/api/quiz/${quizId}/submit/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')  // important for real deployment
+            },
+            body: JSON.stringify(answers)
+        })
+        .then(response => response.json())
+        .then(result => {
+            document.getElementById('result').innerHTML = `
+                <h3>Result</h3>
+                <p>Score: ${result.score} / ${result.total}</p>
+                <p>Percentage: ${result.percentage.toFixed(2)}%</p>
+            `;
+        });
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>

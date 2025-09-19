@@ -1,0 +1,30 @@
+[
+{
+  "model": "lms.pagetype",
+  "pk": 1,
+  "fields": {
+    "name": "basic_page"
+  }
+},
+{
+  "model": "lms.pagetype",
+  "pk": 2,
+  "fields": {
+    "name": "about_page"
+  }
+},
+{
+  "model": "lms.pagetype",
+  "pk": 3,
+  "fields": {
+    "name": "find_program_page"
+  }
+},
+{
+  "model": "lms.pagetype",
+  "pk": 4,
+  "fields": {
+    "name": "program_detail_page"
+  }
+}
+]

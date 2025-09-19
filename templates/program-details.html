@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!--==============================
+    Breadcumb
+    ============================== -->
+    <div class="breadcumb-wrapper " data-bg-src="{% static 'assets/img/breadcumb/breadcumb-bg.png'%}">
+        <div class="container z-index-common">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title">{% trans 'Program Details'%}</h1>
+                <div class="breadcumb-menu-wrap">
+                    <ul class="breadcumb-menu">
+                        <li><a href="{% url 'index' %}">{% trans 'Home'%}</a></li>
+                        <li>{% trans 'Program Details'%}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!--==============================
+      Pricing Area
+  ==============================-->
+    <section class="space-top space-extra-bottom">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <span class="sec-subtitle3">{% trans 'CERTIFICATE'%}</span>
+                    <h2 class="h1 mb-4 pb-2">{{sertificates.title|safe}}</h2>
+                    <div class="list-style1 vs-list mb-4 mb-xl-5">
+                        <ul>
+                            {{sertificates.helper_text1|safe}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-auto align-self-end mb-5">
+                    <span class="guarant-badge">{% trans 'Guaranteed 40% tuition scholarships'%}</span>
+                </div>
+            </div>
+            <div class="mega-hover rounded-20 mb-5"><img src="{{sertificates.image.url}}" alt="teaching"></div>
+            <h5 class="border-title2 mb-4">{% trans 'Overview'%}</h5>
+            {{sertificates.description|safe}}
+            <div class="list-style5 vs-list ">
+                <ul>
+                    {{sertificates.helper_text2|safe}}
+                </ul>
+            </div>
+            <h5 class="border-title2  mb-3 pb-2">{% trans 'Core Courses'%}</h5>
+            <div class="list-style6 vs-list ">
+                <ul>
+                    {{sertificates.helper_text3|safe}}
+                </ul>
+            </div>
+            <h5 class="border-title2 mb-3">{% trans 'Additional Courses'%}</h5>
+            <div class="list-style6 vs-list">
+                <ul>
+                    {{sertificates.helper_text4|safe}}
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <div class="mega-hover rounded-20"><img src="{{additional_courses_part1.image.url}}" alt="collaboration" class="w-100"></div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <div class="mega-hover rounded-20"><img src="{{additional_courses_part2.image.url}}" alt="discussion" class="w-100"></div>
+                </div>
+            </div>
+            <h5 class="border-title2 mb-3">{% trans 'Program Features'%}</h5>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="list-style6 vs-list mb-4">
+                        <ul>
+                            {{additional_courses_part1.helper_text1|safe}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="list-style6 vs-list mb-4">
+                        <ul>
+                            {{additional_courses_part1.helper_text2|safe}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h5 class="border-title2 mb-4">{% trans 'Requirements'%}</h5>
+            <p class="mb-4 pb-2">{{additional_courses_part1.description|safe}}</p>
+            <h5 class="border-title2 mb-4">{% trans 'Internships'%}</h5>
+            <p>{{additional_courses_part2.description|safe}}</p>
+            
+        </div>
+    </section>
+{%endblock%}

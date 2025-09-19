@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!--==============================
+    Breadcumb
+    ============================== -->
+    <div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/breadcumb/breadcumb-bg.png'%}">
+        <div class="container z-index-common">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title">{% trans "Contac Us"%}</h1>
+                <div class="breadcumb-menu-wrap">
+                    <ul class="breadcumb-menu">
+                        <li><a href="{% url 'index' %}">{% trans "Home"%}</a></li>
+                        <li>{% trans "Contac Us"%}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Contact Area
+    ==============================-->
+    <section class=" space-top space-extra-bottom">
+        <div class="container">
+            <div class="row gy-5 gx-5">
+                <div class="col-lg-6 col-xl-6 mb-30 mb-lg-0">
+                    <h2 class="h1 mt-n2">{% trans "Get in Touch"%}</h2>
+                    <p class="fs-md mb-4 pb-2">{% trans "become a partner school, or discover more about our work."%}</p>
+                    <h3 class="border-title2 h5">{% trans "Regional Office"%}</h3>
+                    <p class="contact-info">
+                        <i class="fas fa-clock"></i>
+                        {% trans "Office hours are 9am – 5pm"%} <br> {% trans "Monday-Thursday and 9am – 4.30pm on Friday."%}
+                    </p>
+                    <p class="contact-info mb-4">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {% trans "1309 Beacon Street, Suite 300, Brookline, MA, 02446"%}
+                    </p>
+                    <p class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <a class="text-inherit" href="mailto:roagroup@gmail.com">roagroup@gmail.com</a>
+                    </p>
+                    <div class="contact-map overflow-hidden rounded-20">
+                        <iframe class="bdrs20" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50437.32487690385!2d144.96230200000002!3d-37.805673!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sbd!4v1677062621439!5m2!1sen!2sbd" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-6">
+                    <form action="mail.php" class="form-style5 ajax-contact">
+                        <div class="vs-circle"></div>
+                        <h3 class="form-title">{% trans "any questions?"%}</h3>
+                        <p class="form-text">{% trans "become a partner school, or discover more about our work."%}</p>
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" placeholder="{% trans 'Your Name'%}">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="email" id="email" placeholder="{% trans 'Email Address'%}">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="number" id="number" placeholder="{% trans 'Phone No'%}">
+                        </div>
+                        <div class="form-group">
+                            <select name="subject" id="subject">
+                                <option selected hidden disabled>{% trans "Select Subject"%}</option>
+                                <option value="Addmission Help">{% trans "Addmission Help%"}</option>
+                                <option value="Apply Scholarship">{% trans "Apply Scholarship"}</option>
+                                <option value="Private Tutor">{% trans "Private Tutor"%}</option>
+                                <option value="Admission Session">{% trans "Admission Session"%}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" placeholder="{% trans 'Write your message'%}"></textarea>
+                        </div>
+                        <button type="submit" class="vs-btn style8 mt-2"><i class="far fa-angle-right"></i>{% trans "send message"%}</button>
+                        <p class="form-messages"><span class="sr-only">{% trans "For message will display here"%}</span></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{%endblock%}

@@ -1,0 +1,901 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-18 19:33+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\account\models.py:46
+msgid "Admin"
+msgstr "Администратор"
+
+#: .\account\models.py:47
+msgid "Editor"
+msgstr "Редактор"
+
+#: .\account\models.py:48
+msgid "Viewer"
+msgstr "Читатель"
+
+#: .\templates\about.html:12 .\templates\about.html:16 .\templates\base.html:97
+#: .\templates\includes\header.html:50
+msgid "About Us"
+msgstr "О нас"
+
+#: .\templates\about.html:15 .\templates\base.html:93
+#: .\templates\blog-details.html:15 .\templates\contact.html:14
+#: .\templates\course\courses.html:15 .\templates\course\search_course.html:15
+#: .\templates\event-details.html:15 .\templates\find-program.html:14
+#: .\templates\includes\header.html:48 .\templates\program-details.html:14
+#: .\templates\team-details.html:15 .\templates\team.html:15
+msgid "Home"
+msgstr "Главная"
+
+#: .\templates\about.html:33 .\templates\about.html:42
+msgid "book library and store"
+msgstr "Библиотека книг и магазин"
+
+#: .\templates\about.html:34 .\templates\about.html:43
+#: .\templates\about.html:52 .\templates\about.html:61
+msgid ""
+"Certain welcomed eveytry pain avoided but inger cer mstnces owing ation will "
+"online freetly."
+msgstr "Определенные желанные боли избегаются, но в некоторых обстоятельствах из-за долга ации будет часто онлайн."
+
+#: .\templates\about.html:51
+msgid "learn courses online"
+msgstr "Учитесь на онлайн-курсах"
+
+#: .\templates\about.html:60
+msgid "access 3000+ courses"
+msgstr "Доступ к 3000+ курсам"
+
+#: .\templates\about.html:81 .\templates\team-details.html:86
+#, fuzzy
+#| msgid "GLOBAL EDUCATION"
+msgid "WELCOME TO GLOBAL EDUCATION"
+msgstr "ДОБРО ПОЖАЛОВАТЬ В GLOBAL EDUCATION"
+
+#: .\templates\about.html:91
+msgid "Call Anytime"
+msgstr "Звоните в любое время"
+
+#: .\templates\about.html:97
+msgid "Trusted by Students"
+msgstr "Доверяют студенты"
+
+#: .\templates\about.html:98
+msgid "Expert Instructor"
+msgstr "Опытный преподаватель"
+
+#: .\templates\about.html:102 .\templates\index.html:172
+#: .\templates\index.html:192 .\templates\index.html:402
+msgid "Get More Info"
+msgstr "Узнать больше"
+
+#: .\templates\about.html:121 .\templates\index.html:359
+msgid "IDEAL TUTOR EVERYONE"
+msgstr "ИДЕАЛЬНЫЙ РЕПЕТИТОР ДЛЯ ВСЕХ"
+
+#: .\templates\about.html:122 .\templates\index.html:360
+#: .\templates\team.html:59
+msgid "Qualified Online Tutors"
+msgstr "Квалифицированные онлайн-репетиторы"
+
+#: .\templates\about.html:131 .\templates\index.html:74
+#: .\templates\index.html:86 .\templates\index.html:98
+#: .\templates\index.html:110 .\templates\index.html:122
+#: .\templates\index.html:134 .\templates\index.html:369
+msgid "course"
+msgstr "курс"
+
+#: .\templates\about.html:135 .\templates\index.html:377
+msgid "students"
+msgstr "студентов"
+
+#: .\templates\about.html:136 .\templates\team-details.html:43
+#: .\templates\team.html:73
+msgid "years experience"
+msgstr "лет опыта"
+
+#: .\templates\about.html:174
+#, fuzzy
+#| msgid "Hire teachers"
+msgid "Find Our Teachers"
+msgstr "Найти наших учителей"
+
+#: .\templates\about.html:196
+msgid "ASKED QUESTIONS"
+msgstr "ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ"
+
+#: .\templates\about.html:197
+msgid "Academic Faq's"
+msgstr "Академические вопросы"
+
+#: .\templates\about.html:264 .\templates\find-program.html:216
+msgid "Apply Today"
+msgstr "Подать заявку сегодня"
+
+#: .\templates\about.html:271 .\templates\find-program.html:223
+#, fuzzy
+#| msgid "Admission Session"
+msgid "Admission Process"
+msgstr "Процесс приема"
+
+#: .\templates\account\login.html:16
+msgid "LOG IN"
+msgstr "ВОЙТИ"
+
+#: .\templates\account\login.html:19
+msgid "Username or email address"
+msgstr "Имя пользователя или адрес электронной почты"
+
+#: .\templates\account\login.html:22 .\templates\account\register.html:25
+msgid "Password"
+msgstr "Пароль"
+
+#: .\templates\account\login.html:27
+msgid "Remember me"
+msgstr "Запомнить меня"
+
+#: .\templates\account\login.html:30
+msgid "REGISTER"
+msgstr "ЗАРЕГИСТРИРОВАТЬСЯ"
+
+#: .\templates\account\login.html:33
+msgid "Login"
+msgstr "Войти"
+
+#: .\templates\account\register.html:16
+msgid "SIGN UP"
+msgstr "ЗАРЕГИСТРИРОВАТЬСЯ"
+
+#: .\templates\account\register.html:19
+#, fuzzy
+#| msgid "Your Name"
+msgid "First Name"
+msgstr "Имя"
+
+#: .\templates\account\register.html:22
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email address"
+msgstr "Адрес электронной почты"
+
+#: .\templates\account\register.html:30
+msgid "SIGN IN"
+msgstr "ВОЙТИ"
+
+#: .\templates\account\register.html:33
+#, fuzzy
+#| msgid "Login & Register"
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: .\templates\base.html:9 .\templates\base.html:11
+msgid "ROA Group - online education platform"
+msgstr "ROA Group - платформа онлайн-образования"
+
+#: .\templates\base.html:76
+msgid "Cancel Preloader"
+msgstr "Отменить предзагрузку"
+
+#: .\templates\base.html:100 .\templates\includes\header.html:52
+msgid "Courses"
+msgstr "Курсы"
+
+#: .\templates\base.html:117 .\templates\includes\header.html:67
+msgid "Contact Us"
+msgstr "Связаться с нами"
+
+#: .\templates\base.html:129
+msgid "What are you looking for"
+msgstr "Что вы ищете"
+
+#: .\templates\become-tutor.html:22
+msgid "BECOME AN ONLINE TUTOR"
+msgstr "СТАНЬТЕ ОНЛАЙН-РЕПЕТИТОРОМ"
+
+#: .\templates\become-tutor.html:23
+msgid "Give lessons whenever and wherever you want. We take care of the rest."
+msgstr "Давайте уроки когда и где угодно. Об остальном позаботимся мы."
+
+#: .\templates\become-tutor.html:24
+msgid "Register Now"
+msgstr "Зарегистрироваться сейчас"
+
+#: .\templates\become-tutor.html:38
+msgid "MORE THAN JUST A TUTORING"
+msgstr "БОЛЬШЕ, ЧЕМ ПРОСТО РЕПЕТИТОРСТВО"
+
+#: .\templates\become-tutor.html:39
+msgid "Why become an online tutor"
+msgstr "Почему стоит стать онлайн-репетитором"
+
+#: .\templates\become-tutor.html:46
+msgid "You Need to Teach Online."
+msgstr "Вам нужно преподавать онлайн."
+
+#: .\templates\become-tutor.html:47 .\templates\team.html:37
+msgid ""
+"Ducamb welcomed every pain avoided but in certa mstances owing to the claims "
+"of igation that off bu will frequently occuthe obligations of business it "
+"will ently ofcurs that pleasures."
+msgstr "Дюкамб приветствовал каждую избежанную боль, но в некоторых обстоятельствах из-за требований того, что будет часто возникать, и обязательств бизнеса будет часто возникать, что удовольствия."
+
+#: .\templates\become-tutor.html:79 .\templates\team.html:58
+#, fuzzy
+#| msgid "IDEAL TUTOR EVERYONE"
+msgid "IDEAL TUTOR FOR EVERYONE"
+msgstr "ИДЕАЛЬНЫЙ РЕПЕТИТОР ДЛЯ ВСЕХ"
+
+#: .\templates\become-tutor.html:80
+msgid "The benefits of giving classes online"
+msgstr "Преимущества проведения занятий онлайн"
+
+#: .\templates\become-tutor.html:129 .\templates\team.html:87
+msgid "Call us now and transform your career today"
+msgstr "Позвоните нам сейчас и измените свою карьеру сегодня"
+
+#: .\templates\become-tutor.html:142
+msgid "FIND THE BEST TEACHER FOR YOU"
+msgstr "НАЙДИТЕ ЛУЧШЕГО УЧИТЕЛЯ ДЛЯ СЕБЯ"
+
+#: .\templates\become-tutor.html:143
+msgid "How it works"
+msgstr "Как это работает"
+
+#: .\templates\become-tutor.html:198
+msgid "PLEASURES HAVE TO REPUDIATED"
+msgstr "ОТ УДОВОЛЬСТВИЙ НУЖНО ОТКАЗАТЬСЯ"
+
+#: .\templates\become-tutor.html:199
+msgid "Top Companies"
+msgstr "Ведущие компании"
+
+#: .\templates\blog-details.html:12 .\templates\blog-details.html:16
+msgid "Blog Details"
+msgstr "Детали блога"
+
+#: .\templates\contact.html:11 .\templates\contact.html:15
+msgid "Contac Us"
+msgstr "Связаться с нами"
+
+#: .\templates\contact.html:28
+msgid "Get in Touch"
+msgstr "Связаться"
+
+#: .\templates\contact.html:29 .\templates\contact.html:51
+msgid "become a partner school, or discover more about our work."
+msgstr "станьте школой-партнером или узнайте больше о нашей работе."
+
+#: .\templates\contact.html:30
+msgid "Regional Office"
+msgstr "Региональный офис"
+
+#: .\templates\contact.html:33
+msgid "Office hours are 9am – 5pm"
+msgstr "Часы работы с 9:00 до 17:00"
+
+#: .\templates\contact.html:33
+msgid "Monday-Thursday and 9am – 4.30pm on Friday."
+msgstr "с понедельника по четверг и с 9:00 до 16:30 в пятницу."
+
+#: .\templates\contact.html:37
+msgid "1309 Beacon Street, Suite 300, Brookline, MA, 02446"
+msgstr "1309 Beacon Street, Suite 300, Бруклин, Массачусетс, 02446"
+
+#: .\templates\contact.html:50
+msgid "any questions?"
+msgstr "Есть вопросы?"
+
+#: .\templates\contact.html:53
+msgid "Your Name"
+msgstr "Ваше имя"
+
+#: .\templates\contact.html:56
+msgid "Email Address"
+msgstr "Адрес электронной почты"
+
+#: .\templates\contact.html:59
+msgid "Phone No"
+msgstr "Номер телефона"
+
+#: .\templates\contact.html:63
+msgid "Select Subject"
+msgstr "Выберите тему"
+
+#: .\templates\contact.html:66
+msgid "Private Tutor"
+msgstr "Частный репетитор"
+
+#: .\templates\contact.html:67
+msgid "Admission Session"
+msgstr "Приемная сессия"
+
+#: .\templates\contact.html:71
+msgid "Write your message"
+msgstr "Напишите ваше сообщение"
+
+#: .\templates\contact.html:73
+msgid "send message"
+msgstr "Отправить сообщение"
+
+#: .\templates\contact.html:74
+msgid "For message will display here"
+msgstr "Сообщение будет отображаться здесь"
+
+#: .\templates\course\courses.html:12 .\templates\course\courses.html:16
+#: .\templates\course\search_course.html:12
+#: .\templates\course\search_course.html:16
+#, fuzzy
+#| msgid "Our Courses Two"
+msgid "Our Courses"
+msgstr "Наши курсы"
+
+#: .\templates\course\courses.html:28 .\templates\index.html:218
+msgid "Browse Top Courses"
+msgstr "Просмотрите лучшие курсы"
+
+#: .\templates\course\courses.html:29 .\templates\index.html:219
+msgid "Most Popular Courses"
+msgstr "Самые популярные курсы"
+
+#: .\templates\course\courses.html:61
+#, fuzzy
+#| msgid "No articles found."
+msgid "No Courses Found"
+msgstr "Курсы не найдены."
+
+#: .\templates\course\lecture.html:110
+msgid "Course Sections"
+msgstr "Разделы курса"
+
+#: .\templates\course\lecture.html:143
+msgid "Quiz"
+msgstr "Тест"
+
+#: .\templates\course\lecture.html:152
+msgid "Unknown item type"
+msgstr "Неизвестный тип элемента"
+
+#: .\templates\course\lecture.html:157
+msgid "Content not found for item order"
+msgstr "Содержимое не найдено для порядка элементов"
+
+#: .\templates\course\lecture.html:161
+msgid "No items in this section."
+msgstr "В этом разделе нет элементов."
+
+#: .\templates\course\my-courses.html:22
+#: .\templates\course\search_course.html:37 .\templates\team-details.html:100
+#, fuzzy
+#| msgid "students"
+msgid "Students"
+msgstr "Студенты"
+
+#: .\templates\course\my-courses.html:30
+msgid "Go to the Course"
+msgstr "Перейти к курсу"
+
+#: .\templates\course\my-courses.html:51
+#: .\templates\course\search_course.html:63
+msgid "No articles found."
+msgstr "Статей не найдено."
+
+#: .\templates\course\my-courses.html:58 .\templates\course\my-courses.html:60
+#: .\templates\course\quiz2.html:85 .\templates\course\search_course.html:70
+#: .\templates\course\search_course.html:72
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: .\templates\course\my-courses.html:93 .\templates\course\my-courses.html:95
+#: .\templates\course\quiz2.html:87 .\templates\course\search_course.html:105
+#: .\templates\course\search_course.html:107
+msgid "Next"
+msgstr "Следующий"
+
+#: .\templates\course\quiz.html:56 .\templates\course\quiz2.html:59
+#: .\templates\course\quiz2.html:268
+msgid "Все вопросы"
+msgstr "Все вопросы"
+
+#: .\templates\course\quiz.html:58 .\templates\course\quiz2.html:277
+msgid "Вопрос"
+msgstr "Вопрос"
+
+#: .\templates\course\quiz.html:225 .\templates\course\quiz2.html:129
+msgid "Loading quiz data..."
+msgstr "Загрузка данных теста..."
+
+#: .\templates\course\quiz.html:254 .\templates\course\quiz2.html:155
+msgid "Quiz completed! You have answered all the questions."
+msgstr "Тест завершен! Вы ответили на все вопросы."
+
+#: .\templates\course\quiz.html:264 .\templates\course\quiz2.html:165
+msgid "Failed to load quiz. Please try again later."
+msgstr "Не удалось загрузить тест. Пожалуйста, попробуйте позже."
+
+#: .\templates\course\quiz.html:272 .\templates\course\quiz2.html:172
+msgid "Quiz is complete or no more questions available."
+msgstr "Тест завершен или больше нет доступных вопросов."
+
+#: .\templates\course\quiz.html:292 .\templates\course\quiz.html:362
+#: .\templates\course\quiz2.html:198
+#, fuzzy
+#| msgid "any questions?"
+msgid "Question"
+msgstr "Вопрос"
+
+#: .\templates\course\quiz.html:295
+msgid "Single-Choice (Radio)"
+msgstr "Один вариант ответа"
+
+#: .\templates\course\quiz.html:340 .\templates\course\quiz2.html:251
+msgid "Failed to save answer. Please check your connection."
+msgstr "Не удалось сохранить ответ. Пожалуйста, проверьте ваше соединение."
+
+#: .\templates\course\quiz.html:353
+#, fuzzy
+#| msgid "any questions?"
+msgid "All questions"
+msgstr "Все вопросы"
+
+#: .\templates\course\quiz2.html:61
+msgid "Loading"
+msgstr "Загрузка"
+
+#: .\templates\course\quiz2.html:79
+#, fuzzy
+#| msgid "any questions?"
+msgid "Loading questions..."
+msgstr "Загрузка вопросов..."
+
+#: .\templates\course\quiz2.html:86
+msgid "Submit"
+msgstr "Отправить"
+
+#: .\templates\course\search_course.html:38
+#, fuzzy
+#| msgid "Course Sections"
+msgid "Sections"
+msgstr "Разделы"
+
+#: .\templates\course\search_course.html:44
+msgid "Off"
+msgstr "Выкл"
+
+#: .\templates\course\search_course.html:46 .\templates\index.html:228
+msgid "Preview Course"
+msgstr "Предварительный просмотр курса"
+
+#: .\templates\event-details.html:12 .\templates\event-details.html:16
+msgid "Event Details"
+msgstr "Детали мероприятия"
+
+#: .\templates\find-program.html:11 .\templates\find-program.html:15
+#, fuzzy
+#| msgid "Find Program"
+msgid "Find Programs"
+msgstr "Найти программы"
+
+#: .\templates\find-program.html:35
+msgid "Search Your Program"
+msgstr "Искать вашу программу"
+
+#: .\templates\find-program.html:39
+msgid "Undergraduate Programs"
+msgstr "Программы бакалавриата"
+
+#: .\templates\find-program.html:43
+#, fuzzy
+#| msgid "Find Program"
+msgid "Graduate Programs"
+msgstr "Программы магистратуры"
+
+#: .\templates\find-program.html:58
+msgid "8,000 online courses"
+msgstr "8000 онлайн-курсов"
+
+#: .\templates\find-program.html:59
+msgid "Explore a variety of fresh topics"
+msgstr "Исследуйте разнообразные новые темы"
+
+#: .\templates\find-program.html:67
+msgid "Expert Instruction"
+msgstr "Обучение от экспертов"
+
+#: .\templates\find-program.html:68
+msgid "Find the right instructor for you"
+msgstr "Найдите подходящего для вас преподавателя"
+
+#: .\templates\find-program.html:85
+msgid "PROGRAMS (INCLUDING MAJORS AND MINORS)"
+msgstr "ПРОГРАММЫ (ВКЛЮЧАЯ ОСНОВНЫЕ И ВТОРОСТЕПЕННЫЕ СПЕЦИАЛЬНОСТИ)"
+
+#: .\templates\find-program.html:86
+msgid "TYPE OF DEGREE"
+msgstr "ТИП СТЕПЕНИ"
+
+#: .\templates\find-program.html:127
+msgid "AWARD WINNING QUALIFIED TUTORS"
+msgstr "ОТМЕЧЕННЫЕ НАГРАДАМИ КВАЛИФИЦИРОВАННЫЕ РЕПЕТИТОРЫ"
+
+#: .\templates\find-program.html:129
+#, fuzzy
+#| msgid "Private Tutor"
+msgid "Find a Tutor"
+msgstr "Найти репетитора"
+
+#: .\templates\find-program.html:149
+msgid "FREQUENTLY ASKED QUESTIONS"
+msgstr "ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ"
+
+#: .\templates\includes\footer.html:17
+msgid ""
+"Lorem ipsum dolor sit amet, consectet rem ips dolor sit amet. sum dolor sit "
+"amet, consectet e dolor sit amet, comod."
+msgstr ""
+"Lorem ipsum dolor sit amet, consectet rem ips dolor sit amet. sum dolor sit "
+"amet, consectet e dolor sit amet, comod."
+
+#: .\templates\includes\footer.html:25
+msgid "Study Links"
+msgstr "Полезные ссылки"
+
+#: .\templates\includes\footer.html:28 .\templates\includes\header.html:55
+msgid "All Courses"
+msgstr "Все курсы"
+
+#: .\templates\includes\footer.html:29
+msgid "Summer Sessions"
+msgstr "Летние сессии"
+
+#: .\templates\includes\footer.html:30
+msgid "Best Courses"
+msgstr "Лучшие курсы"
+
+#: .\templates\includes\footer.html:31
+msgid "Hire teachers"
+msgstr "Нанять учителей"
+
+#: .\templates\includes\footer.html:32
+msgid "Program FAQs"
+msgstr "Часто задаваемые вопросы по программе"
+
+#: .\templates\includes\footer.html:39
+msgid "Quick Links"
+msgstr "Быстрые ссылки"
+
+#: .\templates\includes\footer.html:42
+msgid "Community"
+msgstr "Сообщество"
+
+#: .\templates\includes\footer.html:43
+msgid "Support"
+msgstr "Поддержка"
+
+#: .\templates\includes\footer.html:44
+msgid "Video Guides"
+msgstr "Видеоуроки"
+
+#: .\templates\includes\footer.html:45
+msgid "Documentation"
+msgstr "Документация"
+
+#: .\templates\includes\footer.html:46
+msgid "Security"
+msgstr "Безопасность"
+
+#: .\templates\includes\footer.html:53
+msgid "Recent Courses"
+msgstr "Недавние курсы"
+
+#: .\templates\includes\header.html:11
+msgid "Phone"
+msgstr "Телефон"
+
+#: .\templates\includes\header.html:12
+msgid "Email"
+msgstr "Электронная почта"
+
+#: .\templates\includes\header.html:20
+msgid "Log out"
+msgstr "Выйти"
+
+#: .\templates\includes\header.html:24
+msgid "Login & Register"
+msgstr "Вход и регистрация"
+
+#: .\templates\includes\header.html:54
+#, fuzzy
+#| msgid "Courses"
+msgid "My Courses"
+msgstr "Мои курсы"
+
+#: .\templates\includes\header.html:59
+msgid "Tutor"
+msgstr "Репетитор"
+
+#: .\templates\includes\header.html:61 .\templates\team.html:12
+#: .\templates\team.html:16
+#, fuzzy
+#| msgid "Tutor"
+msgid "Our Tutors"
+msgstr "Наши репетиторы"
+
+#: .\templates\includes\header.html:62
+msgid "Become Tutor"
+msgstr "Стать репетитором"
+
+#: .\templates\includes\header.html:78 .\templates\includes\header.html:85
+msgid "Uzbek"
+msgstr "Узбекский"
+
+#: .\templates\includes\header.html:79 .\templates\includes\header.html:86
+msgid "Русский"
+msgstr "Русский"
+
+#: .\templates\includes\header.html:80 .\templates\includes\header.html:87
+#, fuzzy
+#| msgid "Basic English"
+msgid "English"
+msgstr "Английский"
+
+#: .\templates\includes\header.html:101
+msgid "Find Program"
+msgstr "Найти программу"
+
+#: .\templates\index.html:18
+msgid "Find your course..."
+msgstr "Найдите свой курс..."
+
+#: .\templates\index.html:19
+msgid "Find Course"
+msgstr "Найти курс"
+
+#: .\templates\index.html:60
+msgid "our Top Categories"
+msgstr "Наши лучшие категории"
+
+#: .\templates\index.html:61
+msgid "Browse Learn Skills You Need"
+msgstr "Изучите необходимые навыки"
+
+#: .\templates\index.html:72 .\templates\index.html:132
+msgid "web Developer"
+msgstr "Веб-разработчик"
+
+#: .\templates\index.html:84
+msgid "Basic English"
+msgstr "Базовый английский"
+
+#: .\templates\index.html:96
+msgid "Java Script"
+msgstr "Java Script"
+
+#: .\templates\index.html:108
+msgid "tach & coding"
+msgstr "технологии и кодирование"
+
+#: .\templates\index.html:120
+msgid "IT Service"
+msgstr "ИТ-услуги"
+
+#: .\templates\index.html:161
+msgid "GLOBAL EDUCATION"
+msgstr "ГЛОБАЛЬНОЕ ОБРАЗОВАНИЕ"
+
+#: .\templates\index.html:188
+msgid "Browse Top Courses​"
+msgstr "Просмотрите лучшие курсы"
+
+#: .\templates\index.html:262
+msgid "PRICING PLANS"
+msgstr "ТАРИФНЫЕ ПЛАНЫ"
+
+#: .\templates\index.html:263
+msgid "Lesson Packages"
+msgstr "Пакеты уроков"
+
+#: .\templates\index.html:269 .\templates\index.html:295
+#: .\templates\index.html:321
+msgid "Standard"
+msgstr "Стандарт"
+
+#: .\templates\index.html:270 .\templates\index.html:296
+msgid "month"
+msgstr "месяц"
+
+#: .\templates\index.html:271 .\templates\index.html:297
+#: .\templates\index.html:323
+msgid "Secondary Education"
+msgstr "Среднее образование"
+
+#: .\templates\index.html:278 .\templates\index.html:304
+#: .\templates\index.html:330
+msgid "lessons / month"
+msgstr "уроков / месяц"
+
+#: .\templates\index.html:279 .\templates\index.html:305
+#: .\templates\index.html:331
+msgid "One-to-one training"
+msgstr "Индивидуальное обучение"
+
+#: .\templates\index.html:280 .\templates\index.html:306
+#: .\templates\index.html:332
+msgid "minutes"
+msgstr "минут"
+
+#: .\templates\index.html:281 .\templates\index.html:307
+#: .\templates\index.html:333
+msgid "Lesson price"
+msgstr "Стоимость урока"
+
+#: .\templates\index.html:285 .\templates\index.html:311
+#: .\templates\index.html:337
+msgid "Save"
+msgstr "Сэкономить"
+
+#: .\templates\index.html:286 .\templates\index.html:312
+#: .\templates\index.html:338
+msgid "Discount"
+msgstr "Скидка"
+
+#: .\templates\index.html:288 .\templates\index.html:314
+#: .\templates\index.html:340
+msgid "Purchase Now"
+msgstr "Купить сейчас"
+
+#: .\templates\index.html:322
+msgid "year"
+msgstr "год"
+
+#: .\templates\index.html:421
+msgid "BLOG AND UPDATES"
+msgstr "БЛОГ И ОБНОВЛЕНИЯ"
+
+#: .\templates\index.html:422
+msgid "News & Articles"
+msgstr "Новости и статьи"
+
+#: .\templates\index.html:443
+msgid "Read More"
+msgstr "Читать далее"
+
+#: .\templates\program-details.html:11 .\templates\program-details.html:15
+#, fuzzy
+#| msgid "Program FAQs"
+msgid "Program Details"
+msgstr "Детали программы"
+
+#: .\templates\program-details.html:27
+msgid "CERTIFICATE"
+msgstr "СЕРТИФИКАТ"
+
+#: .\templates\program-details.html:36
+#, python-format
+msgid "Guaranteed 40%% tuition scholarships"
+msgstr "Гарантированные стипендии на обучение 40%%"
+
+#: .\templates\program-details.html:40
+msgid "Overview"
+msgstr "Обзор"
+
+#: .\templates\program-details.html:47
+#, fuzzy
+#| msgid "Best Courses"
+msgid "Core Courses"
+msgstr "Основные курсы"
+
+#: .\templates\program-details.html:53
+#, fuzzy
+#| msgid "All Courses"
+msgid "Additional Courses"
+msgstr "Дополнительные курсы"
+
+#: .\templates\program-details.html:67
+#, fuzzy
+#| msgid "Program FAQs"
+msgid "Program Features"
+msgstr "Особенности программы"
+
+#: .\templates\program-details.html:84
+msgid "Requirements"
+msgstr "Требования"
+
+#: .\templates\program-details.html:86
+msgid "Internships"
+msgstr "Стажировки"
+
+#: .\templates\team-details.html:12 .\templates\team-details.html:16
+msgid "Tutor Details"
+msgstr "Детали репетитора"
+
+#: .\templates\team-details.html:41 .\templates\team.html:68
+#, fuzzy
+#| msgid "Lesson price"
+msgid "Lessons Completed"
+msgstr "Уроков завершено"
+
+#: .\templates\team-details.html:42 .\templates\team.html:72
+msgid "per hour"
+msgstr "в час"
+
+#: .\templates\team-details.html:57
+msgid "Qualifications"
+msgstr "Квалификация"
+
+#: .\templates\team-details.html:69
+#, fuzzy
+#| msgid "Private Tutor"
+msgid "History Tutor"
+msgstr "Репетитор по истории"
+
+#: .\templates\team-details.html:87
+#, fuzzy
+#| msgid "All Courses"
+msgid "Explore Courses"
+msgstr "Исследовать курсы"
+
+#: .\templates\team.html:35
+msgid "OUR TUTORS ARE PASSIONATE"
+msgstr "НАШИ РЕПЕТИТОРЫ УВЛЕЧЕНЫ"
+
+#: .\templates\team.html:36
+msgid "Start your education career with us"
+msgstr "Начните свою образовательную карьеру с нами"
+
+#: .\templates\team.html:40
+msgid "Hand-picked authors"
+msgstr "Тщательно отобранные авторы"
+
+#: .\templates\team.html:41
+msgid "Easy to follow curriculum"
+msgstr "Легко следовать учебной программе"
+
+#: .\templates\team.html:42
+#, fuzzy
+#| msgid "Recent Courses"
+msgid "Free courses"
+msgstr "Бесплатные курсы"
+
+#: .\templates\team.html:43
+msgid "Money-back guarantee"
+msgstr "Гарантия возврата денег"
+
+#: .\templates\team.html:83
+msgid "Tutors not found."
+msgstr "Репетиторы не найдены."
+
+#: .\templates\team.html:109
+msgid "WHAT PEOPLE SAY"
+msgstr "ЧТО ГОВОРЯТ ЛЮДИ"
+
+#: .\templates\team.html:110
+msgid "Our Students Words"
+msgstr "Слова наших студентов"
+
+#~ msgid "Becoming a"
+#~ msgstr "Стать"
+
+#~ msgid "tutors?"
+#~ msgstr "репетитором?"
+
+#~ msgid "Find the for you from over 10,000 teachers"
+#~ msgstr "Найдите подходящего для вас из более чем 10 000 учителей"

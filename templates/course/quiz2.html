@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #fff;
+  }
+  .question-nav {
+    max-height: 80vh;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+  }
+  .question-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .question-item:hover {
+    background-color: #f0f0f0;
+  }
+  .question-item.active {
+    background-color: #000;
+    color: #fff;
+  }
+  .question-status {
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  .question-status.correct {
+    color: green;
+  }
+  .question-status.incorrect {
+    color: red;
+  }
+  .progress-bar {
+    background-color: #a78bfa;
+  }
+  .form-check {
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .form-check:hover {
+    background-color: #f9f9f9;
+    border-color: #a78bfa;
+  }
+  .form-check input:checked + label {
+    font-weight: bold;
+  }
+</style>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Left sidebar: Question Navigation -->
+    <div class="col-lg-3 col-md-4 question-nav p-3" id="question-nav-container">
+      <h6 class="fw-bold">{% trans 'Все вопросы'%}</h6>
+      <!-- Dynamic question items will be rendered here -->
+      <div id="loading-nav" class="text-center text-secondary mt-3">{% trans 'Loading'%}...</div>
+    </div>
+
+    <!-- Right content -->
+    <div class="col-lg-9 col-md-8 p-4">
+      <!-- Progress bar -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between">
+          <span id="quiz-title-progress">{{ quizes.title }}</span>
+          <small><span id="progress-text">0/0</span></small>
+        </div>
+        <div class="progress" style="height: 8px;">
+          <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Question and options container -->
+      <div id="question-container">
+        <div id="loading" class="text-center text-xl text-secondary">{% trans 'Loading questions...' %}</div>
+        <!-- Dynamic question and choices will be rendered here by JavaScript -->
+      </div>
+      
+      <!-- Navigation buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-outline-secondary" id="prev-btn" disabled>← {% trans 'Previous' %}</button>
+        <button class="btn btn-outline-success" id="submit-btn" >{% trans 'Submit' %}</button>
+        <button class="btn btn-outline-secondary" id="next-btn" disabled>{% trans 'Next' %} →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get the CSRF token from the cookie
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const quizId = '{{ quiz_id }}';
+    const csrfToken = getCookie('csrftoken');
+    const questionNavContainer = document.getElementById('question-nav-container');
+    const questionContainer = document.getElementById('question-container');
+    const progressTextEl = document.getElementById('progress-text');
+    const progressBarEl = document.getElementById('progress-bar');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    let quizData = null;
+    let answeredQuestions = [];
+    let currentQuestionIndex = 0;
+
+    const renderMessage = (message) => {
+      questionContainer.innerHTML = `<div class="alert alert-info text-center">${message}</div>`;
+    };
+
+    const fetchQuizData = () => {
+      renderMessage("{% trans 'Loading quiz data...' %}");
+      fetch(`/uz/quiz/api/v1/q/${quizId}/progress/`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          }
+        })
+        .then(response => {
+          // console.log(response, 'Response from quiz data fetch');
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data, 'Quiz data fetched successfully');
+          quizData = data;
+          answeredQuestions = data.progress.answered_questions? data.progress.answered_questions : [];
+          currentQuestionIndex = data.progress.current_question_index;
+          // console.log(answeredQuestions, 'Answered questions:', answeredQuestions);
+          // console.log(currentQuestionIndex, 'Current question index:', currentQuestionIndex);
+          // console.log($('#quiz-title-progress'))
+          $('#quiz-title-progress').text(quizData.quiz_info.title);
+          // document.getElementById('quiz-title').innerText) = quizData.quiz_info.title;
+          // console.log(quizData.quiz_is_complete, 'Quiz title set');
+          if (quizData.quiz_is_complete) {
+            renderMessage("{% trans 'Quiz completed! You have answered all the questions.' %}");
+          } else {
+            renderQuestion(currentQuestionIndex);
+          }
+
+          updateProgressBar();
+          updateQuestionNav();
+        })
+        .catch(error => {
+          // console.error("Error fetching quiz data:", error);
+          renderMessage("{% trans 'Failed to load quiz. Please try again later.' %}");
+        });
+    };
+
+   const renderQuestion = (index) => {
+      const question = quizData.quiz_info.questions[index];
+      if (!question) {
+        renderMessage("{% trans 'Quiz is complete or no more questions available.' %}");
+        return;
+      }
+      
+      let choicesHtml = '';
+      const isAnswered = answeredQuestions.includes(question.id);
+      
+      // Safely access answered_questions_details using optional chaining
+      const answeredQuestion = quizData.answered_questions_details?.find(q => q.id === question.id);
+
+      question.choices.forEach(choice => {
+        // Use the safely accessed answeredQuestion variable
+        const isChosen = answeredQuestion?.user_choice_id === choice.id;
+
+        choicesHtml += `
+          <div class="form-check ${isChosen && isAnswered ? 'bg-light' : ''}">
+            <input class="form-check-input" type="radio" name="question_${question.id}" id="choice_${choice.id}" value="${choice.id}" ${isChosen ? 'checked' : ''} ${isAnswered ? 'disabled' : ''}>
+            <label class="form-check-label" for="choice_${choice.id}">
+              ${choice.text}
+            </label>
+          </div>
+        `;
+      });
+      
+      questionContainer.innerHTML = `
+        <div class="mb-4">
+          <p><strong>{% trans 'Question' %}:</strong> ${question.text}</p>
+        </div>
+        <form class="question-form mb-5">
+          ${choicesHtml}
+        </form>
+      `;
+
+      // Add event listeners to radio buttons
+      // Add event listeners to radio buttons to enable the submit button
+      const radioInputs = questionContainer.querySelectorAll('input[type="radio"]');
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (!isAnswered && submitBtn) {
+        radioInputs.forEach(input => {
+          input.addEventListener('change', () => {
+            submitBtn.disabled = false;
+          });
+        });
+
+        // Add event listener to the submit button
+        submitBtn.addEventListener('click', () => {
+          const checkedInput = questionContainer.querySelector('input[type="radio"]:checked');
+          if (checkedInput) {
+            submitAnswer(question.id, checkedInput.value);
+          }
+        });
+      }
+      updateNavButtons();
+    };
+
+    const submitAnswer = (questionId, choiceId) => {
+      fetch("{% url 'save_answer' quiz_id=quiz_id %}", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          },
+          body: JSON.stringify({ question_id: questionId, choice_id: choiceId })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(result => {
+          console.log("Answer saved:", result);
+          // Fetch data again to get the most up-to-date state
+          fetchQuizData();
+        })
+        .catch(error => {
+          console.error("Error submitting answer:", error);
+          // Use a custom modal or alert for feedback
+          alert("{% trans 'Failed to save answer. Please check your connection.' %}");
+        });
+    };
+
+    const updateProgressBar = () => {
+      const answeredCount = answeredQuestions.length;
+      const totalQuestions = quizData.quiz_info.questions.length;
+      const percentage = totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0;
+      
+      progressBarEl.style.width = `${percentage}%`;
+      progressBarEl.setAttribute('aria-valuenow', percentage);
+      progressTextEl.innerText = `${answeredCount}/${totalQuestions}`;
+    };
+
+    const updateQuestionNav = () => {
+      const allQuestions = quizData.quiz_info.questions;
+      // console.log(allQuestions, 'All questions in quiz');
+      questionNavContainer.innerHTML = ` <h6 class="fw-bold">{% trans 'Все вопросы'%}</h6>`;
+      allQuestions.forEach((question, index) => {
+        const isAnswered = answeredQuestions.includes(question.id);
+        const isActive = index === currentQuestionIndex;
+        const statusClass = isAnswered ? 'text-success' : ''; // You can add logic for correct/incorrect here if needed
+        const activeClass = isActive ? 'active' : '';
+
+        const itemEl = document.createElement('div');
+        itemEl.className = `question-item ${statusClass} ${activeClass}`;
+        itemEl.innerText = `{% trans 'Вопрос'%} ${index + 1}`;
+        
+        itemEl.addEventListener('click', () => {
+          currentQuestionIndex = index;
+          renderQuestion(currentQuestionIndex);
+          // Update active class
+          document.querySelectorAll('.question-item').forEach(item => item.classList.remove('active'));
+          itemEl.classList.add('active');
+        });
+        
+        questionNavContainer.appendChild(itemEl);
+      });
+    };
+    
+    const updateNavButtons = () => {
+      const totalQuestions = quizData.quiz_info.questions.length;
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex >= totalQuestions - 1;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion(currentQuestionIndex);
+        updateQuestionNav();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < quizData.quiz_info.questions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion(currentQuestionIndex);
+        updateQuestionNav();
+      }
+    });
+
+    fetchQuizData();
+  });
+</script>
+{%endblock%}

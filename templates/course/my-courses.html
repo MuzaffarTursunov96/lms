@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% block content %}
+    <!--==============================
+      Course Area
+==============================-->
+    <section class="space-top space-extra-bottom">
+        <div class="container">
+            <div class="row">
+                {% for course in courses %}
+                <div class="col-md-6 col-xl-12">
+                    <div class="course-style4 layout2" data-bg-src="{% static 'assets/img/bg/course-list-bg.png'%}">
+                        <div class="course-img">
+                            <a href="{% url 'course-details' course.course.id %}"><img class="w-100" src="{{ course.course.preview_image.url }}" alt="Course Img"></a>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category"><a href="#">{{course.course.course_type}}</a></div>
+                            <h3 class="course-name"><a href="{% url 'course-details' course.course.id %}">{{course.course.title}}</a></h3>
+                            <div class="course-meta">
+                                <a href="#"><i class="fas fa-user-tie"></i><span class="total-student">{{course.course.student_count}} {% trans 'Students'%}</span></a>
+                                <a href="#"><i class="far fa-tv"></i><span class="course-hour">{{course.course.sections.count}} {%trans 'Sections'%}</span></a>
+                                <a href="#"><i class="far fa-clock"></i><span class="course-hour">{{course.course.duration}}</span></a>
+                            </div>
+                            <div class="course-middle">
+                                <div class="course-price">
+                                    <h5><span class="price" style="font-size: 16px;">Status: {%trans 'PAID' %}</span></h5>
+                                </div>
+                                <a href="{% url 'lecture' course.course.id %}" class="vs-btn style5 "><i class="fas fa-play"></i>{% trans 'Go to the Course'%}</a>
+                            </div>
+                            <div class="course-bottom">
+                                <div class="course-author">
+                                    {% if course.course.tutor.profile_image %}
+                                        <a href="{% url 'team-details' course.user.id %}" class="text-inherit"><img src="{{course.course.tutor.profile_image.url}}" alt="About Author">{{course.course.tutor.name}}</a>
+                                    {% else %}
+                                        <a href="{% url 'team-details' course.user.id %}" class="text-inherit"><img src="{% static 'assets/img/about/author-3-1.png'%}" alt="About Author">{{course.course.tutor.name}}</a>
+                                    {%endif%}
+                                </div>
+                                <div class="course-review">
+                                    {% for i in course.course.tutor.rating|times %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    <span class="review-avarage">( {{course.course.tutor.rating}} )</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <li>{% trans 'No articles found.'%}</li>
+                {% endfor %}
+
+            </div>
+            <div class="vs-pagination">
+                <ul class="pagination">
+                    {% if courses.has_previous %}
+                        <li class="prev"><a href="?page={{ courses.previous_page_number }}">{% trans 'Previous'%}</a></li>
+                    {% else %}
+                        <li class="prev disabled"><a >{% trans 'Previous'%}</a></li>
+                    {% endif %}
+
+                    {% for num in courses.paginator.page_range %}
+                        {% if num == 1 %}
+                            {% if num == courses.number %}
+                                <li><a class="disabled" style="background-color: rgba(0, 0, 0, 0.1);">{{ num }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                            {% if courses.number > 4 %}
+                                <li><a>...</a></li>
+                            {% endif %}
+                        {% elif num >= courses.number|add:'-2' and num <= courses.number|add:'2' %}
+                            {% if num == courses.number %}
+                                <li><a class="disabled" style="background-color: rgba(0, 0, 0, 0.1);">{{ num }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ num }}" >{{ num }}</a></li>
+                            {% endif %}
+                        {% elif num == courses.paginator.num_pages %}
+                            {% if courses.number < courses.paginator.num_pages|add:'-3' %}
+                                <li><a>...</a></li>
+                            {% endif %}
+                            {% if num == courses.number %}
+                                <li><a class="disabled" style="background-color: rgba(0, 0, 0, 0.1);">{{ num }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if courses.has_next %}
+                        <li class="next"><a href="?page={{ courses.next_page_number }}">{% trans 'Next'%}</a></li>
+                    {% else %}
+                        <li class="next disabled"><a>{% trans 'Next'%}</a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+            
+        </div>
+    </section>
+
+{% endblock %}

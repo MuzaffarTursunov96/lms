@@ -1,0 +1,72 @@
+[
+{
+  "model": "lms.blogtype",
+  "pk": 1,
+  "fields": {
+    "name": "online_platform_education"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 2,
+  "fields": {
+    "name": "global_education"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 3,
+  "fields": {
+    "name": "top_course"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 4,
+  "fields": {
+    "name": "becoming_a_tutor"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 5,
+  "fields": {
+    "name": "expert_instruktor"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 6,
+  "fields": {
+    "name": "apply_for_tutor"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 7,
+  "fields": {
+    "name": "top_tutors"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 8,
+  "fields": {
+    "name": "sertificates"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 9,
+  "fields": {
+    "name": "additional_courses_part1"
+  }
+},
+{
+  "model": "lms.blogtype",
+  "pk": 10,
+  "fields": {
+    "name": "additional_courses_part2"
+  }
+}
+]

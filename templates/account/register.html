@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    
+    <!--==============================
+    Login & Register
+    ==============================-->
+    <section class="space-top space-extra-bottom">
+        <div class="container">
+            <div class="row gx-60">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <form action="{% url 'register' %}" method="POST" >
+                        <div class="form-style4 signup" data-bg-src="{% static 'assets/img/bg/course-bg-pattern.jpg'%}">
+                            <h2 class="form-title">{% trans 'SIGN UP'%}</h2>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" autocomplete="off" name="first_name" id="signupname" placeholder="{% trans 'First Name'%}">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" autocomplete="off" name="email" id="signupemail" placeholder="{% trans 'Email address'%}">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" autocomplete="off" name="password" id="password" placeholder="{% trans 'Password'%}">
+                            </div>
+                            <div class="row justify-content-between">
+                                
+                                <div class="col-auto form-group">
+                                    <a class="forget-link" href="{% url 'login' %}">{% trans 'SIGN IN'%}?</a>
+                                </div>
+                            </div>
+                            <button type="button" class="vs-btn">{% trans 'Register'%}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+    </section>
+    
+{%endblock%}

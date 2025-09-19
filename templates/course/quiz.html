@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+ <style>
+    body {
+      background-color: #fff;
+    }
+    .question-nav {
+      max-height: 80vh;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+    }
+    .question-item {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .question-item.active {
+      background-color: #000;
+      color: #fff;
+    }
+    .question-status {
+      font-weight: bold;
+    }
+    .question-status.correct {
+      color: green;
+    }
+    .question-status.incorrect {
+      color: red;
+    }
+    .progress-bar {
+      background-color: #a78bfa;
+    }
+    .form-check {
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .dropzone {
+      min-height: 50px;
+    }
+    .drop-target {
+      display: inline-block;
+      min-width: 120px;
+      padding: 2px 4px;
+      border: 1px dashed #bbb;
+      background-color: #f9f9f9;
+    }
+  </style>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Left sidebar: Question Navigation -->
+    <div class="col-lg-3 col-md-4 question-nav p-3">
+      <h6 class="fw-bold">{% trans 'Все вопросы'%}</h6>
+      <div class="question-item text-danger">
+        {% trans 'Вопрос'%} 33 <span class="question-status incorrect">Неправильно</span>
+      </div>
+      <div class="question-item text-success">
+        Вопрос 34 <span class="question-status correct">Правильно</span>
+      </div>
+      <div class="question-item text-success">
+        Вопрос 35 <span class="question-status correct">Правильно</span>
+      </div>
+      <div class="question-item text-danger">
+        Вопрос 36 <span class="question-status incorrect">Неправильно</span>
+      </div>
+      <div class="question-item text-success">
+        Вопрос 37 <span class="question-status correct">Правильно</span>
+      </div>
+      <div class="question-item active">
+        Вопрос 38
+      </div>
+    </div>
+
+    <!-- Right content -->
+    <div class="col-lg-9 col-md-8 p-4">
+      <!-- Progress bar -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between">
+          <span>{{quizes.title}}</span>
+          <small><span id="">{{quizes.questions.count}}</span>/{{quizes.questions.count}}</small>
+        </div>
+        <div class="progress" style="height: 8px;">
+          <div class="progress-bar" style="width: 58%;"></div>
+        </div>
+      </div>
+
+      <!-- Question text -->
+      <div class="mb-4">
+        <p><strong>Question:</strong> An e-commerce company has multiple EC2 instances operating in a private subnet which is part of a custom VPC. These instances are running an image processing application that needs to access images stored on S3. Once each image is processed, the status of the corresponding record needs to be marked as completed in a DynamoDB table.</p>
+        <p>How would you go about providing private access to these AWS resources which are not part of this custom VPC?</p>
+      </div>
+
+      <!-- ✅ Radio Button Version -->
+      <form class="mb-5">
+        <p><strong>Single-Choice (Radio):</strong></p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question_38" id="radio1" value="1">
+          <label class="form-check-label" for="radio1">
+            Create a gateway endpoint for S3 and interface endpoint for DynamoDB.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question_38" id="radio2" value="2">
+          <label class="form-check-label" for="radio2">
+            Use separate gateway endpoints for both.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question_38" id="radio3" value="3">
+          <label class="form-check-label" for="radio3">
+            Add a NAT Gateway and use public endpoints.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question_38" id="radio4" value="4">
+          <label class="form-check-label" for="radio4">
+            Use a VPN connection and access AWS resources over a secure line.
+          </label>
+        </div>
+      </form>
+
+      <!-- ✅ Checkbox Version -->
+      <form>
+        <p><strong>Multiple-Choice (Checkboxes):</strong></p>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="question_38[]" id="check1" value="1">
+          <label class="form-check-label" for="check1">
+            Create a gateway endpoint for S3
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="question_38[]" id="check2" value="2">
+          <label class="form-check-label" for="check2">
+            Interface endpoint for DynamoDB
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="question_38[]" id="check3" value="3">
+          <label class="form-check-label" for="check3">
+            Use a NAT Gateway
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="question_38[]" id="check4" value="4">
+          <label class="form-check-label" for="check4">
+            Use VPN to connect securely
+          </label>
+        </div>
+      </form>
+
+      <!-- ✅ Drag and Drop Quiz -->
+      <div class="mt-5">
+        <h5>🧩 Drag and Drop Quiz</h5>
+        <p>Match each AWS service to its description:</p>
+        <div class="row">
+          <!-- Draggable Options -->
+          <div class="col-md-6">
+            <div class="p-2 border rounded bg-light mb-2" draggable="true" id="draggable1">S3</div>
+            <div class="p-2 border rounded bg-light mb-2" draggable="true" id="draggable2">EC2</div>
+            <div class="p-2 border rounded bg-light mb-2" draggable="true" id="draggable3">Lambda</div>
+          </div>
+          <!-- Drop Targets -->
+          <div class="col-md-6">
+            <div class="p-2 border rounded mb-3 bg-white dropzone" data-answer="S3">💾 Object storage service: <strong><span class="drop-target">[ Drop here ]</span></strong></div>
+            <div class="p-2 border rounded mb-3 bg-white dropzone" data-answer="EC2">🖥️ Virtual servers in the cloud: <strong><span class="drop-target">[ Drop here ]</span></strong></div>
+            <div class="p-2 border rounded mb-3 bg-white dropzone" data-answer="Lambda">⚡ Run code without managing servers: <strong><span class="drop-target">[ Drop here ]</span></strong></div>
+          </div>
+        </div>
+        <button class="btn btn-primary mt-3" onclick="checkAnswers()">Check Answers</button>
+        <div id="dragResult" class="mt-2 fw-bold"></div>
+      </div>
+
+      <!-- Navigation buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-outline-secondary">←</button>
+        <button class="btn btn-outline-secondary">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Helper function to get the CSRF token from the cookie for POST requests
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith(name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    const quizId = '{{ quiz_id }}'; // Get the quiz ID from the Django context
+    const quizTitleEl = document.getElementById('quiz-title');
+    const quizDescriptionEl = document.getElementById('quiz-description');
+    const questionNavContainer = document.querySelector('.question-nav');
+    const questionContainer = document.getElementById('question-container');
+    const progressTextEl = document.getElementById('progress-text');
+    const progressBarEl = document.querySelector('.progress-bar');
+    const csrfToken = getCookie('csrftoken');
+
+    let allQuestions = [];
+    let userAnswers = {}; // Store user answers locally for a better UI experience
+    let currentQuestionIndex = 0;
+
+    // A simple function to render a message
+    const renderMessage = (message) => {
+      questionContainer.innerHTML = `<div class="alert alert-info text-center">${message}</div>`;
+    };
+
+    // Main function to fetch quiz data and render the UI
+    const fetchQuizData = async () => {
+      try {
+        renderMessage("{% trans 'Loading quiz data...' %}");
+        const response = await fetch(`/uz/quiz/api/v1/quizzes/${quizId}/progress/`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          }
+        });
+        console.log(response,'dddddd')
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Combine answered and remaining questions for full list
+        allQuestions = [...data.answered_questions_details, ...data.remaining_questions];
+        
+        quizTitleEl.innerText = data.quiz_info.title;
+        quizDescriptionEl.innerText = data.quiz_info.description;
+
+        // Populate userAnswers with data from the API
+        data.answered_questions_details.forEach(q => {
+            userAnswers[q.id] = q.user_choice_id;
+        });
+
+        currentQuestionIndex = data.progress.current_question_index;
+
+        if (data.quiz_is_complete) {
+          renderMessage("{% trans 'Quiz completed! You have answered all the questions.' %}");
+        } else {
+          renderQuestion();
+        }
+
+        updateProgressBar(data.progress.answered_count, data.progress.total_questions);
+        updateQuestionNav(data.progress.answered_questions);
+
+      } catch (error) {
+        // console.error("Error fetching quiz data:", error);
+        renderMessage("{% trans 'Failed to load quiz. Please try again later.' %}");
+      }
+    };
+
+    // Renders the current question and its choices
+    const renderQuestion = () => {
+      const question = allQuestions[currentQuestionIndex];
+      if (!question) {
+        renderMessage("{% trans 'Quiz is complete or no more questions available.' %}");
+        return;
+      }
+      
+      let choicesHtml = '';
+      question.choices.forEach(choice => {
+        const isChecked = userAnswers[question.id] === choice.id;
+        const disabled = userAnswers.hasOwnProperty(question.id);
+        choicesHtml += `
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="question_${question.id}" id="choice_${choice.id}" value="${choice.id}" ${isChecked ? 'checked' : ''} ${disabled ? 'disabled' : ''}>
+            <label class="form-check-label" for="choice_${choice.id}">
+              ${choice.text}
+            </label>
+          </div>
+        `;
+      });
+      
+      questionContainer.innerHTML = `
+        <div class="mb-4">
+          <p><strong>{% trans 'Question' %}:</strong> ${question.text}</p>
+        </div>
+        <form class="question-form mb-5">
+          <p><strong>{% trans 'Single-Choice (Radio)' %}:</strong></p>
+          ${choicesHtml}
+        </form>
+      `;
+
+      // Add event listeners to radio buttons
+      const radioInputs = questionContainer.querySelectorAll('input[type="radio"]');
+      radioInputs.forEach(input => {
+        input.addEventListener('change', async (e) => {
+          if (e.target.checked) {
+            await submitAnswer(question.id, e.target.value);
+          }
+        });
+      });
+    };
+
+    // Submits the user's answer to the API
+    const submitAnswer = async (questionId, choiceId) => {
+      try {
+        const response = await fetch(`/uz/quiz/api/v1/quizzes/${quizId}/answer/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          },
+          body: JSON.stringify({ question_id: questionId, choice_id: choiceId })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Answer saved:", result);
+        
+        // Update local state and UI
+        userAnswers[questionId] = parseInt(choiceId);
+        currentQuestionIndex++;
+        
+        updateQuestionNav(Object.keys(userAnswers).map(id => parseInt(id)));
+        updateProgressBar(Object.keys(userAnswers).length, allQuestions.length);
+        renderQuestion(); // Render the next question
+      
+      } catch (error) {
+        console.error("Error submitting answer:", error);
+        alert("{% trans 'Failed to save answer. Please check your connection.' %}");
+      }
+    };
+
+    // Updates the progress bar
+    const updateProgressBar = (answered, total) => {
+      const percentage = total > 0 ? (answered / total) * 100 : 0;
+      progressBarEl.style.width = `${percentage}%`;
+      progressTextEl.innerText = `${answered}/${total}`;
+    };
+
+    // Updates the navigation sidebar
+    const updateQuestionNav = (answeredIds) => {
+      questionNavContainer.innerHTML = ` <h6 class="fw-bold">{% trans 'All questions' %}</h6>`;
+      allQuestions.forEach((question, index) => {
+        const isAnswered = answeredIds.includes(question.id);
+        const isActive = index === currentQuestionIndex;
+        const statusClass = isAnswered ? 'text-success' : '';
+        const activeClass = isActive ? 'active' : '';
+
+        const itemEl = document.createElement('div');
+        itemEl.className = `question-item ${statusClass} ${activeClass}`;
+        itemEl.innerText = `{% trans 'Question' %} ${index + 1}`;
+        
+        itemEl.addEventListener('click', () => {
+          currentQuestionIndex = index;
+          renderQuestion();
+          // Update active class
+          document.querySelectorAll('.question-item').forEach(item => item.classList.remove('active'));
+          itemEl.classList.add('active');
+        });
+        
+        questionNavContainer.appendChild(itemEl);
+      });
+    };
+
+    // Initial fetch to load the quiz
+    fetchQuizData();
+  });
+</script>
+<!-- <script>
+
+
+
+
+
+  const draggables = document.querySelectorAll('[draggable="true"]');
+  const dropzones = document.querySelectorAll('.dropzone');
+
+  draggables.forEach(item => {
+    item.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', e.target.id);
+    });
+  });
+
+  dropzones.forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.classList.add('border-primary');
+    });
+
+    zone.addEventListener('dragleave', () => {
+      zone.classList.remove('border-primary');
+    });
+
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      const draggedId = e.dataTransfer.getData('text');
+      const draggedEl = document.getElementById(draggedId);
+      const targetSpan = zone.querySelector('.drop-target');
+      targetSpan.innerText = draggedEl.innerText;
+      targetSpan.dataset.value = draggedEl.innerText;
+      zone.classList.remove('border-primary');
+    });
+  });
+
+  function checkAnswers() {
+    let correct = 0;
+    dropzones.forEach(zone => {
+      const answer = zone.dataset.answer;
+      const userAnswer = zone.querySelector('.drop-target').dataset.value;
+      if (answer === userAnswer) correct++;
+    });
+    document.getElementById('dragResult').innerText = `✅ Correct: ${correct} / ${dropzones.length}`;
+  }
+</script> -->
+{%endblock%}
