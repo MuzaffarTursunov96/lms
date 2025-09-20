@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['roagroup.uz','www.roagroup.uz','95.46.96.70']
 
 
 # Application definition
