@@ -79,6 +79,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'main.wsgi.application'
 
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://roagroup.uz",
+    "https://www.roagroup.uz",
+    "http://roagroup.uz",     # optional, but good for testing
+    "http://www.roagroup.uz"
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
