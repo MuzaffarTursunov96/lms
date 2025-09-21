@@ -58,9 +58,15 @@ def registerUser(request):
 def my_courses(request):
     query = request.GET.get('q', '')
     if query:
-        courses = UserCourses.objects.filter(user = request.user,course__title__icontains=query)
+        courses = UserCourses.objects.filter(
+            user=request.user,
+            course__title__icontains=query
+        ).order_by('-created_at')   # newest first
     else:
-        courses = UserCourses.objects.filter(user = request.user)
+        courses = UserCourses.objects.filter(
+            user=request.user
+        ).order_by('-created_at')
+
 
     paginator = Paginator(courses, 12)
 
