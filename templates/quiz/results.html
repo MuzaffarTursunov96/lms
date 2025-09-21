@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load quiz_extras %}
+{% block content %}
+
+<div class="container mt-5">
+  <!-- Quiz Title -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">{{ quiz.title }}</h2>
+    <p class="text-muted">{% trans "Quiz Results" %}</p>
+  </div>
+
+  <!-- Summary Section -->
+  <div class="row justify-content-center text-center mb-5">
+    <div class="col-md-3">
+      <h5 class="text-secondary">{% trans "Score" %}</h5>
+      <p class="fs-3 fw-bold text-primary">{{ attempt.score|floatformat:0 }}%</p>
+    </div>
+    <div class="col-md-3">
+      <h5 class="text-secondary">{% trans "Correct Answers" %}</h5>
+      <p class="fs-3 fw-bold text-success">{{ correct_answers }}/{{ total_questions }}</p>
+    </div>
+    <div class="col-md-3">
+      <h5 class="text-secondary">{% trans "Date" %}</h5>
+      <p class="fs-5">{{ attempt.finished_at|date:"M d, Y H:i" }}</p>
+    </div>
+  </div>
+
+  <!-- Review Your Answers -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h4 class="mb-3">{% trans "Review Your Answers" %}</h4>
+      <ol class="list-group list-group-numbered">
+        {% for ans in attempt.user_answers.all %}
+          <li class="list-group-item">
+            <p class="fw-bold">{{ ans.question.text }}</p>
+            <p>
+              {% if ans.chosen_option.is_correct %}
+                <span class="text-success">✅ {{ ans.chosen_option.text }} ({% trans "Correct" %})</span>
+              {% else %}
+                <span class="text-danger">❌ {{ ans.chosen_option.text }} ({% trans "Your Answer" %})</span><br>
+                <span class="text-success">✔ {% trans "Correct Answer" %}: 
+                  {{ ans.question.choices.all|get_correct_choice }}
+                </span>
+              {% endif %}
+            </p>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+
+  <!-- Attempt History -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h4 class="mb-3">{% trans "Your Attempts" %}</h4>
+      <table class="table table-bordered text-center">
+        <thead class="table-light">
+          <tr>
+            <th>{% trans "Attempt" %}</th>
+            <th>{% trans "Score" %}</th>
+            <th>{% trans "Date" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for att in attempts %}
+            <tr {% if att.id == attempt.id %}class="table-primary"{% endif %}>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ att.score|floatformat:0 }}%</td>
+              <td>{{ att.finished_at|date:"M d, Y H:i" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="text-center mt-4">
+    {% if attempts.count < 3 %}
+      <a href="{% url 'quiz' quiz.id %}" class="btn btn-warning">
+        🔄 {% trans "Retake Quiz" %}
+      </a>
+    {% endif %}
+    <a href="{% url 'quiz' quiz.id %}" class="btn btn-secondary">
+      ⬅ {% trans "Back to Quiz" %}
+    </a>
+  </div>
+</div>
+<br>
+
+{% endblock %}

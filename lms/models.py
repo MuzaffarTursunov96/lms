@@ -3,7 +3,6 @@ from account.models import User
 from datetime import timedelta
 from PIL import Image
 from django.core.exceptions import ValidationError
-
 # Create your models here.
 
 
@@ -277,6 +276,17 @@ class CourseSection(models.Model):
         if hours:
             return f"{hours:02}:{minutes:02}:{seconds:02}"
         return f"{minutes:02}:{seconds:02}"
+    
+
+class LectureProgress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True)
+    lecture = models.ForeignKey("Lecture", on_delete=models.CASCADE,blank=True, null=True)
+    watched_seconds = models.FloatField(default=0)
+    watched_percent = models.FloatField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'lecture')
 
 
 class Lecture(models.Model):

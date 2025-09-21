@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<style>
+  body { background-color: #fff; }
+  .question-nav { max-height: 80vh; overflow-y: auto; border-right: 1px solid #ddd; }
+  .question-item { padding: 8px 12px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+  .question-item:hover { background-color: #f0f0f0; }
+  .question-item.active { background-color: #000; color: #fff; }
+  .progress-bar { background-color: #a78bfa; }
+  
+  .form-check input:checked + label { font-weight: bold; }
+
+  .form-check {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-check:hover {
+  background-color: #f9f9f9;
+  border-color: #a78bfa;
+}
+
+.option-row {
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.option-row.selected {
+  background: #e6f4ea;         /* light green */
+  border-color: #34a853;       /* Google green */
+  font-weight: 500;
+}
+</style>
+
+<div class="container-fluid">
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="text-center my-5">
+    <h3>{{ quizes.title }}</h3>
+    <p class="text-muted">
+      {% trans "Attempts used" %}: <strong>{{ attempts_count }}</strong> / 3
+    </p>
+
+    {% if attempts_count < 3 %}
+      <button id="start-quiz-btn" class="btn btn-success">
+        {% trans "Start Test" %}
+      </button>
+    {% endif %}
+
+    {% if attempts_count > 0 %}
+      <a href="{% url 'quiz_results' id=id %}" class="btn btn-primary ms-2">
+        {% trans "Show Results" %}
+      </a>
+    {% endif %}
+
+    {% if attempts_count >= 3 %}
+      <div class="alert alert-warning mt-3">
+        {% trans "You have reached the maximum number of attempts." %}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- QUIZ CONTENT -->
+  <div id="quiz-content" style="display:none;">
+    <div class="row">
+      <!-- Left sidebar -->
+      <div class="col-lg-3 col-md-4 question-nav p-3" id="question-nav-container">
+        <h6 class="fw-bold">{% trans 'Все вопросы'%}</h6>
+        <div id="loading-nav" class="text-center text-secondary mt-3">{% trans 'Loading'%}...</div>
+      </div>
+
+      <!-- Right content -->
+      <div class="col-lg-9 col-md-8 p-4">
+        <div class="mb-4">
+          <div class="d-flex justify-content-between">
+            <span id="quiz-title-progress">{{ quizes.title }}</span>
+            <small><span id="progress-text">0/0</span></small>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div id="question-container"></div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button class="btn btn-outline-secondary" id="prev-btn" disabled>← {% trans 'Previous' %}</button>
+          <button class="btn btn-outline-success" id="submit-btn" disabled>{% trans 'Submit' %}</button>
+          <button class="btn btn-outline-secondary" id="next-btn" disabled>{% trans 'Next' %} →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const quizId = '{{ id }}';
+  const csrfToken = getCookie('csrftoken');
+  const quizKey = `quiz_${quizId}_answers`;
+
+  const startBtn = document.getElementById('start-quiz-btn');
+  const startScreen = document.getElementById('start-screen');
+  const quizContent = document.getElementById('quiz-content');
+  const submitBtn = document.getElementById('submit-btn');
+
+  let quizData = null;
+  let currentQuestionIndex = 0;
+  let localAnswers = JSON.parse(localStorage.getItem(quizKey)) || {};
+
+  const questionContainer = document.getElementById('question-container');
+  const questionNavContainer = document.getElementById('question-nav-container');
+  const progressBarEl = document.getElementById('progress-bar');
+  const progressTextEl = document.getElementById('progress-text');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  const quizUrl = "{% url 'quiz_progress' id=id %}";
+  const submitUrl = "{% url 'save_answer_quiz' id=id %}";
+
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      startScreen.style.display = 'none';
+      quizContent.style.display = 'block';
+      fetchQuizData();
+    });
+  }
+
+  // === Fetch quiz data ===
+  function fetchQuizData() {
+    fetch(quizUrl, { headers: { 'X-CSRFToken': csrfToken } })
+      .then(res => res.json())
+      .then(data => {
+        quizData = data;
+        renderQuestion(currentQuestionIndex);
+        updateQuestionNav();
+        updateProgressBar();
+      });
+  }
+
+  // === Render a question ===
+  function renderQuestion(index) {
+  const question = quizData.quiz_info.questions[index];
+  if (!question) return;
+
+  const savedChoice = localAnswers[question.id];
+  let choicesHtml = '';
+
+  question.choices.forEach(choice => {
+    const isChecked = savedChoice == choice.id;
+
+    choicesHtml += `
+      <label class="form-check w-100 d-flex align-items-center option-row ${isChecked ? 'selected' : ''}" 
+             style="cursor: pointer; padding: 12px; border-radius: 6px; margin-bottom: 8px; border: 1px solid #ccc;">
+        <input class="form-check-input me-2" 
+               type="radio" 
+               name="question_${question.id}" 
+               value="${choice.id}" 
+               ${isChecked ? 'checked' : ''}>
+        <span class="form-check-label">${choice.text}</span>
+      </label>
+    `;
+  });
+
+  questionContainer.innerHTML = `
+    <div class="mb-4">
+      <p><strong>{% trans "Question" %}:</strong> ${question.text}</p>
+    </div>
+    ${choicesHtml}
+  `;
+
+  // Add change listener
+  questionContainer.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.addEventListener('change', () => {
+      saveLocalAnswer(question.id, input.value);
+
+      // highlight only the chosen row
+      questionContainer.querySelectorAll('.option-row').forEach(row => row.classList.remove('selected'));
+      input.closest('.option-row').classList.add('selected');
+    });
+  });
+
+  updateNavButtons();
+  checkIfAllAnswered();
+}
+
+
+  function saveLocalAnswer(qid, cid) {
+    localAnswers[qid] = cid;
+    localStorage.setItem(quizKey, JSON.stringify(localAnswers));
+    updateProgressBar();
+    checkIfAllAnswered();
+  }
+
+  function checkIfAllAnswered() {
+    const total = quizData.quiz_info.questions.length;
+    const answered = Object.keys(localAnswers).length;
+    submitBtn.disabled = answered < total;
+  }
+
+  // === Submit all answers ===
+  submitBtn.addEventListener('click', () => {
+  $.ajax({
+      url: submitUrl,   // /api/quiz/<id>/submit-all/
+      method: "POST",
+      data: JSON.stringify({ answers: localAnswers }),
+      contentType: 'application/json',
+      headers: { "X-CSRFToken": csrfToken },
+      success: function(resp) {
+        console.log("Submitted:", resp);
+        localStorage.removeItem(quizKey);
+        alert("✅ Attempt #" + resp.attempt_number + " submitted! Your score: " + resp.score + "%");
+        location.reload();
+      },
+      error: function(xhr) {
+        console.error(xhr.responseText);
+      }
+    });
+  });
+  // === Navigation ===
+  prevBtn.addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      renderQuestion(currentQuestionIndex);
+      updateQuestionNav();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentQuestionIndex < quizData.quiz_info.questions.length - 1) {
+      currentQuestionIndex++;
+      renderQuestion(currentQuestionIndex);
+      updateQuestionNav();
+    }
+  });
+
+  function updateNavButtons() {
+    prevBtn.disabled = currentQuestionIndex === 0;
+    nextBtn.disabled = currentQuestionIndex === quizData.quiz_info.questions.length - 1;
+  }
+
+  function updateProgressBar() {
+    const total = quizData.quiz_info.questions.length;
+    const answered = Object.keys(localAnswers).length;
+    const percent = (answered / total) * 100;
+    progressBarEl.style.width = percent + '%';
+    progressTextEl.textContent = answered + '/' + total;
+  }
+
+  function updateQuestionNav() {
+    const allQuestions = quizData.quiz_info.questions;
+    questionNavContainer.innerHTML = `<h6 class="fw-bold">{% trans 'Все вопросы'%}</h6>`;
+    allQuestions.forEach((q, idx) => {
+      const item = document.createElement('div');
+      item.className = `question-item ${idx === currentQuestionIndex ? 'active' : ''}`;
+      if (localAnswers[q.id]) item.classList.add('text-success');
+      item.innerText = `{% trans "Вопрос" %} ${idx+1}`;
+      item.addEventListener('click', () => {
+        currentQuestionIndex = idx;
+        renderQuestion(currentQuestionIndex);
+        updateQuestionNav();
+      });
+      questionNavContainer.appendChild(item);
+    });
+  }
+});
+</script>
+{% endblock %}

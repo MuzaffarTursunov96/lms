@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from quiz.models import CourseItem
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .models import Blogs, Course , Tutor,Article, CourseSection,Lecture
+from .models import Blogs, Course , Tutor,Article, CourseSection,Lecture,LectureProgress
 from account.decorators import unauthenticated_user,allowed_users
 from django.db.models import Prefetch
 from quiz.models import Quiz
@@ -13,6 +13,11 @@ from rest_framework.response import Response
 from .serializers import CourseSerializer
 from django.db.models import Q
 from .decorators import course_access_required
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.utils import timezone
+from django.http import JsonResponse
+from quiz.models import Quiz, Question, Choice, QuizAttempt, UserAnswer,QuizProgress
 
 # Create your views here.
 
@@ -125,15 +130,36 @@ def lecture(request, id):
         sections.append(section)
     
     
+    lecture_ids = []
+    for section in sections:
+        for item in section.items:
+            if item.content_type.model == "lecture":
+                lecture_ids.append(item.object_id)
+
+    # Fetch last progress only among those lectures
+    last_progress = (
+        LectureProgress.objects
+        .filter(user=request.user, lecture_id__in=lecture_ids)
+        .order_by("-updated_at")
+        .first()
+    )
+
+    if last_progress:
+        default_lecture = last_progress.lecture
+    else:
+        default_lecture = Lecture.objects.filter(id__in=lecture_ids).first()
+
+    
+
     
     context ={
         'course': course,
         'sections': sections
     }
+    context["default_lecture"] = default_lecture
     
 
     return render(request, 'course/lecture.html', context)
-
 
 
 
@@ -229,3 +255,53 @@ def search(request):
         'courses': page_obj,
     }
     return render(request, 'course/search_course.html',context)
+
+
+@csrf_exempt
+@login_required
+def save_answer_and_progress(request, id):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid method"}, status=405)
+
+    quiz = get_object_or_404(Quiz, id=id)
+    data = json.loads(request.body)
+    answers = data.get("answers", {})
+
+    # ✅ Count attempts
+    attempts_count = QuizAttempt.objects.filter(user=request.user, quiz=quiz).count()
+    if attempts_count >= 3:   # max attempts
+        return JsonResponse({"error": "Max attempts reached"}, status=403)
+
+    # ✅ Always create new attempt
+    attempt = QuizAttempt.objects.create(
+        user=request.user,
+        quiz=quiz,
+        score=0,
+        completed_test=False,
+        started_at=timezone.now()
+    )
+
+    # ✅ Save all answers
+    for qid, cid in answers.items():
+        question = get_object_or_404(Question, id=qid, quiz=quiz)
+        choice = get_object_or_404(Choice, id=cid, question=question)
+        UserAnswer.objects.create(
+            attempt=attempt,
+            question=question,
+            chosen_option=choice
+        )
+
+    # ✅ Calculate score for this attempt
+    correct_count = UserAnswer.objects.filter(
+        attempt=attempt, chosen_option__is_correct=True
+    ).count()
+    attempt.score = (correct_count / quiz.questions.count()) * 100 if quiz.questions.exists() else 0
+    attempt.completed_test = True
+    attempt.finished_at = timezone.now()
+    attempt.save()
+
+    return JsonResponse({
+        "status": "ok",
+        "score": attempt.score,
+        "attempt_number": attempts_count + 1,   # which attempt this is
+    })

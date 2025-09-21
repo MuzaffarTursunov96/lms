@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from . import lecture_views
+
 
 
 
@@ -29,6 +31,8 @@ urlpatterns = [
 
     # API endpoints
     path('api/course/<int:id>/', views.course_detail, name='course_detail'),
-
+    path("save-progress/", lecture_views.save_progress, name="save_progress_of_lecture"),
+    # path('api/quiz/<int:id>/', views.save_answer_and_progress, name='save_answer_quiz'),
+    path('api/quiz/<int:id>/submit-all/', views.save_answer_and_progress, name='save_answer_quiz'),
     
 ]

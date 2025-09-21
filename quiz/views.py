@@ -1,11 +1,13 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Quiz, Question, Choice, QuizAttempt,UserAnswer
+from django.shortcuts import render, get_object_or_404,redirect
+from .models import Quiz, Question, Choice, QuizAttempt,UserAnswer,QuizProgress
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .decorators import limit_attempts
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from django.contrib import messages
 from .serializers import (
     QuizSerializer,
     QuestionSerializer,
@@ -13,6 +15,47 @@ from .serializers import (
     QuizAttemptSerializer,
     UserAnswerSerializer,
 )
+
+@login_required
+def retake_quiz(request, id):
+    quiz = get_object_or_404(Quiz, id=id)
+
+    # delete old progress but keep attempts history
+    QuizProgress.objects.filter(user=request.user, quiz=quiz).delete()
+
+    # create new attempt if limit not reached
+    attempts_count = QuizAttempt.objects.filter(user=request.user, quiz=quiz).count()
+    if attempts_count >= 3:
+        messages.warning(request, "You have reached the maximum number of attempts.")
+        return redirect("quiz_results", id=id)
+
+    QuizAttempt.objects.create(user=request.user, quiz=quiz, score=0, completed_test=False)
+
+    messages.success(request, "New attempt started.")
+    return redirect("quiz", id=id)
+
+@login_required(login_url='login')
+def quiz_results(request, id):
+    quiz = get_object_or_404(Quiz, id=id)
+    attempts = QuizAttempt.objects.filter(user=request.user, quiz=quiz).order_by('-started_at')
+
+    if not attempts.exists():
+        messages.warning(request, "You have no attempts for this quiz yet.")
+        return redirect('quiz', id=id)
+
+    attempt = attempts.first()  # latest attempt
+    total_questions = attempt.user_answers.count()
+    correct_answers = attempt.user_answers.filter(chosen_option__is_correct=True).count()
+
+    return render(request, "quiz/results.html", {
+        "quiz": quiz,
+        "attempt": attempt,
+        "attempts": attempts,
+        "total_questions": total_questions,
+        "correct_answers": correct_answers,
+    })
+
+
 
 @login_required(login_url='login')
 def quiz(request,id):
@@ -22,19 +65,25 @@ def quiz(request,id):
     }
     return render(request, 'course/quiz.html',context)
 
-@login_required(login_url='login')
-def quiz_page(request, id):
-    quiz = get_object_or_404(Quiz, id=id)
-    print(quiz.questions)
-    context = {
-        'quiz_id': quiz.id,
-        'quiz_title': quiz.title,
-    }
-    return render(request, 'course/quiz2.html', context)
+
+
 
 @login_required
-def get_quiz_data(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)
+def quiz_entry(request, id):
+    quiz = get_object_or_404(Quiz, id=id)
+    attempts_count = QuizAttempt.objects.filter(user=request.user, quiz=quiz).count()
+    return render(request, "quiz/start.html", {
+        "quizes": quiz,
+        "id": quiz.id,
+        "attempts_count": attempts_count,
+    })
+    
+        
+
+
+@login_required
+def get_quiz_data(request, id):
+    quiz = get_object_or_404(Quiz, id=id)
     questions = []
     for q in quiz.questions.all():
         questions.append({
@@ -46,10 +95,10 @@ def get_quiz_data(request, quiz_id):
 
 @csrf_exempt  # for testing — use CSRF token in production!
 @login_required
-def submit_quiz(request, quiz_id):
+def submit_quiz(request, id):
     if request.method == 'POST':
         data = json.loads(request.body)
-        quiz = get_object_or_404(Quiz, id=quiz_id)
+        quiz = get_object_or_404(Quiz, id=id)
         score = 0
         total = quiz.questions.count()
 

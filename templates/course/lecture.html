@@ -64,6 +64,53 @@
     .span-text-size{
       font-size:14px
     }
+    .list-group-item.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+    .list-group-item.active .title-link {
+        color: white !important; /* force white for anchor */
+        text-decoration: none;   /* optional: remove underline */
+    }
+
+    .quiz-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.quiz-card {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.quiz-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-quiz {
+  background: #6f42c1; /* фиолетовый как в Udemy */
+  color: white;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-quiz:hover {
+  background: #5a32a3;
+  transform: scale(1.05);
+}
   </style>
 <div class="container-fluid">
   <div class="row">
@@ -71,38 +118,77 @@
     <div class="col-lg-8 col-md-12 p-3">
       <h5>{{course.title}}</h5>
 
-      <div class="video-container mb-3" style="position: relative;">
-        <iframe 
-          id="vimeo-player"
-          src="https://player.vimeo.com/video/76979871" 
-          allow="autoplay; fullscreen; picture-in-picture" 
-          >
-        </iframe>
-      </div>
+      {% if default_lecture %}
+        <div class="video-container mb-3" id="video-container" style="position: relative;">
+          <iframe 
+            id="vimeo-player"
+            src="{{ default_lecture.video_url }}"
+            allow="autoplay; fullscreen; picture-in-picture"
+            frameborder="0"
+            style="width:100%; height:500px;"
+          ></iframe>
+        </div>
+        <div id="quiz-container" class="quiz-box mb-3" style="display:none;">
+          <div class="quiz-card">
+            <h5 class="quiz-title" id="quiz-title"></h5>
+            <a class="btn btn-quiz" id="open-quiz-btn" >
+              Открыть тест
+            </a>
+          </div>
+        </div>
+      {% endif %}
 
       <!-- Tabs -->
       <ul class="nav nav-tabs" id="courseTabs" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+          <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+            {%trans 'Overview'%}
+          </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa" type="button" role="tab">Q&A</button>
+          <button class="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa" type="button" role="tab">
+            {%trans 'Q&A'%}
+          </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">Notes</button>
+          <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">
+            {%trans 'Notes'%}
+          </button>
         </li>
       </ul>
-      <div class="tab-content" id="courseTabsContent">
+
+      <!-- Tabs content -->
+      <div class="tab-content mt-3" id="courseTabsContent">
+        <!-- Overview -->
         <div class="tab-pane fade show active" id="overview" role="tabpanel">
-          <p>Full Practice Exam with Explanations included! PASS the Amazon Web Services Developer Certification.</p>
+          <h5>{%trans 'Course Overview'%}</h5>
+          <p>{{ course.description }}</p>
+          <ul>
+            <li><strong>{%trans 'Instructor'%}:</strong> {{ course.tutor }}</li>
+            <li><strong>{%trans 'Duration'%}:</strong> {{ course.get_total_duration }}</li>
+            <li><strong>{%trans 'Language'%}:</strong> {{ course.get_language_display }}</li>
+          </ul>
         </div>
+
+        <!-- Q&A -->
         <div class="tab-pane fade" id="qa" role="tabpanel">
-          <p>Q&A Section will go here.</p>
+          <h5>{%trans 'Questions & Answers'%}</h5>
+          <p>{%trans 'Here you can ask and answer questions about this course.'%}</p>
+          <!-- Later: loop over questions -->
+          <ul>
+            <li><strong>Q:</strong> What is AI? <br><strong>A:</strong> AI is the simulation of human intelligence in machines.</li>
+            <li><strong>Q:</strong> How long is this course? <br><strong>A:</strong> Around 5 hours total.</li>
+          </ul>
         </div>
+
+        <!-- Notes -->
         <div class="tab-pane fade" id="notes" role="tabpanel">
-          <p>Your notes will be shown here.</p>
+          <h5>{%trans 'Your Notes'%}</h5>
+          <textarea class="form-control" rows="5" placeholder="Write your notes here..."></textarea>
+          <button class="btn btn-primary mt-2">{%trans 'Save Note'%}</button>
         </div>
       </div>
+
     </div>
 
     <!-- Right sidebar -->
@@ -128,7 +214,7 @@
                   {% for item in section.items %}
                     {% if item.content_object %}
                       {% if item.content_type.model == 'lecture' %}
-                        <li class="list-group-item" onclick="my_function(this)" >
+                        <li class="list-group-item" onclick="my_function(this)" data-type="lecture">
                           <a src="{{ item.content_object.video_url }}" class="title-link" type="button" >
                             {{ item.content_object.title }}
                           </a> <br>
@@ -138,14 +224,14 @@
                           </svg> ({{ item.content_object.formatted_duration }})
                         </li>
                       {% elif item.content_type.model == 'quiz' %}
-                        <li class="list-group-item">
-                          <a href="{%url 'quiz' 1 %}" class="title-link">
+                        <li class="list-group-item" onclick="my_function(this)" data-type="quiz" data-title="{{ item.content_object.title }}" data-url="{%url 'quiz' item.content_object.id %}">
+                          
                             {% trans 'Quiz'%}: {{ item.content_object.title }}
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
                             <path d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
                           </svg>
-                          </a>
+                          
                         </li>
                       {% else %}
                         <li class="list-group-item text-muted">
@@ -174,13 +260,46 @@
 <script>
   
 
-  function my_function(element) {
+  function my_function(el) {
     
-    const link = element.querySelector('a').getAttribute('src');
+    // const link = element.querySelector('a').getAttribute('src');
     
-    // Update the iframe source
-    const iframe_v = document.getElementById('vimeo-player');
-    iframe_v.src = link;
+    // // Update the iframe source
+    // const iframe_v = document.getElementById('vimeo-player');
+    // iframe_v.src = link;
+    document.querySelectorAll(".list-group-item").forEach(li => li.classList.remove("active"));
+    el.classList.add("active");
+
+    let type = el.getAttribute("data-type")
+    let title = el.getAttribute("data-title")
+    let url = el.getAttribute("data-url")
+    let quiz_title = document.getElementById("quiz-title")
+    let open_quiz_btn = document.getElementById("open-quiz-btn")
+
+    
+
+    let videoContainer = document.getElementById("video-container");
+    let quizContainer = document.getElementById("quiz-container");
+    let iframe = document.getElementById("vimeo-player");
+
+    // if it's a quiz
+    console.log(type)
+    
+
+    if (type === "quiz") {
+        videoContainer.style.display = "none";
+        quizContainer.style.display = "block";
+        quiz_title.innerHTML = title;
+        open_quiz_btn.setAttribute("href", url);
+    } 
+    // if it's a lecture
+    else {
+        let url = el.querySelector("a").getAttribute("src");
+        iframe.setAttribute("src", url);
+
+        videoContainer.style.display = "block";
+        quizContainer.style.display = "none";
+    }
 
   }
   const iframe = document.getElementById('vimeo-player');
@@ -232,17 +351,48 @@
     });
   });
 
-  fetch('/get-progress/?video_id=76979871')
-    .then(res => res.json())
-    .then(data => {
-      if (data.progress_seconds) {
-        player.setCurrentTime(data.progress_seconds).then(function(seconds) {
-          console.log('🔁 Resumed video at', seconds, 'seconds');
-        }).catch(function(error) {
-          console.error('⚠️ Error seeking video:', error);
+  // const listItems = document.querySelectorAll(".list-group-item");
+
+  // listItems.forEach(item => {
+  //     item.addEventListener("click", function() {
+  //         // remove active from all
+  //         listItems.forEach(li => li.classList.remove("active"));
+  //         // add active to clicked one
+  //         this.classList.add("active");
+  //     });
+  // });
+</script>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  let playerVimeoo = new Vimeo.Player(document.getElementById("vimeo-player"));
+  let currentLectureId = "{{ start_lecture.id }}";
+
+  // Save progress every 10s
+  setInterval(() => {
+    playerVimeoo.getCurrentTime().then(seconds => {
+      playerVimeoo.getDuration().then(duration => {
+        let percent = (seconds / duration) * 100;
+        fetch("{% url 'save_progress_of_lecture' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          },
+          body: JSON.stringify({
+            video_id: currentLectureId,
+            watched_seconds: seconds,
+            watched_percent: percent
+          })
         });
-      }
+      });
     });
+  }, 10000);
+
+  function loadVideo(id, url) {
+    currentLectureId = id;
+    playerVimeoo.loadVideo(url);
+  }
 </script>
 
 {%endblock%}
