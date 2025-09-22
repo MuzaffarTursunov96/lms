@@ -131,7 +131,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="cta-img">
-                            <img src="{{top_tutor.image.url}}" alt="About Img">
+                             {% if top_tutor.image.url %}
+                                <img src="{{top_tutor.image.url}}" alt="About Img">
+                            {%else%}
+                                <img src="{% static 'assets/img/about/about-tutor-1.jpg'%}" alt="about-img">
+                            {% endif %}
                             <a href="{{top_tutor.vimeo_url}}" class="play-btn popup-video position-center"><i class="fas fa-play"></i></a>
                         </div>
                     </div>
@@ -209,7 +213,12 @@
                     <div class="row">
                         <div class="col-md-7 col-lg-12">
                             <div class="img-box5 mega-hover wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="img-1"><img class="w-100" src="{{apply_for_tutor.image.url}}" alt="About Img"></div>
+                                {% if apply_for_tutor.image %}
+                                    <div class="img-1"><img class="w-100" src="{{apply_for_tutor.image.url}}" alt="About Img"></div>
+                                {%else%}
+                                    <div class="img-1"><img class="w-100" src="{% static 'assets/img/about/become-tutor-1.jpg'%}" alt="About Img"></div>
+                                {% endif %}
+                                
                                 <div class="box-content">
                                     <h3 class="img-title">{{apply_for_tutor.title|safe}}</h3>
                                     <p class="img-text">{{apply_for_tutor.description|safe}}</p>

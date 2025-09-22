@@ -10,17 +10,25 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 class CourseItem(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='courseitems', blank=True, null=True)
     section = models.ForeignKey(CourseSection, on_delete=models.CASCADE,blank=True,null=True)
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(blank=True, null=True)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField(null=True, blank=True)
 
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = "Course item order"
-        verbose_name_plural = "Course Item orders"
-        ordering = ['order']  # Default order by 'order' field
+        ordering = ["order"]
+
+    def save(self, *args, **kwargs):
+        if self.order is None:
+            last_order = (
+                CourseItem.objects.filter(section=self.section)
+                .aggregate(models.Max("order"))["order__max"]
+            )
+            self.order = 1 if last_order is None else last_order + 1
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.content_type.model} - Order: {self.order}"
 
@@ -31,8 +39,18 @@ class Quiz(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='quizzes_for_course')
     course_section = models.ForeignKey(CourseSection, on_delete=models.CASCADE,blank=True, null=True,related_name='quizzes')
     title = models.CharField(max_length=255)
+    order = models.PositiveIntegerField(blank=True, null=True, default=None)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order"]
+
+    def save(self, *args, **kwargs):
+        if self.order is None:
+            last_order = Quiz.objects.filter(course=self.course).aggregate(models.Max("order"))["order__max"]
+            self.order = 1 if last_order is None else last_order + 1
+        super().save(*args, **kwargs)
 
     def total_questions(self):
         return self.questions.count()

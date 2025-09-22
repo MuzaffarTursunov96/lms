@@ -16,87 +16,10 @@ def validate_image_format(value):
         raise ValidationError("Invalid image file.")
 
 
-def validate_image_article_size(value):
-    max_width = 1430
-    max_height = 955
-    min_width = 1420
-    min_height = 945
-
-    try:
-        img = Image.open(value)
-        width, height = img.size
-        if width < min_width or height < min_height:
-            raise ValidationError(
-                f"Image is too small! Minimum size is {min_width}x{min_height}px."
-            )
-        if width > max_width or height > max_height:
-            raise ValidationError(
-                f"Image is too large! Maximum size is {max_width}x{max_height}px."
-            )
-    except Exception:
-        raise ValidationError("Could not read image size.")
-    
-def validate_image_tutor_size(value):
-    max_width = 490
-    max_height = 490
-    min_width = 480
-    min_height = 480
-
-    try:
-        img = Image.open(value)
-        width, height = img.size
-        if width < min_width or height < min_height:
-            raise ValidationError(
-                f"Image is too small! Minimum size is {min_width}x{min_height}px."
-            )
-        if width > max_width or height > max_height:
-            raise ValidationError(
-                f"Image is too large! Maximum size is {max_width}x{max_height}px."
-            )
-    except Exception:
-        raise ValidationError("Could not read image size.Image must be around 480<=width<=490 x 480<=height<=490px")
-    
-def validate_image_size(value):
-    max_width = 380
-    max_height = 250
-    min_width = 370
-    min_height = 240
-
-    try:
-        img = Image.open(value)
-        width, height = img.size
-        if width < min_width or height < min_height:
-            raise ValidationError(
-                f"Image is too small! Minimum size is {min_width}x{min_height}px."
-            )
-        if width > max_width or height > max_height:
-            raise ValidationError(
-                f"Image is too large! Maximum size is {max_width}x{max_height}px."
-            )
-    except Exception:
-        raise ValidationError("Could not read image size.Image must be around 370<=width<=380 x 240<=height<=250px")
 
 
 
-def validate_image_size_image(value):
-    max_width = 620
-    max_height = 530
-    min_width = 610
-    min_height = 525
 
-    try:
-        img = Image.open(value)
-        width, height = img.size
-        if width < min_width or height < min_height:
-            raise ValidationError(
-                f"Image is too small! Minimum size is {min_width}x{min_height}px."
-            )
-        if width > max_width or height > max_height:
-            raise ValidationError(
-                f"Image is too large! Maximum size is {max_width}x{max_height}px."
-            )
-    except Exception:
-        raise ValidationError("Could not read image size.Image must be around 610<=width<=620 x 525<=height<=530px")
 
 
 class PageType(models.Model):
@@ -161,7 +84,7 @@ class Article(models.Model):
     helper_text1 = models.TextField(blank=True, null=True)  # New helper text field
     helper_text2 = models.TextField(blank=True, null=True)  # New helper text
     helper_text3 = models.TextField(blank=True, null=True)  # New helper text field
-    image = models.ImageField(upload_to='pages/images/', null=True, blank=True,validators=[validate_image_format, validate_image_article_size])  # New image field
+    image = models.ImageField(upload_to='pages/images/', null=True, blank=True)  # New image field
     created_at = models.DateTimeField(auto_now_add=True)  # New date field
 
     class Meta:
@@ -170,6 +93,25 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        # Save first so we have self.profile_image.path
+        super().save(*args, **kwargs)
+
+        if self.image:
+            img_path = self.image.path
+            img = Image.open(img_path)
+
+            # Convert to RGB if needed (to avoid issues with PNG/alpha when saving as JPEG)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize while keeping aspect ratio
+            max_size = (1425, 950)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Save back to same path (JPEG quality applies only to JPG files)
+            img.save(img_path, optimize=True, quality=90)
     
 
 
@@ -182,7 +124,7 @@ class Tutor(models.Model):
     lessons_completed = models.PositiveIntegerField(default=0)
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0)
 
-    profile_image = models.ImageField(upload_to='tutors/', validators=[validate_image_format, validate_image_tutor_size], null=True, blank=True)  # New image field
+    profile_image = models.ImageField(upload_to='tutors/', null=True, blank=True)  # New image field
 
     social_facebook = models.URLField(blank=True, null=True)
     social_twitter = models.URLField(blank=True, null=True)
@@ -197,6 +139,25 @@ class Tutor(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        # Save the original first
+        super().save(*args, **kwargs)
+
+        if self.profile_image:
+            img_path = self.profile_image.path
+            img = Image.open(img_path)
+
+            # Convert to RGB if needed (to avoid issues with PNG/alpha when saving as JPEG)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize while keeping aspect ratio
+            max_size = (490, 490)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Save back to same path (JPEG quality applies only to JPG files)
+            img.save(img_path, optimize=True, quality=90)
 
 
 class Qualification(models.Model):
@@ -222,7 +183,6 @@ class UserCourses(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
-    subtitle = models.CharField(max_length=255, blank=True, null=True)
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='courses', null=True, blank=True)  # Foreign key to Tutor
     course_type = models.CharField(max_length=100,blank=True)  # e.g., "Online", "In-person", "Hybrid"
@@ -231,11 +191,10 @@ class Course(models.Model):
     weekly_study = models.CharField(max_length=100)  # e.g., "11 Hours"
     student_count = models.PositiveIntegerField()
 
-    price = models.DecimalField(max_digits=8, decimal_places=2)  # e.g., 180.00
-    payment_period = models.CharField(max_length=50, default="month")
+    price = models.DecimalField(max_digits=8, decimal_places=2)  
 
-    course_image = models.ImageField(upload_to='courses/images/', validators=[validate_image_format, validate_image_size_image], null=True, blank=True)
-    preview_image = models.ImageField(upload_to='courses/images/',validators=[validate_image_format, validate_image_size], null=True, blank=True)  # New preview image field
+    course_image = models.ImageField(upload_to='courses/images/',blank=True, null=True)
+    preview_image = models.ImageField(upload_to='courses/images/',blank=True, null=True)  # New preview image field
     vimeo_url = models.URLField(blank=True, null=True)  # URL to the Vimeo video
     is_preview = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
@@ -245,14 +204,54 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    def save(self, *args, **kwargs):
+        # Save first so we have self.profile_image.path
+        super().save(*args, **kwargs)
+
+        if self.course_image:
+            img_path = self.course_image.path
+            img = Image.open(img_path)
+
+            # Convert to RGB if needed (to avoid issues with PNG/alpha when saving as JPEG)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize while keeping aspect ratio
+            max_size = (615, 525)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Save back to same path (JPEG quality applies only to JPG files)
+            img.save(img_path, optimize=True, quality=90)
+        
+        if self.preview_image:
+            img_path = self.preview_image.path
+            img = Image.open(img_path)
+
+            # Convert to RGB if needed (to avoid issues with PNG/alpha when saving as JPEG)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize while keeping aspect ratio
+            max_size = (375, 245)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Save back to same path (JPEG quality applies only to JPG files)
+            img.save(img_path, optimize=True, quality=90)
 
 
 class CourseSection(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
     title = models.CharField(max_length=200)
-    content = models.TextField(blank=True)
     order = models.PositiveIntegerField(blank=True, default=1)
 
+    class Meta:
+        ordering = ["order"]
+
+    def save(self, *args, **kwargs):
+        if self.order is None:
+            last_order = CourseSection.objects.filter(course=self.course).aggregate(models.Max("order"))["order__max"]
+            self.order = 1 if last_order is None else last_order + 1
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -294,6 +293,17 @@ class Lecture(models.Model):
     title = models.CharField(max_length=255)
     video_url = models.URLField()
     duration = models.DurationField()
+    order = models.PositiveIntegerField(blank=True, null=True)  # new field
+
+    class Meta:
+        ordering = ["order"]  # always sort by order
+
+    def save(self, *args, **kwargs):
+        if self.order is None:
+            # get max order in this section
+            last_order = Lecture.objects.filter(section=self.section).aggregate(models.Max("order"))["order__max"]
+            self.order = 1 if last_order is None else last_order + 1
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

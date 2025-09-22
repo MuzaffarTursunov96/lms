@@ -91,7 +91,16 @@
                     <div class="col-sm-6 col-xl-4">
                         <div class="course-style2">
                             <div class="course-img">
-                                <a href="{% url 'course-details' course.id %}"><img class="w-100" src="{{course.preview_image.url}}" alt="Course Img"></a>
+                                
+                                <a href="{% url 'course-details' course.id %}">
+                                    {% if course.preview_image %}
+                                        <img class="w-100" src="{{course.preview_image.url}}" alt="Course Img">
+                                    {%else%}
+                                        <img class="w-100" src="{% static 'assets/img/about/about-4-1.jpg'%}" alt="Course Img">
+                                        
+                                    {% endif %}
+                                    
+                                </a>
                                 <span class="course-price">${{course.price}}</span>
                             </div>
                             <div class="course-content">
@@ -102,7 +111,16 @@
                                     <span><i class="far fa-clock"></i>{{course.duration}}</span>
                                 </div>
                                 <div class="course-footer">
-                                    <div class="course-teacher"><a href="{% url 'team-details' course.id %}" class="text-inherit"><img src="{{course.tutor.profile_image.url}}" alt="Course">{{course.tutor.name}}</a></div>
+                                    <div class="course-teacher">
+                                        <a href="{% url 'team-details' course.id %}" class="text-inherit">
+                                            {% if course.tutor.profile_image %}
+                                                <img src="{{course.tutor.profile_image.url}}" alt="Course">
+                                            {%else%}
+                                                <img src="{% static 'assets/img/about/author-1-1.jpg'%}" alt="Course">
+                                            {% endif %}
+                                        {{course.tutor.name}}
+                                        </a>
+                                    </div>
                                     <div class="course-review">
                                         {% for i in course.tutor.rating|times %}
                                             <i class="fas fa-star"></i>

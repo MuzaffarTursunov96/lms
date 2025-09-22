@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='article',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='pages/images/', validators=[lms.models.validate_image_format, lms.models.validate_image_article_size]),
+            field=models.ImageField(blank=True, null=True, upload_to='pages/images/'),
         ),
     ]

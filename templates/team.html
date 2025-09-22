@@ -67,7 +67,11 @@
                             <p class="team-degi">{{tutor.subject}}</p>
                             <span class="team-courses">{{tutor.lessons_completed}}+ {% trans 'Lessons Completed'%}</span>
                             <div class="team-img">
-                                <img src="{{tutor.profile_image.url}}" alt="member">
+                                {% if tutor.profile_image %}
+                                    <img src="{{tutor.profile_image.url}}" alt="member">
+                                {%else%}
+                                    <img src="{% static 'assets/img/about/author-1-1.jpg'%}" alt="member">
+                                {% endif %}
                             </div>
                             <span class="team-rate"><span class="team-price">${{tutor.hourly_rate}} </span>/ {% trans 'per hour'%}</span>
                             <p class="team-experi">{{tutor.experience_years}}+ {% trans 'years experience'%}</p>

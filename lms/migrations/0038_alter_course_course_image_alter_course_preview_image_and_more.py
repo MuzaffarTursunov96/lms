@@ -14,16 +14,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='course',
             name='course_image',
-            field=models.ImageField(blank=True, null=True, upload_to='courses/images/', validators=[lms.models.validate_image_format, lms.models.validate_image_size_image]),
+            field=models.ImageField(blank=True, null=True, upload_to='courses/images/'),
         ),
         migrations.AlterField(
             model_name='course',
             name='preview_image',
-            field=models.ImageField(blank=True, null=True, upload_to='courses/images/', validators=[lms.models.validate_image_format, lms.models.validate_image_size]),
+            field=models.ImageField(blank=True, null=True, upload_to='courses/images/'),
         ),
         migrations.AlterField(
             model_name='tutor',
             name='profile_image',
-            field=models.ImageField(blank=True, null=True, upload_to='tutors/', validators=[lms.models.validate_image_format, lms.models.validate_image_tutor_size]),
+            field=models.ImageField(blank=True, null=True, upload_to='tutors/'),
         ),
     ]

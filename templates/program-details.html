@@ -36,7 +36,13 @@
                     <span class="guarant-badge">{% trans 'Guaranteed 40% tuition scholarships'%}</span>
                 </div>
             </div>
-            <div class="mega-hover rounded-20 mb-5"><img src="{{sertificates.image.url}}" alt="teaching"></div>
+            <div class="mega-hover rounded-20 mb-5">
+                 {% if sertificates.image %}
+                    <img src="{{sertificates.image.url}}" alt="teaching">
+                {%else%}
+                    <img src="{% static 'assets/img/about/about-s-1.jpg'%}" alt="teaching">
+                {% endif %}
+            </div>
             <h5 class="border-title2 mb-4">{% trans 'Overview'%}</h5>
             {{sertificates.description|safe}}
             <div class="list-style5 vs-list ">
@@ -58,10 +64,21 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-5">
-                    <div class="mega-hover rounded-20"><img src="{{additional_courses_part1.image.url}}" alt="collaboration" class="w-100"></div>
+                    {% if additional_courses_part1.image %}
+                        <div class="mega-hover rounded-20"><img src="{{additional_courses_part1.image.url}}" alt="collaboration" class="w-100"></div>
+                    {%else%}
+                        <div class="mega-hover rounded-20"><img src="{% static 'assets/img/about/about-3-1.jpg'%}" alt="collaboration" class="w-100"></div>
+                        
+                    {% endif %}
                 </div>
                 <div class="col-md-6 mb-5">
-                    <div class="mega-hover rounded-20"><img src="{{additional_courses_part2.image.url}}" alt="discussion" class="w-100"></div>
+                    {% if additional_courses_part2.image %}
+                        <div class="mega-hover rounded-20"><img src="{{additional_courses_part2.image.url}}" alt="collaboration" class="w-100"></div>
+                    {%else%}
+                        <div class="mega-hover rounded-20"><img src="{% static 'assets/img/about/about-3-1.jpg'%}" alt="collaboration" class="w-100"></div>
+                        
+                    {% endif %}
+                    
                 </div>
             </div>
             <h5 class="border-title2 mb-3">{% trans 'Program Features'%}</h5>

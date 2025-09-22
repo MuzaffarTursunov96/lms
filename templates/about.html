@@ -72,7 +72,11 @@
             <div class="row align-items-center align-items-xxl-start">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="about-img mega-hover">
-                        <img src="{{blog.image.url}}" alt="about-img">
+                        {% if blog.image %}
+                            <img src="{{blog.image.url}}" alt="about-img">
+                        {%else%}
+                            <img src="{% static 'assets/img/about/about-1-1.jpg'%}" alt="about-img">
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
@@ -130,7 +134,11 @@
                             <p class="team-degi">{{tutor.subject}}</p>
                             <span class="team-courses">{{tutor.courses.count}} {% trans 'course'%}</span>
                             <div class="team-img">
-                                <img src="{{tutor.profile_image.url}}" alt="member">
+                                {% if tutor.profile_image %}
+                                    <img src="{{tutor.profile_image.url}}" alt="member">
+                                {%else%}
+                                    <img src="{% static 'assets/img/about/author-1-1.jpg'%}" alt="member">
+                                {% endif %}
                             </div>
                             <!-- <span class="team-title">+ {% trans 'students'%}</span> -->
                             <p class="team-experi">{{tutor.experience_years}}+ {% trans 'years experience'%}</p>
@@ -176,7 +184,11 @@
                 <div class="col-lg-7 col-xl-6 align-self-end">
                     <div class="img-box2">
                         <div class="vs-circle"></div>
-                        <img class="img-1" src="{{expert_instruktor.image.url}}" alt="">
+                         {% if expert_instruktor.image.url %}
+                            <img class="img-1" src="{{expert_instruktor.image.url}}" alt="">
+                        {%else%}
+                            <img src="{% static 'assets/img/about/about-6-1.jpg'%}" alt="about-img">
+                        {% endif %}
                     </div>
                     <div class="shape-mockup jump d-none d-xxl-block" style="bottom: 75%; right: 75%;">
                         <img src="{% static 'assets/img/shape/cta-shep1.png'%}" alt="shep">
@@ -257,7 +269,11 @@
                     <div class="row">
                         <div class="col-md-7 col-lg-12">
                             <div class="img-box5 mega-hover wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="img-1"><img class="w-100" src="{{apply_for_tutor.image.url}}" alt="About Img"></div>
+                                {% if apply_for_tutor.image %}
+                                    <div class="img-1"><img class="w-100" src="{{apply_for_tutor.image.url}}" alt="About Img"></div>
+                                {%else%}
+                                    <div class="img-1"><img class="w-100" src="{% static 'assets/img/about/become-tutor-1.jpg'%}" alt="About Img"></div>
+                                {% endif %}
                                 <div class="box-content">
                                     <h3 class="img-title">{{apply_for_tutor.title|safe}}</h3>
                                     <p class="img-text">{{apply_for_tutor.description}}</p>

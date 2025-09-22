@@ -6,14 +6,14 @@
     <!--==============================
     Breadcumb
     ============================== -->
-    <div class="breadcumb-wrapper " data-bg-src="assets/img/breadcumb/breadcumb-bg.png">
+    <div class="breadcumb-wrapper " data-bg-src="{% static 'assets/img/breadcumb/breadcumb-bg.png'%}">
         <div class="container z-index-common">
             <div class="breadcumb-content">
-                <h1 class="breadcumb-title">Course Details</h1>
+                <h1 class="breadcumb-title">{%trans 'Course Details'%}</h1>
                 <div class="breadcumb-menu-wrap">
                     <ul class="breadcumb-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Course Details</li>
+                        <li><a href="{% url 'index' %}">{%trans 'Home'%}</a></li>
+                        <li>{%trans 'Course Details'%}</li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row flex-row-reverse gx-50">
                 <div class="col-lg-8">
-                    <div class="mega-hover course-img"><img src="assets/img/course/course-details-1.jpg" alt="girl"></div>
+                    <div class="mega-hover course-img"><img src="{% static 'assets/img/course/course-details-1.jpg'%}" alt="girl"></div>
                     <div class="course-category">
                         <a href="course.html">Advance learning</a>
                     </div>
@@ -59,7 +59,7 @@
                             <div class="course-price"><span class="currency">$</span>180<small>/month</small></div>
                         </div>
                         <div class="col-auto">
-                            <a class="vs-btn" href="contact.html">Join Course</a>
+                            <a class="vs-btn" href="{% url 'contact' %}">Join Course</a>
                         </div>
                     </div>
                     <h5 class="border-title2">Overview</h5>

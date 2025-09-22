@@ -7,3 +7,4 @@ class LmsConfig(AppConfig):
 
     def ready(self):
         import lms.translation
+        import lms.signals 

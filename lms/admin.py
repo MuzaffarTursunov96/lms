@@ -6,7 +6,7 @@ from quiz.models import Quiz, Question, Choice,CourseItem
 # Register CourseSection and Lecture explicitly
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'course', 'order')
+    list_display = ('title', 'course')
     search_fields = ('title', 'course__title')
     list_filter = ('course__title', 'order')
 
@@ -35,9 +35,9 @@ class LectureInline(nested_admin.NestedStackedInline):
 #     model = Lecture
 #     extra = 1
 
-class CourseItemInline(nested_admin.NestedStackedInline):
-    model = CourseItem
-    extra = 1
+# class CourseItemInline(nested_admin.NestedStackedInline):
+#     model = CourseItem
+#     extra = 1
 
 class ReviewInline(nested_admin.NestedStackedInline):
     model = Review
@@ -55,14 +55,14 @@ class QuizInline(nested_admin.NestedStackedInline):
 class CourseSectionInline(nested_admin.NestedStackedInline):
     model = CourseSection
     extra = 1
-    inlines = [LectureInline]
+    inlines = [LectureInline,QuizInline]
 
 @admin.register(Course)
 class CourseAdmin(nested_admin.NestedModelAdmin):
     list_display = ('title', 'course_type', 'tutor', 'rating', 'student_count', 'price')
-    search_fields = ('title', 'subtitle', 'tags', 'course_type')
+    search_fields = ('title', 'tags', 'course_type')
     list_filter = ('course_type', 'tutor')
-    inlines = [CourseSectionInline,QuizInline,CourseItemInline,ReviewInline]
+    inlines = [CourseSectionInline,ReviewInline]
 
 # Other model registrations
 @admin.register(Article)

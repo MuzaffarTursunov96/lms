@@ -40,7 +40,11 @@
                         <div class="shape-mockup jump d-none d-xxxl-block" style="top: 10%; left: 30%;">
                             <img src="{% static 'assets/img/shape/hero-shep1.png'%}" alt="shep">
                         </div>
-                        <div class="img-1"><img src="{{hero_section.image.url}}" alt="girl" style="width: 90%"></div>
+                        {% if hero_section.image %}
+                            <div class="img-1"><img src="{{hero_section.image.url}}" alt="girl" style="width: 90%"></div>
+                        {%else%}
+                            <div class="img-1"><img src="{% static 'assets/img/about/about-5-1.jpg'%}" alt="girl" style="width: 90%"></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -149,7 +153,11 @@
             <div class="row align-items-center align-items-center">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="about-img">
-                        <img src="{{global_education.image.url}}" alt="about-img">
+                        {% if global_education.image %}
+                            <img src="{{global_education.image.url}}" alt="about-img">
+                        {%else%}
+                            <img src="{% static 'assets/img/about/about-6-1.jpg'%}" alt="about-img">
+                        {% endif %}
                         <div class="media-box1">
                             {{global_education.helper_text1|safe}}
                         </div>
@@ -198,7 +206,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="cta-img">
-                            <img src="{{top_course.image.url}}" alt="About Img">
+                            {% if top_course.image %}
+                                <img src="{{top_course.image.url}}" alt="About Img">
+                            {%else%}
+                                <img src="{% static 'assets/img/about/about-7-1.jpg'%}" alt="About Img">
+                            {% endif %}
                             <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn2 popup-video position-center"><i class="fas fa-play"></i></a>
                         </div>
                     </div>
@@ -223,7 +235,13 @@
                     <div class="col-sm-6 col-xl-4">
                         <div class="course-style1">
                             <div class="course-img">
-                                <a href="{%url 'course-details' course.id %}"><img class="w-100" src="{{course.preview_image.url}}"></a>
+                                <a href="{%url 'course-details' course.id %}">
+                                    {% if course.preview_image.url %}
+                                        <img class="w-100" src="{{course.preview_image.url}}">
+                                    {%else%}
+                                        <img class="w-100" src="{% static 'assets/img/about/about-7-1.jpg'%}">
+                                    {% endif %}
+                                </a>
                                 <div class="course-category"><a href="course.html">{{course.course_type}}</a></div>
                                 <a href="{{course.vimeo_url}}" class="vs-btn style2 popup-video"><i class="fas fa-play"></i>{% trans 'Preview Course'%}</a>
                             </div>
@@ -370,8 +388,8 @@
                             <div class="team-img">
                                 {% if tutor.profile_image %}
                                     <img src="{{tutor.profile_image.url}}" alt="member">
-                                {% else %}
-                                    <img src="{% static 'assets/img/team/team-s-3-1.png' %}" alt="member">
+                                {%else%}
+                                    <img src="{% static 'assets/img/about/author-1-1.jpg'%}" alt="member">
                                 {% endif %}
                             </div>
                             <span class="team-title">3k+ {% trans 'students'%}</span>
@@ -391,7 +409,7 @@
     <!--==============================
     CTA Area
     ==============================-->
-    <section class="cta-layout1 style2" data-bg-src="{{becoming_a_tutor.image.url}}">
+    <section class="cta-layout1 style2" data-bg-src="{% if becoming_a_tutor.image %} {{becoming_a_tutor.image.url}}{%else%}{% static 'assets/img/about/become-tutor-1.jpg' %}{%endif%}">
         <div class="container">
             <div class="cta-style2">
                 <div class="row g-5 align-items-center">

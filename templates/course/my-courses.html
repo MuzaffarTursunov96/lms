@@ -13,7 +13,13 @@
                 <div class="col-md-6 col-xl-12">
                     <div class="course-style4 layout2" data-bg-src="{% static 'assets/img/bg/course-list-bg.png'%}">
                         <div class="course-img">
-                            <a href="{% url 'course-details' course.course.id %}"><img class="w-100" src="{{ course.course.preview_image.url }}" alt="Course Img"></a>
+                            <a href="{% url 'course-details' course.course.id %}">
+                                {% if course.course.preview_image %}
+                                <img class="w-100" src="{{ course.course.preview_image.url }}" alt="Course Img">
+                                {%else%}
+                                <img class="w-100" src="{% static 'assets/img/about/program-details-2.jpg'%}" alt="Course Img">
+                                {% endif %}
+                            </a>
                         </div>
                         <div class="course-content">
                             <div class="course-category"><a href="#">{{course.course.course_type}}</a></div>

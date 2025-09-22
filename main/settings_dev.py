@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'modeltranslation',
     'rest_framework',
-    'lms',
+    'lms.apps.LmsConfig',
     'account',
     'quiz',
 ]
@@ -129,6 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_REDIRECT_URL = '/accounts/login/'
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 
 LANGUAGE_CODE = 'ru'
 
