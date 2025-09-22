@@ -242,9 +242,9 @@ def course_details_v2(request,id):
 def search(request):
     query = request.GET.get('q', '')
     if query:
-        courses = Course.objects.filter(is_published=True).filter(Q(title__icontains=query)|Q(course_type__icontains=query)|Q(tags__icontains=query))
+        courses = Course.objects.filter(is_published=True).filter(Q(title__icontains=query)|Q(course_type__icontains=query)|Q(tags__icontains=query)).order_by('-created_at')
     else:
-        courses = Course.objects.filter(is_published=True)
+        courses = Course.objects.filter(is_published=True).order_by('-created_at')
 
     paginator = Paginator(courses, 6)
 
