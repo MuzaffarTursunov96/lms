@@ -58,6 +58,7 @@ class CourseSectionInline(nested_admin.NestedStackedInline):
     model = CourseSection
     extra = 1
     inlines = [LectureInline,QuizInline]
+    exclude = ('order',)
 
 @admin.register(Course)
 class CourseAdmin(nested_admin.NestedModelAdmin):
