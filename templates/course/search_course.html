@@ -28,26 +28,33 @@
                 <div class="col-md-6 col-xl-12">
                     <div class="course-style4 layout2" data-bg-src="assets/img/bg/course-list-bg.png">
                         <div class="course-img">
-                            <a href="course-details.html"><img class="w-100" src="{{course.preview_image.url}}" alt="Course Img"></a>
+                            <a href="{% url 'course-details' course.id %}"><img class="w-100" src="{{course.preview_image.url}}" alt="Course Img"></a>
                         </div>
                         <div class="course-content">
-                            <div class="course-category"><a href="course.html">{{course.course_type}}</a></div>
-                            <h3 class="course-name"><a href="course-details.html">{{course.title}}</a></h3>
+                            <div class="course-category"><a href="{% url 'course-details' course.id %}">{{course.course_type}}</a></div>
+                            <h3 class="course-name"><a href="{% url 'course-details' course.id %}">{{course.title}}</a></h3>
                             <div class="course-meta">
-                                <a href="course.html"><i class="fas fa-user-tie"></i><span class="total-student">{{course.student_count}} {% trans 'Students'%}</span></a>
-                                <a href="course.html"><i class="far fa-tv"></i><span class="course-hour">{{course.sections.count}} {% trans 'Sections'%}</span></a>
-                                <a href="course.html"><i class="far fa-clock"></i><span class="course-hour">{{course.duration}}</span></a>
+                                <a href="{% url 'course-details' course.id %}"><i class="fas fa-user-tie"></i><span class="total-student">{{course.student_count}} {% trans 'Students'%}</span></a>
+                                <a href="{% url 'course-details' course.id %}"><i class="far fa-tv"></i><span class="course-hour">{{course.sections.count}} {% trans 'Sections'%}</span></a>
+                                <a href="{% url 'course-details' course.id %}"><i class="far fa-clock"></i><span class="course-hour">{{course.duration}}</span></a>
                             </div>
                             <div class="course-middle">
                                 <div class="course-price">
                                     <span class="price"><del>${{course.price}}</del> ${{course.price|get_cuurect_price}}</span>
                                     <small class="discount">30% {% trans 'Off'%}</small>
                                 </div>
-                                <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="vs-btn style5 popup-video"><i class="fas fa-play"></i>{% trans 'Preview Course'%}</a>
+                                <a href="{{course.vimeo_url.url}}" class="vs-btn style5 popup-video"><i class="fas fa-play"></i>{% trans 'Preview Course'%}</a>
                             </div>
                             <div class="course-bottom">
                                 <div class="course-author">
-                                    <a href="team-details.html" class="text-inherit"><img src="{{course.tutor.profile_image.url}}" alt="About Author">{{course.tutor.name}}</a>
+                                    <a href="{% url 'team-details' course.tutor.id %}" class="text-inherit">
+                                        {% if course.tutor.profile_image %}
+                                            <img src="{{course.tutor.profile_image.url}}" alt="About Author">
+                                        {%else%}
+                                            <img src="{% static 'assets/img/about/teacher.jpg' %}" alt="About Author">
+                                        {% endif %}
+                                        {{course.tutor.name}}
+                                    </a>
                                 </div>
                                 <div class="course-review">
                                     {% for i in course.tutor.rating|times %}
