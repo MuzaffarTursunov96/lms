@@ -9,6 +9,7 @@ class CourseSectionAdmin(admin.ModelAdmin):
     list_display = ('title', 'course')
     search_fields = ('title', 'course__title')
     list_filter = ('course__title', 'order')
+    exclude = ('order',)
 
 @admin.register(Lecture)
 class LectureAdmin(admin.ModelAdmin):
@@ -51,6 +52,7 @@ class QuizInline(nested_admin.NestedStackedInline):
     model = Quiz
     extra = 1
     inlines = [QuestionInline]
+    exclude = ('order',)
 
 class CourseSectionInline(nested_admin.NestedStackedInline):
     model = CourseSection

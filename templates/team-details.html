@@ -96,7 +96,7 @@
                                     {% if course.preview_image %}
                                         <img class="w-100" src="{{course.preview_image.url}}" alt="Course Img">
                                     {%else%}
-                                        <img class="w-100" src="{% static 'assets/img/about/about-4-1.jpg'%}" alt="Course Img">
+                                        <img class="w-100" src="{% static 'assets/img/about/about-4-1.png'%}" alt="Course Img">
                                         
                                     {% endif %}
                                     
@@ -116,7 +116,7 @@
                                             {% if course.tutor.profile_image %}
                                                 <img src="{{course.tutor.profile_image.url}}" alt="Course">
                                             {%else%}
-                                                <img src="{% static 'assets/img/about/author-1-1.jpg'%}" alt="Course">
+                                                <img src="{% static 'assets/img/about/author-1-1.png'%}" alt="Course">
                                             {% endif %}
                                         {{course.tutor.name}}
                                         </a>
