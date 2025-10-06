@@ -3,6 +3,8 @@ from account.models import User
 from datetime import timedelta
 from PIL import Image
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 
 
@@ -26,8 +28,8 @@ class PageType(models.Model):
     name = models.CharField(max_length=100, unique=True)
    
     class Meta:
-        verbose_name = "Page Type"
-        verbose_name_plural = "Page Types"
+        verbose_name = _("Page Type")
+        verbose_name_plural = _("Page Types")
 
     def __str__(self):
         return self.name
@@ -37,8 +39,8 @@ class BlogType(models.Model):
     name = models.CharField(max_length=100, unique=True)
     
     class Meta:
-        verbose_name = "Blog Type"
-        verbose_name_plural = "Blog Types"
+        verbose_name = _("Blog Type")
+        verbose_name_plural = _("Blog Types")
 
     def __str__(self):
         return self.name
@@ -46,22 +48,34 @@ class BlogType(models.Model):
 
 class Blogs(models.Model):
    
-    title = models.CharField(max_length=200)
-    page_type = models.ForeignKey(PageType, on_delete=models.SET_NULL, null=True, blank=True)
-    blog_type = models.ForeignKey(BlogType, on_delete=models.SET_NULL, null=True, blank=True)
-    description = models.TextField()
-    helper_text1 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text2 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text3 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text4 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text5 = models.TextField(blank=True, null=True)  # New helper text field
-    created_at = models.DateTimeField(auto_now_add=True)  # New date field
-    image = models.ImageField(upload_to='pages/images/', null=True, blank=True)  # New image field
-    vimeo_url = models.URLField(blank=True, null=True)
+    title = models.CharField(_("Title"), max_length=200)
+    page_type = models.ForeignKey(
+        PageType, on_delete=models.SET_NULL,
+        null=True, blank=True,
+        verbose_name=_("Page Type")
+    )
+    blog_type = models.ForeignKey(
+        BlogType, on_delete=models.SET_NULL,
+        null=True, blank=True,
+        verbose_name=_("Blog Type")
+    )
+    description = models.TextField(_("Description"))
+
+    helper_text1 = models.TextField(_("Helper Text 1"), blank=True, null=True)
+    helper_text2 = models.TextField(_("Helper Text 2"), blank=True, null=True)
+    helper_text3 = models.TextField(_("Helper Text 3"), blank=True, null=True)
+    helper_text4 = models.TextField(_("Helper Text 4"), blank=True, null=True)
+    helper_text5 = models.TextField(_("Helper Text 5"), blank=True, null=True)
+
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+    image = models.ImageField(
+        _("Image"), upload_to='pages/images/', null=True, blank=True
+    )
+    vimeo_url = models.URLField(_("Vimeo URL"), blank=True, null=True)
 
     class Meta:
-        verbose_name = "Blog"
-        verbose_name_plural = "Blogs"
+        verbose_name = _("Blog")
+        verbose_name_plural = _("Blogs")
 
     def __str__(self):
         return self.title
@@ -70,26 +84,31 @@ class Blogs(models.Model):
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    category = models.CharField(max_length=100, blank=True, null=True)  # New category field
-    start_date = models.DateField(blank=True, null=True) 
-    start_hour = models.TimeField(blank=True, null=True)
-    end_hour = models.TimeField(blank=True, null=True)
-    topic = models.CharField(max_length=200, blank=True, null=True) 
-    cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) 
-    organiser_full_name =  models.CharField(max_length=200, blank=True, null=True)
-    organiser_email = models.EmailField(blank=True, null=True)
-    organiser_phone = models.CharField(max_length=15, blank=True, null=True)
-    helper_text1 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text2 = models.TextField(blank=True, null=True)  # New helper text
-    helper_text3 = models.TextField(blank=True, null=True)  # New helper text field
-    image = models.ImageField(upload_to='pages/images/', null=True, blank=True)  # New image field
-    created_at = models.DateTimeField(auto_now_add=True)  # New date field
+    title = models.CharField(_("Title"), max_length=200)
+    description = models.TextField(_("Description"))
+
+    category = models.CharField(_("Category"), max_length=100, blank=True, null=True)
+    start_date = models.DateField(_("Start Date"), blank=True, null=True)
+    start_hour = models.TimeField(_("Start Hour"), blank=True, null=True)
+    end_hour = models.TimeField(_("End Hour"), blank=True, null=True)
+    topic = models.CharField(_("Topic"), max_length=200, blank=True, null=True)
+
+    cost = models.DecimalField(_("Cost"), max_digits=10, decimal_places=2, default=0.00)
+
+    organiser_full_name = models.CharField(_("Organiser Full Name"), max_length=200, blank=True, null=True)
+    organiser_email = models.EmailField(_("Organiser Email"), blank=True, null=True)
+    organiser_phone = models.CharField(_("Organiser Phone"), max_length=15, blank=True, null=True)
+
+    helper_text1 = models.TextField(_("Helper Text 1"), blank=True, null=True)
+    helper_text2 = models.TextField(_("Helper Text 2"), blank=True, null=True)
+    helper_text3 = models.TextField(_("Helper Text 3"), blank=True, null=True)
+
+    image = models.ImageField(_("Image"), upload_to='pages/images/', null=True, blank=True)
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
 
     class Meta:
-        verbose_name = "Article"
-        verbose_name_plural = "Articles"
+        verbose_name = _("Article")
+        verbose_name_plural = _("Articles")
 
     def __str__(self):
         return self.title
@@ -117,25 +136,29 @@ class Article(models.Model):
 
 
 class Tutor(models.Model):
-    name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=200)
-    hourly_rate = models.DecimalField(max_digits=6, decimal_places=2)
-    experience_years = models.PositiveIntegerField()
-    lessons_completed = models.PositiveIntegerField(default=0)
-    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0)
+    name = models.CharField(_("Name"), max_length=100)
+    subject = models.CharField(_("Subject"), max_length=200)
+    hourly_rate = models.DecimalField(_("Hourly Rate"), max_digits=6, decimal_places=2)
+    experience_years = models.PositiveIntegerField(_("Experience (Years)"))
+    lessons_completed = models.PositiveIntegerField(_("Lessons Completed"), default=0)
+    rating = models.DecimalField(_("Rating"), max_digits=2, decimal_places=1, default=5.0)
 
-    profile_image = models.ImageField(upload_to='tutors/', null=True, blank=True)  # New image field
+    profile_image = models.ImageField(_("Profile Image"), upload_to='tutors/', null=True, blank=True)
 
-    social_facebook = models.URLField(blank=True, null=True)
-    social_twitter = models.URLField(blank=True, null=True)
-    social_linkedin = models.URLField(blank=True, null=True)
+    social_facebook = models.URLField(_("Facebook URL"), blank=True, null=True)
+    social_twitter = models.URLField(_("Twitter URL"), blank=True, null=True)
+    social_linkedin = models.URLField(_("LinkedIn URL"), blank=True, null=True)
 
-    description = models.TextField(blank=True, null=True)
-    helper_text1 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text2 = models.TextField(blank=True, null=True)  # New helper text field
-    helper_text3 = models.TextField(blank=True, null=True)  # New helper text field
-    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)  # New date field
-    
+    description = models.TextField(_("Description"), blank=True, null=True)
+    helper_text1 = models.TextField(_("Helper Text 1"), blank=True, null=True)
+    helper_text2 = models.TextField(_("Helper Text 2"), blank=True, null=True)
+    helper_text3 = models.TextField(_("Helper Text 3"), blank=True, null=True)
+
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Tutor")
+        verbose_name_plural = _("Tutors")
 
     def __str__(self):
         return self.name
@@ -161,10 +184,21 @@ class Tutor(models.Model):
 
 
 class Qualification(models.Model):
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='tutor_qualifications',blank=True,null=True)
-    title = models.CharField(max_length=100)
-    year = models.PositiveIntegerField()
-    institution = models.CharField(max_length=200)
+    tutor = models.ForeignKey(
+        Tutor,
+        on_delete=models.CASCADE,
+        related_name='tutor_qualifications',
+        verbose_name=_("Tutor"),
+        blank=True,
+        null=True
+    )
+    title = models.CharField(_("Title"), max_length=100)
+    year = models.PositiveIntegerField(_("Year"))
+    institution = models.CharField(_("Institution"), max_length=200)
+
+    class Meta:
+        verbose_name = _("Qualification")
+        verbose_name_plural = _("Qualifications")
 
     def __str__(self):
         return f"{self.year} - {self.title} -{self.institution}"
@@ -172,35 +206,57 @@ class Qualification(models.Model):
 
 
 class UserCourses(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey('Course', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
-    
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name=_("User")
+    )
+    course = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE,
+        verbose_name=_("Course")
+    )
+    created_at = models.DateTimeField(
+        _("Created At"),
+        auto_now_add=True,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = _("User Course")
+        verbose_name_plural = _("User Courses")
+
     def __str__(self):
         return f"{self.user.username} - {self.course.title}"
 
 
 
 class Course(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(_("Title"),max_length=255)
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0)
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='courses', null=True, blank=True)  # Foreign key to Tutor
-    course_type = models.CharField(max_length=100,blank=True)  # e.g., "Online", "In-person", "Hybrid"
-    tags = models.TextField(blank=True)  # e.g., "English, Math, Science"
-    duration = models.CharField(max_length=100)  # e.g., "4 weeks"
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='courses', verbose_name=_("Tutor"),null=True, blank=True)  # Foreign key to Tutor
+    course_type = models.CharField(_("Course Type"),max_length=100,blank=True)  # e.g., "Online", "In-person", "Hybrid"
+    tags = models.TextField(_("Tags"),blank=True)  # e.g., "English, Math, Science"
+    duration = models.CharField(_("Duration"),max_length=100)  # e.g., "4 weeks"
     weekly_study = models.CharField(max_length=100)  # e.g., "11 Hours"
     student_count = models.PositiveIntegerField()
 
-    price = models.DecimalField(max_digits=8, decimal_places=2)  
+    price = models.DecimalField(_("Price"),max_digits=8, decimal_places=2)  
 
-    course_image = models.ImageField(upload_to='courses/images/',blank=True, null=True)
-    preview_image = models.ImageField(upload_to='courses/images/',blank=True, null=True)  # New preview image field
-    vimeo_url = models.URLField(blank=True, null=True)  # URL to the Vimeo video
-    is_preview = models.BooleanField(default=False)
-    is_published = models.BooleanField(default=False)
+    course_image = models.ImageField(_("Main Course Image"),upload_to='courses/images/',blank=True, null=True)
+    preview_image = models.ImageField(_("Preview Image"),upload_to='courses/images/',blank=True, null=True)  # New preview image field
+    vimeo_url = models.URLField(_("Vimeo URL"),blank=True, null=True)  # URL to the Vimeo video
+    is_preview = models.BooleanField(_("Is Preview"),default=False)
+    is_published = models.BooleanField(_("Is Published"),default=False)
 
-    overview = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)  # New date field
+    overview = models.TextField(_("Overview"),blank=True, null=True)
+    created_at = models.DateTimeField(_("Created At"),auto_now_add=True,blank=True, null=True)  # New date field
+
+
+    class Meta:
+        verbose_name = _("Course")
+        verbose_name_plural = _("Courses")
 
     def __str__(self):
         return self.title
@@ -240,11 +296,18 @@ class Course(models.Model):
 
 
 class CourseSection(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
-    title = models.CharField(max_length=200)
-    order = models.PositiveIntegerField(blank=True, default=1)
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name='sections',
+        verbose_name=_("Course")
+    )
+    title = models.CharField(_("Title"), max_length=200)
+    order = models.PositiveIntegerField(_("Order"), blank=True, default=1)
 
     class Meta:
+        verbose_name = _("Course Section")
+        verbose_name_plural = _("Course Sections")
         ordering = ["order"]
 
     def save(self, *args, **kwargs):
@@ -278,24 +341,46 @@ class CourseSection(models.Model):
     
 
 class LectureProgress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True)
-    lecture = models.ForeignKey("Lecture", on_delete=models.CASCADE,blank=True, null=True)
-    watched_seconds = models.FloatField(default=0)
-    watched_percent = models.FloatField(default=0)
-    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name=_("User"),
+        blank=True,
+        null=True
+    )
+    lecture = models.ForeignKey(
+        "Lecture",
+        on_delete=models.CASCADE,
+        verbose_name=_("Lecture"),
+        blank=True,
+        null=True
+    )
+    watched_seconds = models.FloatField(_("Watched Seconds"), default=0)
+    watched_percent = models.FloatField(_("Watched Percent"), default=0)
+    updated_at = models.DateTimeField(_("Last Updated"), auto_now=True)
+
 
     class Meta:
+        verbose_name = _("Lecture Progress")
+        verbose_name_plural = _("Lecture Progresses")
         unique_together = ('user', 'lecture')
 
 
 class Lecture(models.Model):
-    section = models.ForeignKey(CourseSection, on_delete=models.CASCADE,related_name='lectures')
-    title = models.CharField(max_length=255)
-    video_url = models.URLField()
-    duration = models.DurationField()
-    order = models.PositiveIntegerField(blank=True, null=True)  # new field
+    section = models.ForeignKey(
+        CourseSection,
+        on_delete=models.CASCADE,
+        related_name='lectures',
+        verbose_name=_("Course Section")
+    )
+    title = models.CharField(_("Title"), max_length=255)
+    video_url = models.URLField(_("Video URL"))
+    duration = models.DurationField(_("Duration"))
+    order = models.PositiveIntegerField(_("Order"), blank=True, null=True)
 
     class Meta:
+        verbose_name = _("Lecture")
+        verbose_name_plural = _("Lectures")
         ordering = ["order"]  # always sort by order
 
     def save(self, *args, **kwargs):
@@ -320,8 +405,17 @@ class Lecture(models.Model):
         return f"{minutes:02}:{seconds:02}"
 
 class CourseBulletPoint(models.Model):
-    section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, related_name='bullet_points')
-    text = models.CharField(max_length=255)
+    section = models.ForeignKey(
+        CourseSection,
+        on_delete=models.CASCADE,
+        related_name='bullet_points',
+        verbose_name=_("Course Section")
+    )
+    text = models.CharField(_("Text"), max_length=255)
+
+    class Meta:
+        verbose_name = _("Course Bullet Point")
+        verbose_name_plural = _("Course Bullet Points")
 
     def __str__(self):
         return self.text
@@ -330,9 +424,26 @@ class CourseBulletPoint(models.Model):
 
 
 class Review(models.Model):
-    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # 1 to 5 stars
-    comment = models.TextField()
-    show = models.BooleanField(default=False,blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE,
+        related_name='reviews',
+        verbose_name=_("Course")
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name=_("User")
+    )
+    rating = models.IntegerField(
+        _("Rating"),
+        choices=[(i, i) for i in range(1, 6)]
+    )
+    comment = models.TextField(_("Comment"))
+    show = models.BooleanField(_("Show on site"), default=False, blank=True, null=True)
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Review")
+        verbose_name_plural = _("Reviews")
+        ordering = ['-created_at']

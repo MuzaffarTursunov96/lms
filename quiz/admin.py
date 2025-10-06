@@ -1,14 +1,15 @@
 from django.contrib import admin
 from .models import Quiz, Question, Choice, QuizAttempt, CourseItem,QuizProgress
 from django.contrib.contenttypes.admin import GenericTabularInline
+from django.utils.translation import gettext_lazy as _
 
 # Register your models here.
 
 class CourseItemInline(GenericTabularInline):
     model = CourseItem
     extra = 0  # Number of empty forms to display by default
-    verbose_name = "Course Item"
-    verbose_name_plural = "Course Items"
+    verbose_name = _("Course Item")
+    verbose_name_plural = _("Course Items")
 
     # Optionally, you can limit which models are shown in the inline:
     def get_queryset(self, request):
@@ -19,6 +20,10 @@ class CourseItemAdmin(admin.ModelAdmin):
     list_display = ('order', 'content_type', 'object_id')
     list_filter = ('content_type',)
     search_fields = ('content_type__model', 'object_id')
+
+    class Meta:
+        verbose_name = _("Course Item")
+        verbose_name_plural = _("Course Items")
 
     
 
@@ -56,9 +61,51 @@ class QuizAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return request.user.has_perm('quiz.delete_quiz') or request.user.is_staff
+    
+    class Meta:
+        verbose_name = _("Quiz")
+        verbose_name_plural = _("Quizzes")
 
 
-admin.site.register(Question)
-admin.site.register(Choice)
-admin.site.register(QuizAttempt)
-admin.site.register(QuizProgress)
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'quiz', 'text')
+    search_fields = ('text', 'quiz__title')
+    list_filter = ('quiz',)
+
+    class Meta:
+        verbose_name = _("Question")
+        verbose_name_plural = _("Questions")
+
+
+@admin.register(Choice)
+class ChoiceAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question', 'text', 'is_correct')
+    search_fields = ('text', 'question__text')
+    list_filter = ('is_correct', 'question')
+
+    class Meta:
+        verbose_name = _("Choice")
+        verbose_name_plural = _("Choices")
+
+
+@admin.register(QuizAttempt)
+class QuizAttemptAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'quiz', 'score',)
+    search_fields = ('user__username', 'quiz__title')
+    list_filter = ('quiz',)
+
+    class Meta:
+        verbose_name = _("Quiz Attempt")
+        verbose_name_plural = _("Quiz Attempts")
+
+
+@admin.register(QuizProgress)
+class QuizProgressAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'quiz', 'last_updated')
+    search_fields = ('user__username', 'quiz__title')
+    list_filter = ('quiz', 'last_updated')
+
+    class Meta:
+        verbose_name = _("Quiz Progress")
+        verbose_name_plural = _("Quiz Progresses")

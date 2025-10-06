@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-24 22:24+0500\n"
+"POT-Creation-Date: 2025-10-07 00:11+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\account\apps.py:8
+msgid "User Accounts"
+msgstr ""
 
 #: .\account\models.py:46
 msgid "Admin"
@@ -28,6 +32,15 @@ msgstr ""
 
 #: .\account\models.py:48
 msgid "Viewer"
+msgstr ""
+
+#: .\account\models.py:83 .\lms\models.py:212 .\lms\models.py:347
+#: .\lms\models.py:436 .\quiz\models.py:151 .\quiz\models.py:199
+msgid "User"
+msgstr ""
+
+#: .\account\models.py:84
+msgid "Users"
 msgstr ""
 
 #: .\env\Lib\site-packages\django\contrib\messages\apps.py:16
@@ -338,7 +351,7 @@ msgid ""
 msgstr ""
 
 #: .\env\Lib\site-packages\django\db\models\fields\__init__.py:1868
-#: .\templates\course\lecture.html:168
+#: .\lms\models.py:241 .\lms\models.py:378 .\templates\course\lecture.html:168
 msgid "Duration"
 msgstr ""
 
@@ -413,6 +426,7 @@ msgid "Slug (up to %(max_length)s)"
 msgstr ""
 
 #: .\env\Lib\site-packages\django\db\models\fields\__init__.py:2446
+#: .\lms\models.py:414
 msgid "Text"
 msgstr ""
 
@@ -456,6 +470,7 @@ msgid "File"
 msgstr ""
 
 #: .\env\Lib\site-packages\django\db\models\fields\files.py:420
+#: .\lms\models.py:72 .\lms\models.py:106
 msgid "Image"
 msgstr ""
 
@@ -618,7 +633,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: .\env\Lib\site-packages\django\forms\formsets.py:484
-#: .\env\Lib\site-packages\django\forms\formsets.py:491
+#: .\env\Lib\site-packages\django\forms\formsets.py:491 .\lms\models.py:306
+#: .\lms\models.py:379 .\quiz\models.py:27 .\quiz\models.py:73
 msgid "Order"
 msgstr ""
 
@@ -1385,6 +1401,443 @@ msgstr ""
 msgid "Delete?"
 msgstr ""
 
+#: .\lms\admin.py:17 .\lms\admin.py:86 .\lms\models.py:309 .\lms\models.py:374
+#: .\lms\models.py:412 .\quiz\models.py:68
+msgid "Course Section"
+msgstr ""
+
+#: .\lms\admin.py:18 .\lms\admin.py:87 .\lms\models.py:310
+#: .\templates\course\lecture.html:196
+msgid "Course Sections"
+msgstr ""
+
+#: .\lms\admin.py:27 .\lms\admin.py:51 .\lms\models.py:354 .\lms\models.py:382
+msgid "Lecture"
+msgstr ""
+
+#: .\lms\admin.py:28 .\lms\admin.py:52 .\lms\models.py:383
+msgid "Lectures"
+msgstr ""
+
+#: .\lms\admin.py:34 .\quiz\admin.py:88 .\quiz\models.py:141
+msgid "Choice"
+msgstr ""
+
+#: .\lms\admin.py:35 .\quiz\admin.py:89 .\quiz\models.py:142
+msgid "Choices"
+msgstr ""
+
+#: .\lms\admin.py:42 .\quiz\admin.py:77 .\quiz\models.py:123
+#: .\quiz\models.py:135 .\quiz\models.py:180 .\templates\course\quiz.html:292
+#: .\templates\course\quiz.html:362 ⁨.\templates\quiz\start copy.html⁩:198
+#: .\templates\quiz\start.html:187
+msgid "Question"
+msgstr ""
+
+#: .\lms\admin.py:43 .\quiz\admin.py:78 .\quiz\models.py:124
+msgid "Questions"
+msgstr ""
+
+#: .\lms\admin.py:65 .\lms\models.py:447
+msgid "Review"
+msgstr ""
+
+#: .\lms\admin.py:66 .\lms\models.py:448
+msgid "Reviews"
+msgstr ""
+
+#: .\lms\admin.py:77 .\quiz\admin.py:66 .\quiz\models.py:79
+#: .\quiz\models.py:108 .\quiz\models.py:156 .\quiz\models.py:204
+#: .\templates\course\lecture.html:229
+msgid "Quiz"
+msgstr ""
+
+#: .\lms\admin.py:78 .\quiz\admin.py:67 .\quiz\models.py:80
+msgid "Quizzes"
+msgstr ""
+
+#: .\lms\admin.py:97 .\lms\admin.py:164 .\lms\models.py:217 .\lms\models.py:258
+#: .\lms\models.py:303 .\lms\models.py:431 .\quiz\models.py:16
+#: .\quiz\models.py:62
+msgid "Course"
+msgstr ""
+
+#: .\lms\admin.py:98 .\lms\admin.py:165 .\lms\models.py:259
+#: .\templates\base.html:100 .\templates\includes\header.html:52
+msgid "Courses"
+msgstr ""
+
+#: .\lms\admin.py:108 .\lms\models.py:110
+msgid "Article"
+msgstr ""
+
+#: .\lms\admin.py:109 .\lms\models.py:111
+msgid "Articles"
+msgstr ""
+
+#: .\lms\admin.py:118 .\lms\models.py:77
+msgid "Blog"
+msgstr ""
+
+#: .\lms\admin.py:119 .\lms\models.py:78
+msgid "Blogs"
+msgstr ""
+
+#: .\lms\admin.py:128 .\lms\models.py:42 .\lms\models.py:60
+msgid "Blog Type"
+msgstr ""
+
+#: .\lms\admin.py:129 .\lms\models.py:43
+msgid "Blog Types"
+msgstr ""
+
+#: .\lms\admin.py:139 .\lms\models.py:31 .\lms\models.py:55
+msgid "Page Type"
+msgstr ""
+
+#: .\lms\admin.py:140 .\lms\models.py:32
+msgid "Page Types"
+msgstr ""
+
+#: .\lms\admin.py:151 .\lms\admin.py:158 .\lms\models.py:200
+msgid "Qualification"
+msgstr ""
+
+#: .\lms\admin.py:152 .\lms\admin.py:159 .\lms\models.py:201
+#: .\templates\team-details.html:57
+msgid "Qualifications"
+msgstr ""
+
+#: .\lms\admin.py:174 .\lms\models.py:160 .\lms\models.py:191
+#: .\lms\models.py:238 .\templates\base.html:107
+#: .\templates\includes\header.html:59
+msgid "Tutor"
+msgstr ""
+
+#: .\lms\admin.py:175 .\lms\models.py:161
+msgid "Tutors"
+msgstr ""
+
+#: .\lms\apps.py:8
+msgid "Learning Management System"
+msgstr ""
+
+#: .\lms\models.py:51 .\lms\models.py:87 .\lms\models.py:195
+#: .\lms\models.py:236 .\lms\models.py:305 .\lms\models.py:376
+#: .\quiz\models.py:72
+msgid "Title"
+msgstr ""
+
+#: .\lms\models.py:62 .\lms\models.py:88 .\lms\models.py:152
+#: .\quiz\models.py:74
+msgid "Description"
+msgstr ""
+
+#: .\lms\models.py:64 .\lms\models.py:102 .\lms\models.py:153
+msgid "Helper Text 1"
+msgstr ""
+
+#: .\lms\models.py:65 .\lms\models.py:103 .\lms\models.py:154
+msgid "Helper Text 2"
+msgstr ""
+
+#: .\lms\models.py:66 .\lms\models.py:104 .\lms\models.py:155
+msgid "Helper Text 3"
+msgstr ""
+
+#: .\lms\models.py:67
+msgid "Helper Text 4"
+msgstr ""
+
+#: .\lms\models.py:68
+msgid "Helper Text 5"
+msgstr ""
+
+#: .\lms\models.py:70 .\lms\models.py:107 .\lms\models.py:157
+#: .\lms\models.py:220 .\lms\models.py:254 .\lms\models.py:444
+#: .\quiz\models.py:75 .\quiz\models.py:119 .\quiz\models.py:187
+msgid "Created At"
+msgstr ""
+
+#: .\lms\models.py:74 .\lms\models.py:249
+msgid "Vimeo URL"
+msgstr ""
+
+#: .\lms\models.py:90
+msgid "Category"
+msgstr ""
+
+#: .\lms\models.py:91
+msgid "Start Date"
+msgstr ""
+
+#: .\lms\models.py:92
+msgid "Start Hour"
+msgstr ""
+
+#: .\lms\models.py:93
+msgid "End Hour"
+msgstr ""
+
+#: .\lms\models.py:94
+msgid "Topic"
+msgstr ""
+
+#: .\lms\models.py:96
+msgid "Cost"
+msgstr ""
+
+#: .\lms\models.py:98
+msgid "Organiser Full Name"
+msgstr ""
+
+#: .\lms\models.py:99
+msgid "Organiser Email"
+msgstr ""
+
+#: .\lms\models.py:100
+msgid "Organiser Phone"
+msgstr ""
+
+#: .\lms\models.py:139
+msgid "Name"
+msgstr ""
+
+#: .\lms\models.py:140
+msgid "Subject"
+msgstr ""
+
+#: .\lms\models.py:141
+msgid "Hourly Rate"
+msgstr ""
+
+#: .\lms\models.py:142
+msgid "Experience (Years)"
+msgstr ""
+
+#: .\lms\models.py:143 .\templates\team-details.html:41
+#: .\templates\team.html:68
+msgid "Lessons Completed"
+msgstr ""
+
+#: .\lms\models.py:144 .\lms\models.py:439
+msgid "Rating"
+msgstr ""
+
+#: .\lms\models.py:146
+msgid "Profile Image"
+msgstr ""
+
+#: .\lms\models.py:148
+msgid "Facebook URL"
+msgstr ""
+
+#: .\lms\models.py:149
+msgid "Twitter URL"
+msgstr ""
+
+#: .\lms\models.py:150
+msgid "LinkedIn URL"
+msgstr ""
+
+#: .\lms\models.py:196
+msgid "Year"
+msgstr ""
+
+#: .\lms\models.py:197
+msgid "Institution"
+msgstr ""
+
+#: .\lms\models.py:227
+msgid "User Course"
+msgstr ""
+
+#: .\lms\models.py:228
+msgid "User Courses"
+msgstr ""
+
+#: .\lms\models.py:239
+msgid "Course Type"
+msgstr ""
+
+#: .\lms\models.py:240
+msgid "Tags"
+msgstr ""
+
+#: .\lms\models.py:245
+msgid "Price"
+msgstr ""
+
+#: .\lms\models.py:247
+msgid "Main Course Image"
+msgstr ""
+
+#: .\lms\models.py:248
+msgid "Preview Image"
+msgstr ""
+
+#: .\lms\models.py:250
+msgid "Is Preview"
+msgstr ""
+
+#: .\lms\models.py:251
+msgid "Is Published"
+msgstr ""
+
+#: .\lms\models.py:253 .\templates\course\lecture.html:145
+#: .\templates\program-details.html:46
+msgid "Overview"
+msgstr ""
+
+#: .\lms\models.py:358
+msgid "Watched Seconds"
+msgstr ""
+
+#: .\lms\models.py:359
+msgid "Watched Percent"
+msgstr ""
+
+#: .\lms\models.py:360 .\quiz\models.py:208
+msgid "Last Updated"
+msgstr ""
+
+#: .\lms\models.py:364
+msgid "Lecture Progress"
+msgstr ""
+
+#: .\lms\models.py:365
+msgid "Lecture Progresses"
+msgstr ""
+
+#: .\lms\models.py:377
+msgid "Video URL"
+msgstr ""
+
+#: .\lms\models.py:417
+msgid "Course Bullet Point"
+msgstr ""
+
+#: .\lms\models.py:418
+msgid "Course Bullet Points"
+msgstr ""
+
+#: .\lms\models.py:442
+msgid "Comment"
+msgstr ""
+
+#: .\lms\models.py:443
+msgid "Show on site"
+msgstr ""
+
+#: .\quiz\admin.py:11 .\quiz\admin.py:25 .\quiz\models.py:38
+msgid "Course Item"
+msgstr ""
+
+#: .\quiz\admin.py:12 .\quiz\admin.py:26 .\quiz\models.py:39
+msgid "Course Items"
+msgstr ""
+
+#: .\quiz\admin.py:99 .\quiz\models.py:164 .\quiz\models.py:175
+msgid "Quiz Attempt"
+msgstr ""
+
+#: .\quiz\admin.py:100 .\quiz\models.py:165
+msgid "Quiz Attempts"
+msgstr ""
+
+#: .\quiz\admin.py:110 .\quiz\models.py:211
+msgid "Quiz Progress"
+msgstr ""
+
+#: .\quiz\admin.py:111 .\quiz\models.py:212
+msgid "Quiz Progresses"
+msgstr ""
+
+#: .\quiz\apps.py:8
+msgid "Quiz System"
+msgstr ""
+
+#: .\quiz\models.py:23
+msgid "Section"
+msgstr ""
+
+#: .\quiz\models.py:32
+msgid "Content Type"
+msgstr ""
+
+#: .\quiz\models.py:34
+msgid "Object ID"
+msgstr ""
+
+#: .\quiz\models.py:99
+msgid "Multiple Choice"
+msgstr ""
+
+#: .\quiz\models.py:100
+msgid "True/False"
+msgstr ""
+
+#: .\quiz\models.py:101
+msgid "Radio"
+msgstr ""
+
+#: .\quiz\models.py:110
+msgid "Question Text"
+msgstr ""
+
+#: .\quiz\models.py:112
+msgid "Question Type"
+msgstr ""
+
+#: .\quiz\models.py:120 .\quiz\models.py:188
+msgid "Updated At"
+msgstr ""
+
+#: .\quiz\models.py:137
+msgid "Choice Text"
+msgstr ""
+
+#: .\quiz\models.py:138
+msgid "Is Correct"
+msgstr ""
+
+#: .\quiz\models.py:158 .\templates\quiz\results.html:16
+#: .\templates\quiz\results.html:61
+msgid "Score"
+msgstr ""
+
+#: .\quiz\models.py:159
+msgid "Completed Test"
+msgstr ""
+
+#: .\quiz\models.py:160
+msgid "Started At"
+msgstr ""
+
+#: .\quiz\models.py:161
+msgid "Finished At"
+msgstr ""
+
+#: .\quiz\models.py:185
+msgid "Chosen Option"
+msgstr ""
+
+#: .\quiz\models.py:191
+msgid "User Answer"
+msgstr ""
+
+#: .\quiz\models.py:192
+msgid "User Answers"
+msgstr ""
+
+#: .\quiz\models.py:206
+msgid "Answered Questions"
+msgstr ""
+
+#: .\quiz\models.py:207
+msgid "Current Question Index"
+msgstr ""
+
 #: .\templates\about.html:12 .\templates\about.html:16 .\templates\base.html:97
 #: .\templates\includes\header.html:50
 msgid "About Us"
@@ -1533,10 +1986,6 @@ msgstr ""
 msgid "Cancel Preloader"
 msgstr ""
 
-#: .\templates\base.html:100 .\templates\includes\header.html:52
-msgid "Courses"
-msgstr ""
-
 #: .\templates\base.html:102 .\templates\includes\header.html:54
 msgid "My Courses"
 msgstr ""
@@ -1544,10 +1993,6 @@ msgstr ""
 #: .\templates\base.html:103 .\templates\includes\footer.html:28
 #: .\templates\includes\header.html:55
 msgid "All Courses"
-msgstr ""
-
-#: .\templates\base.html:107 .\templates\includes\header.html:59
-msgid "Tutor"
 msgstr ""
 
 #: .\templates\base.html:109 .\templates\includes\header.html:61
@@ -1736,10 +2181,6 @@ msgstr ""
 msgid "No Courses Found"
 msgstr ""
 
-#: .\templates\course\lecture.html:145 .\templates\program-details.html:46
-msgid "Overview"
-msgstr ""
-
 #: .\templates\course\lecture.html:150
 msgid "Q&A"
 msgstr ""
@@ -1774,14 +2215,6 @@ msgstr ""
 
 #: .\templates\course\lecture.html:188
 msgid "Save Note"
-msgstr ""
-
-#: .\templates\course\lecture.html:196
-msgid "Course Sections"
-msgstr ""
-
-#: .\templates\course\lecture.html:229
-msgid "Quiz"
 msgstr ""
 
 #: .\templates\course\lecture.html:238
@@ -1858,11 +2291,6 @@ msgstr ""
 
 #: .\templates\course\quiz.html:272 ⁨.\templates\quiz\start copy.html⁩:172
 msgid "Quiz is complete or no more questions available."
-msgstr ""
-
-#: .\templates\course\quiz.html:292 .\templates\course\quiz.html:362
-#: ⁨.\templates\quiz\start copy.html⁩:198 .\templates\quiz\start.html:187
-msgid "Question"
 msgstr ""
 
 #: .\templates\course\quiz.html:295
@@ -2169,10 +2597,6 @@ msgstr ""
 msgid "Quiz Results"
 msgstr ""
 
-#: .\templates\quiz\results.html:16 .\templates\quiz\results.html:61
-msgid "Score"
-msgstr ""
-
 #: .\templates\quiz\results.html:20
 msgid "Correct Answers"
 msgstr ""
@@ -2245,16 +2669,8 @@ msgstr ""
 msgid "Tutor Details"
 msgstr ""
 
-#: .\templates\team-details.html:41 .\templates\team.html:68
-msgid "Lessons Completed"
-msgstr ""
-
 #: .\templates\team-details.html:42 .\templates\team.html:76
 msgid "per hour"
-msgstr ""
-
-#: .\templates\team-details.html:57
-msgid "Qualifications"
 msgstr ""
 
 #: .\templates\team-details.html:69
