@@ -222,7 +222,17 @@ def program_details(request,id):
     return render(request, 'program-details.html',context)
 
 def course_details(request,id):
-    return render(request, 'course/course-details.html')
+    course = get_object_or_404(Course, id=id, is_published=True)
+
+    blog2 = Blogs.objects.filter(page_type__name='about_page')
+    apply_for_tutor = blog2.filter(blog_type__name='apply_for_tutor').first()
+    
+
+    context = {
+        'course': course,
+        'apply_for_tutor':apply_for_tutor,
+    }
+    return render(request, 'course/course-details.html',context)
 
 def event_details(request,id):
     return render(request, 'event-details.html')

@@ -26,63 +26,65 @@
         <div class="container">
             <div class="row flex-row-reverse gx-50">
                 <div class="col-lg-8">
-                    <div class="mega-hover course-img"><img src="{% static 'assets/img/course/course-details-1.jpg'%}" alt="girl"></div>
+                    {% if course.course_image %}
+                        <div class="mega-hover course-img"><img src="{{course.course_image.url}}" alt="girl"></div>
+                    {%else%}
+                        <div class="mega-hover course-img"><img src="{% static 'assets/img/course/course-details-1.jpg'%}" alt="girl"></div>
+                    {% endif %}
                     <div class="course-category">
-                        <a href="course.html">Advance learning</a>
+                        <a href="course.html">{{course.course_type}}</a>
                     </div>
-                    <h2 class="course-title">Naturally & Safely Boost Testosterone</h2>
-                    <div class="course-review"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>( 5.0 )</div>
+                    <h2 class="course-title">{{course.title}}</h2>
+                    <div class="course-review">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>( 5.0 )
+                    </div>
                     <div class="course-meta">
                         <div class="meta-item">
                             <i class="far fa-hourglass"></i>
-                            <span class="meta-title">Duration:</span>
-                            <p class="meta-text">4 weeks</p>
+                            <span class="meta-title">{% trans 'Duration'%}:</span>
+                            <p class="meta-text">{{course.duration}}</p>
                         </div>
-                        <div class="meta-item">
-                            <i class="far fa-clock"></i>
-                            <span class="meta-title">Weekly Study:</span>
-                            <p class="meta-text">11 Hours</p>
-                        </div>
-                        <div class="meta-item">
-                            <i class="far fa-user-alt"></i>
-                            <span class="meta-title">Student:</span>
-                            <p class="meta-text">204 Students</p>
-                        </div>
+                        
                         <div class="meta-item">
                             <i class="far fa-suitcase"></i>
-                            <span class="meta-title">Course Type:</span>
-                            <p class="meta-text">100% online</p>
+                            <span class="meta-title">{% trans 'Course Type'%}:</span>
+                            <p class="meta-text">100% {% trans 'online'%}</p>
                         </div>
                     </div>
                     <div class="row justify-content-between align-items-center gy-4">
                         <div class="col-auto">
-                            <div class="course-price"><span class="currency">$</span>180<small>/month</small></div>
+                            <div class="course-price">
+                                <span class="price"><del style="font-size: 32px;">${{course.price}}</del> ${{course.price|get_cuurect_price}}</span>
+                                <small class="discount">30% {% trans 'Off'%}</small>
+                            </div>
                         </div>
                         <div class="col-auto">
-                            <a class="vs-btn" href="{% url 'contact' %}">Join Course</a>
+                            <a class="vs-btn" href="">{% trans 'Join Course'%}</a>
                         </div>
                     </div>
-                    <h5 class="border-title2">Overview</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali quip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offic ia deserunt mollit anim id est laborums nisi ut aliquip ex ea commosi ut aliquip ex ea commodo cons magna aliqua. Ut enim ad minim veniam equatdo.</p>
-                    <h5>Reading on English language learners</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali quip ex ea commodo consequat.</p>
-                    <h5>Benefit your learners’ entire reading journey</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor e et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo a onsequat. Duis aute irure dolor in reprehenderit in voluptdolore eu fugiat. minim veniam, quis nostrud exercit.</p>
-                    <div class="list-style1 vs-list">
-                        <ul>
-                            <li>Steady stream of new students</li>
-                            <li>Smart calendar</li>
-                            <li>Interactive classroom</li>
-                            <li>Convenient payment methods</li>
-                            <li>Professional development webinars</li>
-                        </ul>
-                    </div>
+                    {% if course.overview%}
+                    <h5 class="border-title2">{% trans 'Overview'%}</h5>
+                    <p>{{course.overview|safe}}</p>
+                    {% endif %}
+                    {% if course.vimeo_url %}
                     <div class="inner-video-box">
-                        <img src="assets/img/course/course-details-2.jpg" alt="blog video">
-                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn position-center popup-video"><i class="fas fa-play"></i></a>
+                        {% if course.preview_image %}
+                            <img src="{{course.preview_image.url}}" alt="blog video">
+                        {%else%}
+                            <img src="{% static 'assets/img/course/course-details-2.jpg'%}" alt="blog video">
+                        {% endif %}
+                        <a href="{{course.vimeo_url}}" class="play-btn position-center popup-video"><i class="fas fa-play"></i></a>
                     </div>
-                    <h5 class="border-title2">Syllabus</h5>
+                    {%endif%}
 
+                    {% if course.syllabus %}
+                    <h5 class="border-title2">{% trans 'Syllabus'%}</h5>
+                        <!-- {{course.syllabus|safe}} -->
+                    
                     <div class="accordion accordion-style4" id="faqVersion2">
                         <div class="accordion-item active">
                             <div class="accordion-header" id="headingOne">
@@ -241,23 +243,24 @@
                             </div>
                         </div>
                     </div>
-                    <h5 class="border-title2">When would you like to start?</h5>
-                    <p>Start straight away and join a global classroom of learners. If the course hasn’t started yet you’ll see the future date listed below.</p>
-                    <a href="contact.html" class="vs-btn">Join Today</a>
-                    <span class="available-badge">Available now</span>
+                    
+                    {%endif%}
+
+                    <h5 class="border-title2">{% trans 'When would you like to start?'%}</h5>
+                    <p>{% trans 'Start straight away and join a global classroom of learners. If the course hasn’t started yet you’ll see the future date listed below.'%}</p>
+                    <a href="" class="vs-btn">{% trans 'Join Today'%}</a>
+                    <span class="available-badge">{% trans 'Available now'%}</span>
+                    
+                    {% if course.syllabus %}
                     <div class="mt-4 pt-lg-2">
-                        <h5 class="border-title2">What will you achieve?</h5>
+                        <h5 class="border-title2">{% trans 'What will you achieve?'%}</h5>
                         <div class="list-style1 vs-list">
-                            <ul>
-                                <li>Apply extensive reading in the classroom to help students learn English more effectively.</li>
-                                <li>Integrate extensive reading into a school learning programme.</li>
-                                <li>Identify practical pre-reading activities to get students interested in their graded readers.</li>
-                                <li>Identify practical while-reading activities to use with students.</li>
-                                <li>Identify practical post-reading activities to use with students.</li>
-                            </ul>
+                            {{course.outcomes|safe}}
                         </div>
                     </div>
-                    <h5 class="border-title2">Who will you learn with?</h5>
+                    {%endif%}
+
+                    <h5 class="border-title2">{% trans 'Who will you learn with?'%}</h5>
                     <!--==============================
       Team Area
   ==============================-->
@@ -265,17 +268,21 @@
                         <div class="col-sm-6 col-lg-4">
                             <div class="team-style1">
                                 <div class="team-img">
-                                    <img class="w-100" src="assets/img/team/team-1-1.jpg" alt="teacher">
+                                    {% if course.tutor.profile_image %}
+                                        <img class="w-100" src="{{course.tutor.profile_image.url}}" alt="teacher">
+                                    {%else%}
+                                        <img class="w-100" src="{% static 'assets/img/team/team-1-1.jpg'%}" alt="teacher">
+                                    {%endif%}
                                 </div>
                                 <div class="team-content">
                                     <div class="team-review"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                    <h4 class="team-name"><a href="team-details.html">Thomas Walimes</a></h4>
-                                    <p class="team-degi">Science Tutor</p>
-                                    <p class="team-text">I taught English and trained teachers for a decade then moved into workplace learning</p>
+                                    <h4 class="team-name"><a href="team-details.html">{{course.tutor.name}}</a></h4>
+                                    <p class="team-degi">{{course.tutor.subject}}</p>
+                                    <p class="team-text">{{course.tutor.description}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <!-- <div class="col-sm-6 col-lg-4">
                             <div class="team-style1">
                                 <div class="team-img">
                                     <img class="w-100" src="assets/img/team/team-1-2.jpg" alt="teacher">
@@ -313,13 +320,13 @@
                                     <p class="team-text">I taught English and trained teachers for a decade then moved into workplace learning</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-4 pt-4 pt-lg-0">
                     <aside>
-                        <div class="widget   ">
-                            <h3 class="widget_title">Academic Courses</h3>
+                        <!-- <div class="widget   ">
+                            <h3 class="widget_title">{% trans 'Academic Courses'%}</h3>
                             <div class="course-list">
                                 <ul>
                                     <li><a href="course-details.html"><i class="fal fa-book"></i>2024 Face to Face Courses</a></li>
@@ -330,24 +337,28 @@
                                     <li><a href="course-details.html"><i class="fal fa-book"></i>Introduction to Computer</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-7 col-lg-12">
                                 <div class="img-box5 mega-hover wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="img-1"><img class="w-100" src="assets/img/about/about-2-4.jpg" alt="About Img"></div>
+                                    {% if apply_for_tutor.image %}
+                                        <div class="img-1"><img class="w-100" src="{{apply_for_tutor.image.url}}" alt="About Img"></div>
+                                    {%else%}
+                                        <div class="img-1"><img class="w-100" src="{% static 'assets/img/about/become-tutor-1.jpg'%}" alt="About Img"></div>
+                                    {% endif %}
                                     <div class="box-content">
-                                        <h3 class="img-title">Online Course Registration</h3>
-                                        <p class="img-text">Top 20 courses among our 1350+ free online courses by experts</p>
-                                        <a href="contact.html" class="vs-btn">Apply Today</a>
+                                        <h3 class="img-title">{% trans 'Online Course Registration'%}</h3>
+                                        <p class="img-text">{% trans 'Top 20 courses among our 1350+ free online courses by experts'%}</p>
+                                        <a href="" class="vs-btn">{% trans 'Apply Today'%}</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-5 col-lg-12">
                                 <div class="media-style5 wow fadeInUp" data-wow-delay="0.4s">
                                     <span class="icon"><i class="fas fa-user-headset"></i></span>
-                                    <h5 class="media-title">Admission Process</h5>
-                                    <a class="phone" href="+8156415000"><i class="fal fa-phone-alt"></i>815-641-5000</a>
-                                    <a class="mail" href="mailto:support@example.com"><i class="fal fa-envelope"></i>support@example.com</a>
+                                    <h5 class="media-title">{% trans 'Admission Process'%}</h5>
+                                    <a class="phone" href="+998 99 820 11 37"><i class="fal fa-phone-alt"></i>+998 99 820 11 37</a>
+                                    <a class="mail" href="rasulovoa@gmail.com"><i class="fal fa-envelope"></i>rasulovoa@gmail.com</a>
                                 </div>
                             </div>
                         </div>

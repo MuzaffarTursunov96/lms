@@ -25,7 +25,7 @@ class QualificationTranslationOptions(TranslationOptions):
 
 @register(Course)
 class CourseTranslationOptions(TranslationOptions):
-    fields = ('title','course_type','duration','weekly_study','course_type','overview')
+    fields = ('title','course_type','duration','weekly_study','course_type','overview','syllabus','outcomes',)
 
 
 @register(CourseSection)

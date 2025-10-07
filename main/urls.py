@@ -16,7 +16,8 @@ def redirect_to_default_language(request):
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('', redirect_to_default_language),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
     
 ]
 

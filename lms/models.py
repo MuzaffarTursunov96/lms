@@ -230,7 +230,166 @@ class UserCourses(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.course.title}"
 
+ACCORDION_DEFAULT_HTML = """
+<div class="accordion accordion-style4" id="faqVersion2">
+                        <div class="accordion-item active">
+                            <div class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="button-label">Week 1</span>
+                                    Getting started with Extensive Reading
+                                </button>
+                            </div>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqVersion2">
 
+                                <div class="accordion-body">
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-1.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Introduction</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-2.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">What do you understand by Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Why Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Incorporating Extensive Reading</h6>
+                                            <p class="syllabustext">lit esse cillum dolore eu ferit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="button-label">Week 2</span>
+                                    Practical pre-reading activities with graded readers
+                                </button>
+                            </div>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqVersion2">
+
+                                <div class="accordion-body">
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-1.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Introduction</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-2.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">What do you understand by Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Why Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Incorporating Extensive Reading</h6>
+                                            <p class="syllabustext">lit esse cillum dolore eu ferit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="button-label">Week 3</span>
+                                    Activities with graded readers
+                                </button>
+                            </div>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqVersion2">
+
+                                <div class="accordion-body">
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-1.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Introduction</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-2.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">What do you understand by Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Why Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Incorporating Extensive Reading</h6>
+                                            <p class="syllabustext">lit esse cillum dolore eu ferit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <span class="button-label">Week 4</span>
+                                    Practical post-reading
+                                </button>
+                            </div>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqVersion2">
+
+                                <div class="accordion-body">
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-1.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Introduction</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-img"><img src="assets/img/course/course-syllabus-2.jpg" alt=""></div>
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">What do you understand by Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Why Extensive Reading?</h6>
+                                            <p class="syllabustext">Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                    <div class="syllabus-list">
+                                        <div class="syllabus-content">
+                                            <h6 class="syllabustitle">Incorporating Extensive Reading</h6>
+                                            <p class="syllabustext">lit esse cillum dolore eu ferit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Ex cepteur sint upidatat non illum dolore eu fugiat proident.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+"""
 
 class Course(models.Model):
     title = models.CharField(_("Title"),max_length=255)
@@ -251,6 +410,9 @@ class Course(models.Model):
     is_published = models.BooleanField(_("Is Published"),default=False)
 
     overview = models.TextField(_("Overview"),blank=True, null=True)
+    syllabus = models.TextField(_("Syllabus"), blank=True, null=True,default=ACCORDION_DEFAULT_HTML)
+    outcomes = models.TextField(_("What Will You Achieve?"), blank=True, null=True)
+
     created_at = models.DateTimeField(_("Created At"),auto_now_add=True,blank=True, null=True)  # New date field
 
 

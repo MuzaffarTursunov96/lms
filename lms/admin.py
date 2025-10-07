@@ -5,6 +5,8 @@ from quiz.models import Quiz, Question, Choice,CourseItem
 
 from django.utils.translation import gettext_lazy as _
 
+from .forms import CourseAdminForm
+
 # Register CourseSection and Lecture explicitly
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
@@ -88,6 +90,7 @@ class CourseSectionInline(nested_admin.NestedStackedInline):
 
 @admin.register(Course)
 class CourseAdmin(nested_admin.NestedModelAdmin):
+    form = CourseAdminForm
     list_display = ('title', 'course_type', 'tutor', 'rating', 'student_count', 'price')
     search_fields = ('title', 'tags', 'course_type')
     list_filter = ('course_type', 'tutor')
