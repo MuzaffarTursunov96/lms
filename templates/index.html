@@ -4,6 +4,7 @@
 {% load custom_tags %}
 {% block content %}
 
+
     <section class="hero-layout2 style5" data-bg-src="{% static 'assets/img/bg/hero-bg-5.jpg' %}">
         <div class="container-style2">
             <div class="row gy-5 gx-50 align-items-center">
@@ -254,7 +255,7 @@
                                         ({{course.rating}})</div>
                                     <span class="course-price">${{course.price}}</span>
                                 </div>
-                                <h3 class="h5 course-name"><a href="{%url 'course-details' course.id %}" class="text-inherit">{{course.title}}</a></h3>
+                                <h3 class="h5 course-name"><a href="{%url 'course-details' course.id %}" class="text-inherit">{{ course.title|truncatechars:40 }}</a></h3>
                             </div>
                             <div class="course-meta">
                                 <span><i class="fal fa-user-circle"></i>{{course.tutor.name}}</span>

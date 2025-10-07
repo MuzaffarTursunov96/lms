@@ -31,7 +31,7 @@ def index(request):
     becoming_tutor = blogs.filter(blog_type__name='becoming_a_tutor').first()
 
 
-    course = Course.objects.filter(is_published=True).filter(is_preview=True)[:3]
+    course = Course.objects.filter(is_published=True).filter(is_preview=True)[:9]
     tutors = Tutor.objects.all()[:4]
     articles = Article.objects.all()[:3]
 
