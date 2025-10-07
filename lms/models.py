@@ -410,7 +410,8 @@ class Course(models.Model):
     is_published = models.BooleanField(_("Is Published"),default=False)
 
     overview = models.TextField(_("Overview"),blank=True, null=True)
-    syllabus = models.TextField(_("Syllabus"), blank=True, null=True,default=ACCORDION_DEFAULT_HTML)
+    # syllabus = models.TextField(_("Syllabus"), blank=True, null=True,default=ACCORDION_DEFAULT_HTML)
+    syllabus = models.JSONField(_("Syllabus"),default=list, blank=True, null=True)
     outcomes = models.TextField(_("What Will You Achieve?"), blank=True, null=True)
 
     created_at = models.DateTimeField(_("Created At"),auto_now_add=True,blank=True, null=True)  # New date field
@@ -455,6 +456,8 @@ class Course(models.Model):
 
             # Save back to same path (JPEG quality applies only to JPG files)
             img.save(img_path, optimize=True, quality=90)
+    
+    
 
 
 class CourseSection(models.Model):

@@ -16,3 +16,8 @@ def get_cuurect_price(price):
         return price - discount
     except (ValueError, TypeError):
         return price
+    
+@register.filter
+def attr(obj, name):
+    """Return dynamic attribute value from an object."""
+    return getattr(obj, name, None)
