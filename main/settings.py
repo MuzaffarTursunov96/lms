@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG = True
 
-ALLOWED_HOSTS = ['roagroup.uz','www.roagroup.uz','95.46.96.70']
+ALLOWED_HOSTS = ['roagroup.uz','www.roagroup.uz','95.46.96.70','lms-yir8.onrender.com']
 
 
 # Application definition
@@ -85,7 +85,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://roagroup.uz",
     "https://www.roagroup.uz",
     "http://roagroup.uz",     # optional, but good for testing
-    "http://www.roagroup.uz"
+    "http://www.roagroup.uz",
+    "lms-yir8.onrender.com"
 ]
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
